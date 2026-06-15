@@ -1,0 +1,10 @@
+# Amazon Now — API tier dependencies
+# Preferred install:  uv sync   (uses pyproject.toml)
+# Fallback:           pip install -r requirements.txt
+
+fastapi>=0.137.0
+uvicorn[standard]>=0.49.0
+
+# dev / testing
+httpx>=0.28.1
+pytest>=9.1.0
