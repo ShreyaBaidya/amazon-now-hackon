@@ -4,7 +4,9 @@
 
 Amazon Now is a quick-commerce experience built for the moments when shopping has to be instant — you discover, decide, and buy what you need in seconds, not minutes. Instead of a search box and endless browsing, Amazon Now puts an intelligent agent at the front of the store that understands your context and assembles the cart for you.
 
-Built for **Hackon with Amazon 6.0**.
+**🔗 Live demo: [d15dwmp7o2oj4d.cloudfront.net](https://d15dwmp7o2oj4d.cloudfront.net)** — best viewed in a narrow window; it renders as a phone.
+
+Built for **Amazon HackOn 2026 — Season 6**, under the theme *Amazon Now – Reimagining Urgent Shopping*.
 
 ---
 
@@ -148,3 +150,22 @@ amazonNow/
 - pnpm
 - ESLint
 - Git
+
+---
+
+## The team
+
+**Team Syntax** — Indian Institute of Technology (Indian School of Mines), Dhanbad
+
+| Name | Email | GitHub |
+|---|---|---|
+| Shreya Baidya | 23je0927@iitism.ac.in | [@ShreyaBaidya](https://github.com/ShreyaBaidya) |
+| Shreya | 23je0926@iitism.ac.in | [@shreya-2511](https://github.com/shreya-2511) |
+| Varsha | 23je1067@iitism.ac.in | [@Varsha9833](https://github.com/Varsha9833) |
+
+---
+
+## About
+
+Built for **Amazon HackOn 2026 — Season 6**
+Theme: *Amazon Now – Reimagining Urgent Shopping*
