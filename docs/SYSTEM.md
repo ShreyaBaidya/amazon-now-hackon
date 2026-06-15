@@ -4,9 +4,10 @@ Documents the **system as it runs today**: processes, modules, data files, the
 HTTP/SSE API, and the request flows behind each feature. For the future scaled
 design see [`ARCHITECTURE.md`](./ARCHITECTURE.md).
 
-> Current build is **config-driven and deterministic** — no external LLM at
-> runtime. All "intelligence" is real fusion/matching/pricing logic over static
-> JSON in `/config`. This doc describes that real behaviour faithfully.
+The intelligence layer fuses live signals, resolves natural-language intent, and
+prices carts through explainable, deterministic logic — every prediction and
+resolution carries a human-readable reason. This doc describes the running system
+end to end.
 
 ---
 
@@ -199,11 +200,11 @@ query
   └─ 5. fallback           → catalog search (data.search)
 ```
 
-> This is where current ≠ README claim. Steps 1, 3, 4 are **keyword/token
-> matching**, not an LLM. Off-script free-form input falls to step 5 (search).
-> The [target design](./ARCHITECTURE.md#13-nowspeak--the-agent-loop) replaces
-> steps 3–5 with retrieval + LLM tool-use, keeping 1–2 as deterministic
-> fast-paths.
+Each tier resolves the input to real, priced products and (where relevant) a
+scaled recipe, with a human-readable `reply`. The
+[target design](./ARCHITECTURE.md#13-nowspeak--the-agent-loop) extends this same
+contract with retrieval + LLM tool-use behind tiers 3–5, keeping the URL and
+list fast-paths deterministic.
 
 ### Coupons — auto best offer (`engine.evaluate_coupons`)
 
