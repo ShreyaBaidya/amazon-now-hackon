@@ -68,6 +68,10 @@ Amazon Now is a service-oriented application: a stateless API tier in front of a
 
 The NowSpeak agent and NowCast ranking run on the **Amazon Bedrock** model stack, with the rest of the product backed by managed AWS services for data, search, and delivery.
 
+📖 **Deeper docs:**
+- [`docs/SYSTEM.md`](docs/SYSTEM.md) — the running system: modules, data store, full HTTP/SSE API reference, and per-feature flows.
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — the target scaled design: logical service boundaries and functional feature map.
+
 ---
 
 ## Running locally
