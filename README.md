@@ -64,26 +64,7 @@ Amazon Now is a service-oriented application: a stateless API tier in front of a
 └──────────────┘   └─────────────────┘   └─────────────────┘
 ```
 
-### The intelligence layer on AWS
-
-The NowSpeak agent and NowCast ranking run on the **Amazon Bedrock** model stack, which gives the product managed, secure, low-latency access to frontier LLMs without standing up inference infrastructure:
-
-- **Amazon Bedrock** — hosts the foundation models behind NowSpeak (intent understanding, list/recipe parsing, dietary reasoning) and NowCast (signal fusion and reason generation). Model access is region-local and VPC-private.
-- **Bedrock Knowledge Bases** — ground the agent in the live product catalog and recipe corpus so resolutions map to real, in-stock SKUs rather than invented items. Retrieval-augmented generation keeps answers catalog-accurate.
-- **Bedrock Agents + Action Groups** — let the model call store functions (cart assembly, pricing, coupon evaluation, order placement) as tools, turning a natural-language request into concrete commerce actions.
-- **Bedrock Guardrails** — enforce dietary and allergen safety (e.g. nut-allergy filtering) and keep responses on-policy.
-- **Amazon Titan Embeddings** — power semantic matching from free-text items ("2 onions") to catalog products.
-
-### Supporting AWS services
-
-- **Amazon API Gateway + AWS Lambda / Amazon ECS Fargate** — host the FastAPI tier elastically.
-- **Amazon DynamoDB** — fridge, history, calendar, profile, group-cart, and order state with single-digit-millisecond reads.
-- **Amazon S3 + Amazon CloudFront** — serve product and recipe imagery from edge caches.
-- **Amazon OpenSearch Service** — vector + keyword search over the catalog.
-- **Amazon Personalize** — sharpens NowCast reorder-cadence predictions over time.
-- **Amazon Cognito** — customer identity and group-cart invitations.
-- **Amazon EventBridge + Amazon SNS** — order-lifecycle events and live tracking updates.
-- **Amazon Bedrock streaming → SSE** — token-by-token NowSpeak replies and live group-cart fill delivered over Server-Sent Events.
+The NowSpeak agent and NowCast ranking run on the **Amazon Bedrock** model stack, with the rest of the product backed by managed AWS services for data, search, and delivery.
 
 ---
 
@@ -143,18 +124,7 @@ amazonNow/
 
 **Cloud & AI (AWS)**
 - Amazon Bedrock (foundation models)
-- Amazon Bedrock Knowledge Bases
-- Amazon Bedrock Agents & Action Groups
-- Amazon Bedrock Guardrails
-- Amazon Titan Embeddings
-- Amazon API Gateway
-- AWS Lambda / Amazon ECS Fargate
-- Amazon DynamoDB
-- Amazon S3 + Amazon CloudFront
-- Amazon OpenSearch Service
-- Amazon Personalize
-- Amazon Cognito
-- Amazon EventBridge + Amazon SNS
+- Managed AWS services for data, search, and delivery
 
 **Backend**
 - Python 3.12
