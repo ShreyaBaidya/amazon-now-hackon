@@ -20,12 +20,11 @@ jobs:
         username: ubuntu
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
+          # 1. Move to the repository root and pull latest code
           cd /home/ubuntu/projects
-          
-          # 1. Pull latest changes
           git pull origin main
           
-          # 2. Go to frontend, install pnpm, and build
+          # 2. Navigate to frontend, install tools, and build
           cd frontend
           sudo npm install -g pnpm
           pnpm install
