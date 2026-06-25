@@ -1,0 +1,30 @@
+name: Deploy App to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Deploy to EC2 via SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: 3.88.127.234
+        username: ubuntu
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          cd /home/ubuntu/projects
+          
+          # 1. Pull the latest code changes from GitHub
+          git pull origin main
+          
+          # 2. Update and rebuild the App
+          npm install
+          npm run build
