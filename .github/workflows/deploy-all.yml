@@ -20,17 +20,44 @@ jobs:
         username: ubuntu
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          # 1. Enter the project frontend folder
-          cd /home/ubuntu/projects/frontend
-
-          # 2. Force pull the clean code to overwrite permissions locks
+          # 1. Navigate to the root folder and sync the latest code
+          cd /home/ubuntu/amazon-now-hackon
           git fetch --all
           git reset --hard origin/main
 
-          # 3. Clean install your dependencies and build without using sudo
+          # ==========================================
+          # BACKEND & CATALOG DEPLOYMENT (Phases 1-3)
+          # ==========================================
+          
+          # Install 'uv' if it isn't already installed on the machine
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          export PATH="$HOME/.local/bin:$PATH"
+
+          # Initialize virtual environment and sync backend dependencies
+          uv venv --allow-existing
+          uv sync
+
+          # Run the required data content pipelines to generate catalogs
+          uv run scripts/build_catalog.py
+          uv run scripts/build_recipes.py
+
+          # Kill any old background API processes and launch Uvicorn on port 8010
+          pkill -f "uvicorn" || true
+          nohup uv run uvicorn backend.app.main:app --host 0.0.0.0 --port 8010 > uvicorn.log 2>&1 &
+
+
+          # ==========================================
+          # FRONTEND DEPLOYMENT (Phase 4)
+          # ==========================================
+          
+          cd frontend
+
+          # Clean install frontend dependencies using npx to avoid global locks
           npx pnpm install --no-frozen-lockfile
+          
+          # Compile the Next.js production build
           npx pnpm exec next build
 
-          # 4. Kill old server instance and launch the updated version live
+          # Kill old frontend server processes and launch fresh on production Port 3000
           pkill -f "next-server" || true
-          nohup npx pnpm exec next start -p 3100 > next.log 2>&1 &
+          nohup npx pnpm exec next start -p 3000 > next.log 2>&1 &
