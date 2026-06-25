@@ -25,6 +25,16 @@ jobs:
           # 1. Pull the latest code changes from GitHub
           git pull origin main
           
-          # 2. Update and rebuild the App
+          # 2. Update and rebuild the Frontend
           npm install
           npm run build
+
+          # 3. Restart the background application processes
+          # (Uncomment the command below that matches your setup)
+          
+          # If using PM2:
+          # pm2 restart all
+          
+          # If using standard system services:
+          # sudo systemctl restart nginx
+          # sudo systemctl restart fastapi
