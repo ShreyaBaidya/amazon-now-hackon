@@ -20,15 +20,17 @@ jobs:
         username: ubuntu
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          cd /home/ubuntu/projects/frontend
+          cd /home/ubuntu/projects
           
           # 1. Pull latest changes
           git pull origin main
           
-          # 2. Build the Next.js application
-          npm install
-          npm run build
+          # 2. Go to frontend, install pnpm, and build
+          cd frontend
+          sudo npm install -g pnpm
+          pnpm install
+          pnpm exec next build
 
-          # 3. Stop any old background next process and start the fresh one
+          # 3. Stop old background next processes and start fresh
           pkill -f "next-server" || true
-          nohup npm run start -- -p 3100 > next.log 2>&1 &
+          nohup pnpm exec next start -p 3100 > next.log 2>&1 &
