@@ -20,16 +20,19 @@ jobs:
         username: ubuntu
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          # 1. Move to the repository root and pull latest code
-          cd /home/ubuntu/projects
-          git pull origin main
+          # 1. Clear out old files and move to your project root
+          mkdir -p /home/ubuntu/projects/frontend
+          cd /home/ubuntu/projects/frontend
           
-          # 2. Navigate to frontend, install tools, and build
-          cd frontend
+          # 2. Force reset and update local directory files cleanly
+          git reset --hard HEAD || true
+          git pull origin main || (cd .. && git clone https://github.com/shreya-2511/amazon-now-hackon.git temporary-dir && cp -r temporary-dir/frontend/* ./ && rm -rf temporary-dir)
+
+          # 3. Securely install pnpm globally and build your Next.js application
           sudo npm install -g pnpm
           pnpm install
           pnpm exec next build
 
-          # 3. Stop old background next processes and start fresh
+          # 4. Tear down any lingering Next background tasks and launch the updated build
           pkill -f "next-server" || true
           nohup pnpm exec next start -p 3100 > next.log 2>&1 &
