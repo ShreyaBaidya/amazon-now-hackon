@@ -21,6 +21,16 @@ async function get<T>(path: string): Promise<T> {
   return r.json();
 }
 
+async function post<T>(path: string, body: unknown): Promise<T> {
+  const r = await fetch(`${BASE}${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) throw new Error(`${path} -> ${r.status}`);
+  return r.json();
+}
+
 export const api = {
   base: BASE,
   bootstrap: () => get<Bootstrap>("/api/bootstrap"),

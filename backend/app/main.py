@@ -183,7 +183,7 @@ class GroupAddReq(BaseModel):
 
 
 @app.post("/api/group/create")
-def group_create(req: GroupCreateReq):
+async def group_create(req: GroupCreateReq):
     u = data.active_user()
     return group.create(u["first_name"], u["avatar_color"],
                         [i.model_dump() for i in req.items])
@@ -195,18 +195,18 @@ def group_get(gid: str):
 
 
 @app.post("/api/group/{gid}/join")
-def group_join(gid: str, req: GroupJoinReq):
+async def group_join(gid: str, req: GroupJoinReq):
     return group.join(gid, req.name) or {"error": "not found"}
 
 
 @app.post("/api/group/{gid}/add")
-def group_add(gid: str, req: GroupAddReq):
+async def group_add(gid: str, req: GroupAddReq):
     return group.add_item(gid, req.product_id, req.qty, req.added_by) or {"error": "not found"}
 
 
 @app.get("/api/group/{gid}/stream")
 async def group_stream(gid: str, play: int = 0):
-    """SSE: emit state; when play=1, run the scripted family live-fill on a timer."""
+    """SSE: push real-time updates instantly via asyncio.Queue."""
     state = group.enrich(gid)
     if not state:
         async def err():
@@ -215,9 +215,12 @@ async def group_stream(gid: str, play: int = 0):
 
     g = group.get(gid)
     should_play = bool(play) and not g.get("played")
+    q = group.subscribe(gid)
 
     async def gen():
         yield f"event: state\ndata: {json.dumps(state)}\n\n"
+
+        # play scripted timeline if host shared the link
         if should_play:
             g["played"] = True
             elapsed = 0
@@ -229,7 +232,11 @@ async def group_stream(gid: str, play: int = 0):
                 ev = {"state": updated, "joined": {"name": m["name"], "relation": m.get("relation"),
                                                    "color": m.get("color"), "count": len(m.get("items", []))}}
                 yield f"event: update\ndata: {json.dumps(ev)}\n\n"
-        yield "event: done\ndata: {}\n\n"
+
+        # push updates instantly as they happen
+        while True:
+            raw = await q.get()
+            yield f"event: update\ndata: {raw}\n\n"
 
     return StreamingResponse(gen(), media_type="text/event-stream",
                              headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})

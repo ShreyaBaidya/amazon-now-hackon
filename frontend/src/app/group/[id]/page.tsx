@@ -33,14 +33,33 @@ export default function GroupCartPage() {
   const [copied, setCopied] = useState(false);
   const startedRef = useRef(false);
   const esRef = useRef<EventSource | null>(null);
+  const playEsRef = useRef<EventSource | null>(null);
   const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [updatingLine, setUpdatingLine] = useState<string | null>(null);
 
-  // initial state only — the family live-fill is triggered by sharing the link
+  // connect to SSE for real-time group updates
   useEffect(() => {
     api.groupGet(id).then(setCart).catch(() => {});
+
+    const es = new EventSource(api.groupStreamUrl(id));
+    esRef.current = es;
+
+    es.addEventListener("state", (e: MessageEvent) => {
+      setCart(JSON.parse(e.data));
+    });
+
+    es.addEventListener("update", (e: MessageEvent) => {
+      const data = JSON.parse(e.data);
+      if (data.state) {
+        setCart(data.state);
+      }
+    });
+
+    es.onerror = () => {};
+
     return () => {
-      esRef.current?.close();
+      es.close();
+      playEsRef.current?.close();
       if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
     };
   }, [id]);
@@ -56,7 +75,7 @@ export default function GroupCartPage() {
     startedRef.current = true;
     setShareOpen(false);
     const es = new EventSource(api.groupStreamUrl(id, true));
-    esRef.current = es;
+    playEsRef.current = es;
     es.addEventListener("state", (e: MessageEvent) => setCart(JSON.parse(e.data)));
     es.addEventListener("update", (e: MessageEvent) => {
       const { state, joined } = JSON.parse(e.data);

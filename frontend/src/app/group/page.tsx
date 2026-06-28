@@ -1,11 +1,36 @@
 "use client";
-import { ChevronLeft, LogIn, Users } from "lucide-react";
+import { ChevronLeft, LogIn, Users, X } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { useBoot } from "@/lib/boot";
 import { useCart } from "@/lib/cart";
 import { rupee } from "@/lib/format";
+
+const ACTIVE_KEY = "amzn-now-active-group";
+
+type ActiveGroup = { gid: string; name: string; host: boolean };
+
+function getActive(): ActiveGroup | null {
+  try {
+    const raw = localStorage.getItem(ACTIVE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveActive(g: ActiveGroup) {
+  try {
+    localStorage.setItem(ACTIVE_KEY, JSON.stringify(g));
+  } catch {}
+}
+
+function clearActive() {
+  try {
+    localStorage.removeItem(ACTIVE_KEY);
+  } catch {}
+}
 
 function GroupEntry() {
   const router = useRouter();
@@ -16,10 +41,34 @@ function GroupEntry() {
   const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
+  const [active, setActive] = useState<ActiveGroup | null>(null);
+  const [activeValid, setActiveValid] = useState(true);
+
+  // check for an active group membership on mount
+  useEffect(() => {
+    const saved = getActive();
+    if (!saved) return;
+    // verify the group still exists on the backend
+    api.groupGet(saved.gid)
+      .then((cart) => {
+        if ((cart as { id?: string }).id) {
+          setActive(saved);
+          setActiveValid(true);
+        } else {
+          clearActive();
+          setActiveValid(false);
+        }
+      })
+      .catch(() => {
+        clearActive();
+        setActiveValid(false);
+      });
+  }, []);
 
   const create = async () => {
     setBusy(true);
     const cart = await api.groupCreate(items.map((i) => ({ product_id: i.product.id, qty: i.qty })));
+    saveActive({ gid: cart.id, name: boot?.user.first_name || "You", host: true });
     router.push(`/group/${cart.id}?host=1`);
   };
 
@@ -28,11 +77,18 @@ function GroupEntry() {
     setBusy(true);
     setErr("");
     const cart = await api.groupJoin(code.trim().toUpperCase(), name.trim());
-    if ((cart as { id?: string }).id) router.push(`/group/${code.trim().toUpperCase()}?me=${encodeURIComponent(name.trim())}`);
-    else {
+    if ((cart as { id?: string }).id) {
+      saveActive({ gid: code.trim().toUpperCase(), name: name.trim(), host: false });
+      router.push(`/group/${code.trim().toUpperCase()}?me=${encodeURIComponent(name.trim())}`);
+    } else {
       setErr("No cart with that code");
       setBusy(false);
     }
+  };
+
+  const leave = () => {
+    clearActive();
+    setActive(null);
   };
 
   return (
@@ -54,6 +110,32 @@ function GroupEntry() {
             Everyone adds what they need from their own phone. It all combines into a single delivery.
           </p>
         </div>
+
+        {/* active membership banner */}
+        {active && (
+          <div className="bg-amzn-greenlite border border-amzn-green/40 rounded-2xl p-4 mt-4 flex items-center gap-3">
+            <div className="h-10 w-10 rounded-full bg-amzn-green grid place-items-center shrink-0">
+              <Users size={18} className="text-white" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[13px] font-bold text-amzn-green">
+                You're in cart {active.gid}
+              </p>
+              <p className="text-[12px] text-ink2">
+                {active.host ? "You're the host" : `Joined as ${active.name}`}
+              </p>
+            </div>
+            <button
+              onClick={() => router.push(`/group/${active.gid}${active.host ? "?host=1" : `?me=${encodeURIComponent(active.name)}`}`)}
+              className="h-9 px-4 rounded-xl bg-amzn-green text-white text-[12px] font-bold flex items-center gap-1"
+            >
+              Open
+            </button>
+            <button onClick={leave} className="h-9 px-4 rounded-xl bg-amzn-red text-white text-[12px] font-bold flex items-center gap-1" aria-label="Leave cart">
+              Leave
+            </button>
+          </div>
+        )}
 
         {/* create */}
         <div className="bg-white rounded-2xl border border-line shadow-card p-4 mt-4">
