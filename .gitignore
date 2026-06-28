@@ -1,29 +1,47 @@
-# node / next
+# --- Node / Next.js ---
 node_modules/
 .next/
 out/
+build/
 .turbo/
+*.tsbuildinfo
+next-env.d.ts
+.pnp
+.pnp.js
 
-# python
+# --- Python ---
 __pycache__/
 *.pyc
+*.pyo
+*.egg-info
+dist/
+wheels/
 .venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
-# env
+# --- Environment ---
 .env
 .env.local
 .env.*.local
 .env*.local
-.env.example
 
-# playwright
+# --- Testing ---
+coverage/
 test-results/
 playwright-report/
 frontend/test-shots/
 
-# misc
+# --- Editor / OS ---
 .DS_Store
 *.log
+*.pem
+.vercel
+.idea/
 
-
+# --- Deployment docs (not needed in repo) ---
+GithubAction_EC2.md
+SSH_EC2.md
 LOCAL_SETUP.md
+CODEBASE_GUIDE.md

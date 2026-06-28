@@ -22,7 +22,8 @@ jobs:
             sudo git pull origin main
 
             cd frontend
-            sudo pnpm run build
+            sudo npm ci
+            sudo npm run build
             sudo systemctl restart amznow-web
 
             cd ../backend

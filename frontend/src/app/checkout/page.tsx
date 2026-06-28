@@ -33,16 +33,13 @@ export default function CheckoutPage() {
   const fee = subtotal >= (boot?.settings.free_delivery_above ?? 199) ? 0 : boot?.settings.delivery_fee ?? 25;
   const eta = boot?.settings.eta_default_min ?? 14;
 
-  // re-evaluate coupons whenever the cart changes; auto-select the best
+  // re-evaluate coupons whenever the cart changes; always auto-select the best
   useEffect(() => {
     if (items.length === 0) return;
     api.coupons(items.map((i) => ({ product_id: i.product.id, qty: i.qty })))
       .then((ev) => {
         setEvalc(ev);
-        setSelected((prev) => {
-          if (prev && ev.coupons.some((c) => c.code === prev && c.eligible)) return prev;
-          return ev.best_code;
-        });
+        setSelected(ev.best_code);
       })
       .catch(() => {});
   }, [items]);
