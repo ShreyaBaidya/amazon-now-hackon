@@ -14,7 +14,7 @@ import {
   Wallet,
 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { useBoot } from "@/lib/boot";
 import { useCart } from "@/lib/cart";
@@ -22,6 +22,14 @@ import { rupee } from "@/lib/format";
 import type { CouponEval } from "@/lib/types";
 
 export default function CheckoutPage() {
+  return (
+    <Suspense fallback={null}>
+      <CheckoutContent />
+    </Suspense>
+  );
+}
+
+function CheckoutContent() {
   const { items, subtotal, setQty, clear } = useCart();
   const boot = useBoot();
   const router = useRouter();
