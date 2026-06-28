@@ -150,3 +150,12 @@ def play_member(gid: str, member: dict) -> dict | None:
         _add_item(g, it["product_id"], it.get("qty", 1), member["name"])
     _bump(gid)
     return enrich(gid)
+
+
+def delete_group(gid: str) -> bool:
+    """Delete a group cart. Returns True if it existed."""
+    if gid not in _GROUPS:
+        return False
+    del _GROUPS[gid]
+    _SUBSCRIBERS.pop(gid, None)
+    return True

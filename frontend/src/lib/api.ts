@@ -88,6 +88,9 @@ export const api = {
     }).then((r) => r.json() as Promise<GroupCart>),
   groupStreamUrl: (id: string, play = false) =>
     `${BASE}/api/group/${id}/stream${play ? "?play=1" : ""}`,
+  groupCheckout: (id: string) =>
+    fetch(`${BASE}/api/group/${id}/checkout`, { method: "POST" })
+      .then((r) => r.json() as Promise<{ ok: boolean }>),
 };
 
 export const img = (path: string) => (path ? `${path}` : "");

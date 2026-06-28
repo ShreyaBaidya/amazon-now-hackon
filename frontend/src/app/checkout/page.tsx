@@ -13,7 +13,7 @@ import {
   Users,
   Wallet,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { useBoot } from "@/lib/boot";
@@ -49,6 +49,9 @@ export default function CheckoutPage() {
   const total = Math.max(0, subtotal + fee - discount);
   const eligibleCount = evalc?.coupons.filter((c) => c.eligible).length ?? 0;
 
+  const params = useSearchParams();
+  const gid = params.get("gid");
+
   const placeOrder = async () => {
     setPaying(true);
     const order = await api.order(
@@ -56,6 +59,11 @@ export default function CheckoutPage() {
       undefined,
       selected ?? undefined,
     );
+    // delete the group cart after checkout if the user came from a shared cart
+    if (gid) {
+      api.groupCheckout(gid).catch(() => {});
+      try { localStorage.removeItem("amzn-now-active-group"); } catch {}
+    }
     setTimeout(() => {
       clear();
       router.push(`/order/${order.order_id}`);

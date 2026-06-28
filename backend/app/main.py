@@ -4,7 +4,7 @@ from __future__ import annotations
 import asyncio
 import json
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
@@ -202,6 +202,14 @@ async def group_join(gid: str, req: GroupJoinReq):
 @app.post("/api/group/{gid}/add")
 async def group_add(gid: str, req: GroupAddReq):
     return group.add_item(gid, req.product_id, req.qty, req.added_by) or {"error": "not found"}
+
+
+@app.post("/api/group/{gid}/checkout")
+async def group_checkout(gid: str):
+    ok = group.delete_group(gid)
+    if not ok:
+        raise HTTPException(status_code=404, detail="not found")
+    return {"ok": True}
 
 
 @app.get("/api/group/{gid}/stream")

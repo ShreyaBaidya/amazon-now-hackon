@@ -119,7 +119,7 @@ export default function GroupCartPage() {
   const checkout = () => {
     if (!cart) return;
     addMany(cart.items.map((i) => ({ product: i.product, qty: i.qty })), true);
-    router.push("/checkout?src=group");
+    router.push(`/checkout?src=group&gid=${id}`);
   };
 
   const copyCode = () => {
