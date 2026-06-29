@@ -3,8 +3,10 @@ from __future__ import annotations
 
 import asyncio
 import json
+import re
 
-from fastapi import FastAPI, HTTPException
+
+from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
@@ -264,3 +266,442 @@ def fridge():
 @app.get("/api/calendar")
 def calendar():
     return data.calendar()
+
+
+# ---------------------------------------------------------------------------
+# AI Dish Recognition  (Issues 2 & 3 — intelligent matching + recipe reuse)
+# ---------------------------------------------------------------------------
+
+_IDENTIFY_SYSTEM = """You are a culinary image recognition AI. Respond with ONLY a valid JSON object — no markdown fences, no explanation.
+
+Return exactly:
+{"dish_name":"string","cuisine":"string","confidence":number,"error":null}
+
+Set error to a short message if the image is not a recognisable food dish, otherwise null."""
+
+_INGREDIENTS_SYSTEM = """You are a culinary AI for Amazon Now (India). Given a dish name and cuisine, respond with ONLY valid JSON — no markdown, no explanation.
+
+Return exactly:
+{"cooking_time_min":number,"base_servings":number,"ingredients":[{"name":"string","qty":number or null,"unit":"string","search_term":"string"}]}
+
+CRITICAL rules for qty and unit:
+- qty is the numeric amount (e.g. 500, 2, 0.5) OR null if the ingredient has no numeric quantity.
+- unit MUST always be present and non-empty. Use real measurement units: g, kg, ml, L, tsp, tbsp, cups, pcs, pinch, handful, leaves, to taste, etc.
+- NEVER return a bare number with an empty unit. Every ingredient must have a unit.
+- If the ingredient has no numeric qty (e.g. fresh herbs, garnish), set qty to null and unit to the descriptive text (e.g. "Leaves", "Handful", "To taste", "Few sprigs").
+- search_term = simplest grocery search term (e.g. "tomatoes", "eggs", "butter").
+- Split compound ingredients (ginger-garlic paste, mixed herbs) into separate purchasable items.
+- Quantities scaled to base_servings (usually 4). Dynamic — never hardcoded."""
+
+_DECOMPOSE_SYSTEM = """You are a grocery decomposition AI. Given an ingredient, list which commonly available grocery items are needed to make or substitute it.
+
+Respond ONLY with a valid JSON array of short search strings (e.g. ["garlic","ginger"]).
+Return at most 4 items. Return [] if it is already a basic product."""
+
+
+# ── Bedrock JSON helper ──────────────────────────────────────────────────
+
+def _bedrock_json(messages: list[dict], system: str) -> dict:
+    resp = bedrock.converse(messages, system=system)
+    raw = resp["output"]["message"]["content"][0]["text"].strip()
+    if raw.startswith("```"):
+        raw = "\n".join(ln for ln in raw.splitlines() if not ln.startswith("```")).strip()
+    return json.loads(raw)
+
+
+def _identify_dish(image_bytes: bytes, media_type: str) -> dict:
+    fmt = media_type.split("/")[-1] if "/" in media_type else "jpeg"
+    msgs = [{"role": "user", "content": [
+        {"image": {"format": fmt, "source": {"bytes": image_bytes}}},
+        {"text": "Identify this dish. Respond ONLY with the JSON object as instructed."},
+    ]}]
+    return _bedrock_json(msgs, _IDENTIFY_SYSTEM)
+
+
+def _generate_ingredients(dish_name: str, cuisine: str) -> dict:
+    msgs = [{"role": "user", "content": [{"text": (
+        f"Generate the complete ingredient list for: {dish_name} ({cuisine} cuisine). "
+        "Respond ONLY with the JSON object as instructed."
+    )}]}]
+    return _bedrock_json(msgs, _INGREDIENTS_SYSTEM)
+
+
+def _ai_decompose(ingredient_name: str) -> list[str]:
+    try:
+        msgs = [{"role": "user", "content": [{"text": (
+            f"Ingredient: {ingredient_name}\n"
+            "List commonly available grocery items needed to make or substitute this."
+        )}]}]
+        resp = bedrock.converse(msgs, system=_DECOMPOSE_SYSTEM)
+        raw = resp["output"]["message"]["content"][0]["text"].strip()
+        if raw.startswith("```"):
+            raw = "\n".join(ln for ln in raw.splitlines() if not ln.startswith("```")).strip()
+        result = json.loads(raw)
+        if isinstance(result, list):
+            return [str(x).strip() for x in result if x]
+    except Exception:  # noqa: BLE001
+        pass
+    return []
+
+
+# ── Recipe database matching (Issue 3) ──────────────────────────────────
+
+_RECIPE_STOP = {"the", "and", "for", "with", "recipe", "style", "homemade",
+                "easy", "quick", "authentic", "classic"}
+
+_DISH_SYNONYMS: dict[str, list[str]] = {
+    "veg chow mein": ["vegetable chow mein", "veg chowmein", "vegetable chowmein", "chow mein"],
+    "vegetable chow mein": ["veg chow mein", "veg chowmein", "chow mein"],
+    "dal fry": ["daal fry", "dal tadka", "daal tadka"],
+    "butter chicken": ["murgh makhani", "chicken makhani"],
+    "lamb biryani": ["mutton biryani", "gosht biryani"],
+    "palak paneer": ["saag paneer"],
+    "rajma": ["rajma masala", "kidney bean curry"],
+    "pasta carbonara": ["carbonara", "spaghetti carbonara"],
+}
+
+
+def _norm(text: str) -> str:
+    t = re.sub(r"[-–—_]", " ", text.lower())
+    t = re.sub(r"[^a-z0-9 ]", "", t)
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def _rtoks(name: str) -> set[str]:
+    return {t for t in re.split(r"[^a-z]+", _norm(name))
+            if len(t) > 2 and t not in _RECIPE_STOP}
+
+
+def _find_stored_recipe(dish_name: str) -> str | None:
+    needle = _norm(dish_name)
+    # 1) exact
+    for r in data.recipes():
+        if _norm(r["name"]) == needle:
+            return r["id"]
+    # 2) synonyms
+    for syn in _DISH_SYNONYMS.get(needle, []):
+        for r in data.recipes():
+            if _norm(r["name"]) == _norm(syn):
+                return r["id"]
+    # 3) token overlap >= 60%
+    nt = _rtoks(needle)
+    best_id, best_ratio = None, 0.0
+    for r in data.recipes():
+        rt = _rtoks(r["name"])
+        if not rt or not nt:
+            continue
+        ratio = len(nt & rt) / max(len(nt), len(rt))
+        if ratio > best_ratio:
+            best_ratio, best_id = ratio, r["id"]
+    return best_id if best_ratio >= 0.6 else None
+
+
+# ── Ingredient ↔ product matching (Issue 2) ─────────────────────────────
+
+_ING_SYNONYMS: dict[str, list[str]] = {
+    "capsicum": ["bell pepper"], "bell pepper": ["capsicum"],
+    "coriander leaves": ["cilantro", "coriander", "dhania"],
+    "coriander powder": ["coriander"],
+    "curd": ["yogurt", "dahi"], "yogurt": ["curd", "dahi"],
+    "maida": ["all purpose flour", "flour"], "all purpose flour": ["maida", "flour"],
+    "spring onion": ["scallion", "green onion"], "scallion": ["spring onion"],
+    "eggplant": ["brinjal", "aubergine"], "brinjal": ["eggplant", "aubergine"],
+    "zucchini": ["courgette"],
+    "okra": ["bhindi", "lady finger"], "bhindi": ["okra"],
+    "chickpeas": ["chana"], "kidney beans": ["rajma"], "rajma": ["kidney beans"],
+    "cottage cheese": ["paneer"], "semolina": ["rava", "sooji"], "rava": ["semolina"],
+    "cumin seeds": ["cumin", "jeera"], "cumin": ["jeera"],
+    "jeera": ["cumin"], "turmeric": ["haldi"],
+    "heavy cream": ["cream"], "sour cream": ["curd", "cream"],
+    "chilli powder": ["red chilli powder", "paprika"],
+    "paprika": ["red chilli powder", "chilli powder"],
+    "parmesan": ["cheese"], "mozzarella": ["cheese"], "cheddar": ["cheese"],
+    "breadcrumbs": ["bread"], "cream cheese": ["cheese"],
+    "chicken breast": ["chicken", "boneless chicken"],
+    "chicken thighs": ["chicken"], "pork chops": ["pork"],
+    "shrimp": ["prawns"], "prawns": ["shrimp"],
+    "salmon": ["fish"], "tuna": ["fish"],
+    "pasta": ["spaghetti", "penne"],
+    "spaghetti": ["pasta"], "noodles": ["egg noodles"],
+    "soy sauce": ["soya sauce"], "rice vinegar": ["white vinegar"],
+    "fish sauce": ["soy sauce"], "oyster sauce": ["soy sauce"],
+    "cilantro": ["coriander", "dhania"],
+    "greek yogurt": ["yogurt", "curd"],
+    "corn flour": ["cornstarch"], "cornstarch": ["corn flour"],
+    "baking soda": ["baking powder"],
+    "vanilla extract": ["vanilla essence"],
+    "coconut milk": ["coconut", "coconut cream"],
+    "tahini": ["sesame seeds"],
+}
+
+_COMPOUND: dict[str, list[str]] = {
+    "ginger garlic paste": ["ginger", "garlic"],
+    "ginger-garlic paste": ["ginger", "garlic"],
+    "mixed herbs": ["oregano", "basil", "thyme"],
+    "italian seasoning": ["oregano", "thyme", "rosemary", "basil"],
+    "taco seasoning": ["chilli powder", "paprika", "cumin"],
+    "fajita seasoning": ["cumin", "paprika", "chilli powder"],
+    "cajun seasoning": ["paprika", "garlic powder"],
+    "panko breadcrumbs": ["breadcrumbs", "bread"],
+    "bread crumbs": ["breadcrumbs", "bread"],
+    "tomato puree": ["tomatoes"],
+    "tomato paste": ["tomatoes"],
+    "sushi vinegar": ["rice vinegar", "sugar", "salt"],
+    "teriyaki sauce": ["soy sauce", "sugar"],
+    "worcestershire sauce": ["soy sauce"],
+    "hot sauce": ["chilli sauce"],
+    "sriracha": ["chilli sauce"],
+    "hoisin sauce": ["soy sauce"],
+    "miso paste": ["soy sauce"],
+    "salted butter": ["butter"], "unsalted butter": ["butter"],
+    "clarified butter": ["ghee", "butter"],
+    "whole milk": ["milk"], "skimmed milk": ["milk"],
+    "buttermilk": ["milk", "curd"],
+    "double cream": ["cream"], "whipping cream": ["cream"],
+    "chicken stock": ["chicken broth"], "chicken broth": ["chicken"],
+    "vegetable stock": ["vegetables"],
+    "self raising flour": ["flour", "baking powder"],
+    "almond flour": ["almonds"],
+    "vanilla extract": ["vanilla essence"],
+    "pizza dough": ["flour", "yeast"],
+    "five spice powder": ["cinnamon", "cloves"],
+    "curry powder": ["turmeric", "coriander", "cumin"],
+    "garam masala blend": ["garam masala"],
+    "herbes de provence": ["thyme", "rosemary", "oregano"],
+}
+
+
+def _fuzzy_norm(term: str) -> str:
+    t = re.sub(r"[-–_]", " ", term.lower().strip())
+    t = re.sub(r"[^a-z0-9 ]", "", t)
+    t = re.sub(r"\s+", " ", t).strip()
+    if t.endswith("es") and len(t) > 4:
+        t = t[:-2]
+    elif t.endswith("s") and len(t) > 3:
+        t = t[:-1]
+    return t
+
+
+def _try_get_product(term: str) -> dict | None:
+    hits = data.retrieve(term, limit=3)
+    if hits:
+        full = data.product(hits[0]["id"])
+        if full:
+            return data.decorate(full, data.active_user())
+    return None
+
+
+def _best_product(term: str) -> dict | None:
+    # 1. direct
+    p = _try_get_product(term)
+    if p:
+        return p
+    # 2. extended synonyms
+    fn = _fuzzy_norm(term)
+    for syn in _ING_SYNONYMS.get(fn, []):
+        p = _try_get_product(syn)
+        if p:
+            return p
+    # 3. fuzzy normalised
+    if fn != term.lower().strip():
+        p = _try_get_product(fn)
+        if p:
+            return p
+    # 4. individual words
+    words = [w for w in fn.split() if len(w) > 2]
+    if len(words) > 1:
+        for w in words:
+            p = _try_get_product(w)
+            if p:
+                return p
+    return None
+
+
+def _map_single_ingredient(ing: dict) -> list[dict]:
+    name = ing.get("name", "")
+    search_term = ing.get("search_term") or name
+    qty = ing.get("qty")       # may be None for descriptive-only ingredients
+    unit = (ing.get("unit") or "").strip()
+
+    # Build display_qty — must always be non-empty and include the unit.
+    # If qty is a number and unit is present: "2 tbsp", "500 g", "3 sliced thinly"
+    # If qty is None but unit is present: "Leaves", "Handful", "To taste"
+    # Fallback: use whatever came in the original display_qty field if set.
+    if qty is not None and unit:
+        display_qty = f"{qty:g} {unit}".strip()
+    elif qty is not None:
+        # bare number — unit was missing despite instructions; label it as "pcs" to avoid bare digits
+        display_qty = f"{qty:g} pcs"
+    elif unit:
+        display_qty = unit
+    else:
+        display_qty = ing.get("display_qty", "").strip() or "as needed"
+
+    def line(n: str, prod: dict | None) -> dict:
+        return {"name": n, "display_qty": display_qty, "qty": qty, "unit": unit,
+                "search_term": search_term, "product": prod,
+                "price": prod["price"] if prod else 0, "available": prod is not None}
+
+    fn_name = _fuzzy_norm(name)
+    fn_search = _fuzzy_norm(search_term)
+
+    # 1-2-5-6: direct + synonym + fuzzy + word parts
+    prod = _best_product(search_term)
+    if prod:
+        return [line(name, prod)]
+    if fn_name != fn_search:
+        prod = _best_product(name)
+        if prod:
+            return [line(name, prod)]
+
+    # 3: static compound decomposition
+    comps = _COMPOUND.get(fn_name) or _COMPOUND.get(fn_search)
+    if comps:
+        lines = [line(c.title(), _best_product(c)) for c in comps]
+        if any(l["available"] for l in lines):
+            return lines
+
+    # 4: AI decomposition
+    parts = _ai_decompose(name)
+    if parts:
+        lines = [line(p.title(), _best_product(p)) for p in parts]
+        if any(l["available"] for l in lines):
+            return lines
+
+    return [line(name, None)]
+
+
+def _map_ingredients_to_products(ingredients: list[dict]) -> list[dict]:
+    """
+    Map all ingredients using intelligent matching.
+    Compound ingredients may expand into multiple rows.
+    Deduplicates only true duplicates: same ingredient name AND same product id.
+    """
+    result: list[dict] = []
+    seen: set[tuple] = set()   # (ingredient_name, product_id)
+    for ing in ingredients:
+        for ln in _map_single_ingredient(ing):
+            pid = ln["product"]["id"] if ln["product"] else None
+            key = (ln["name"].lower().strip(), pid or "")
+            if key in seen:
+                continue
+            seen.add(key)
+            result.append(ln)
+    return result
+
+
+def _recipe_to_dish_analysis(recipe: dict) -> dict:
+    """
+    Convert a recipe_scaled() result to the DishAnalysis response shape.
+    Preserves display_qty, base_measure, and all ingredient rows exactly —
+    including multiple rows for the same product (e.g. garlic 2 tsp + 4 whole).
+    No deduplication, no normalisation, no unit replacement.
+    """
+    ingredients = []
+    for ing in recipe.get("ingredients", []):
+        p = ing.get("product")
+        # display_qty is already built correctly by engine.recipe_scaled:
+        #   "{scaled_qty:g} {unit}" when qty is not null, else ing["measure"]
+        display_qty = ing.get("display_qty", "") or ing.get("base_measure", "")
+        ingredients.append({
+            "name": ing.get("name", ""),
+            "display_qty": display_qty,
+            # Keep base_measure as the canonical unit text so the frontend
+            # scaleDisplayQty helper receives something meaningful.
+            "qty": ing.get("qty") if ing.get("qty") is not None else None,
+            "unit": ing.get("base_measure", ""),
+            "search_term": ing.get("name", ""),
+            "product": p,
+            "price": ing.get("price", 0),
+            "available": p is not None,
+        })
+    return {
+        "dish_name": recipe["name"],
+        "cuisine": recipe.get("cuisine", ""),
+        "cooking_time_min": recipe.get("time_min", 30),
+        "base_servings": recipe.get("base_servings", 4),
+        "ingredients": ingredients,
+        "ingredient_count": len(ingredients),
+        "image": recipe.get("image"),
+        "from_stored_recipe": True,
+        "recipe_id": recipe.get("id"),
+    }
+
+
+_ALLOWED_TYPES = {"image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"}
+_MAX_SIZE_BYTES = 5 * 1024 * 1024  # 5 MB
+
+
+@app.post("/api/dish/analyze")
+async def dish_analyze(image: UploadFile = File(...)):
+    """
+    Step 1: Identify dish from image (Bedrock vision).
+    Step 2: Check existing recipe database — return directly if found.
+    Step 3: Generate ingredients via Bedrock (only when no recipe match).
+    Step 4: Map ingredients to catalog products (intelligent matching).
+    """
+    content_type = (image.content_type or "").lower()
+    if content_type not in _ALLOWED_TYPES:
+        raise HTTPException(status_code=400,
+            detail=f"Unsupported image format '{content_type}'. "
+                   "Please upload a JPEG, PNG, or WebP image.")
+
+    image_bytes = await image.read()
+    if len(image_bytes) > _MAX_SIZE_BYTES:
+        raise HTTPException(status_code=400,
+            detail="Image is too large. Please upload an image under 5 MB.")
+    if len(image_bytes) == 0:
+        raise HTTPException(status_code=400, detail="Empty image file.")
+
+    # Step 1 — identify dish
+    try:
+        dish_info = _identify_dish(image_bytes, content_type)
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=502,
+            detail="AI returned an unexpected response. Please try again.")
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=502, detail=f"AI analysis failed: {str(e)}")
+
+    if dish_info.get("error"):
+        raise HTTPException(status_code=422, detail=dish_info["error"])
+
+    dish_name: str = dish_info.get("dish_name", "")
+    cuisine: str = dish_info.get("cuisine", "")
+    if not dish_name:
+        raise HTTPException(status_code=422,
+            detail="Could not identify a dish in this image. Please try a clearer food photo.")
+
+    # Step 2 — try existing recipe
+    recipe_id = _find_stored_recipe(dish_name)
+    if recipe_id:
+        from . import engine as _eng
+        recipe = _eng.recipe_scaled(recipe_id, 4)
+        if recipe:
+            return _recipe_to_dish_analysis(recipe)
+
+    # Step 3 — generate ingredient list
+    try:
+        ing_info = _generate_ingredients(dish_name, cuisine)
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=502,
+            detail="AI returned an unexpected response. Please try again.")
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=502, detail=f"AI analysis failed: {str(e)}")
+
+    ingredients_raw = ing_info.get("ingredients", [])
+    if not ingredients_raw:
+        raise HTTPException(status_code=422,
+            detail="No ingredients could be detected. Please try a clearer food image.")
+
+    # Step 4 — intelligent product mapping
+    mapped = _map_ingredients_to_products(ingredients_raw)
+
+    return {
+        "dish_name": dish_name,
+        "cuisine": cuisine,
+        "cooking_time_min": ing_info.get("cooking_time_min", 30),
+        "base_servings": max(1, int(ing_info.get("base_servings", 4))),
+        "ingredients": mapped,
+        "ingredient_count": len(mapped),
+        "from_stored_recipe": False,
+    }

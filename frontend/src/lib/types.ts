@@ -224,3 +224,32 @@ export type Order = {
   store: string;
   stages: string[];
 };
+
+// ── AI Dish Recognition ────────────────────────────────────────────────────
+
+export type DishIngredient = {
+  name: string;
+  display_qty: string;
+  qty: number;
+  unit: string;
+  search_term: string;
+  product: Product | null;
+  price: number;
+  available: boolean;
+};
+
+export type DishAnalysis = {
+  dish_name: string;
+  cuisine: string;
+  cooking_time_min: number;
+  base_servings: number;
+  ingredients: DishIngredient[];
+  ingredient_count: number;
+  /** Hero image URL — set when a stored recipe was matched, undefined for AI-generated results */
+  image?: string;
+  /** True when the result came from an existing stored recipe */
+  from_stored_recipe?: boolean;
+  /** Recipe id — present only when from_stored_recipe is true; used to re-fetch on servings change */
+  recipe_id?: string;
+};
+

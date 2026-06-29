@@ -1,6 +1,7 @@
 import type {
   Bootstrap,
   CouponEval,
+  DishAnalysis,
   GroupCart,
   NowCast,
   Dietary,
@@ -91,6 +92,15 @@ export const api = {
   groupCheckout: (id: string) =>
     fetch(`${BASE}/api/group/${id}/checkout`, { method: "POST" })
       .then((r) => r.json() as Promise<{ ok: boolean }>),
+
+  analyzeDish: (imageFile: File): Promise<DishAnalysis> => {
+    const form = new FormData();
+    form.append("image", imageFile);
+    return fetch(`${BASE}/api/dish/analyze`, { method: "POST", body: form }).then((r) => {
+      if (!r.ok) return r.json().then((e) => Promise.reject(new Error(e.detail || r.statusText)));
+      return r.json() as Promise<DishAnalysis>;
+    });
+  },
 };
 
 export const img = (path: string) => (path ? `${path}` : "");

@@ -1,15 +1,16 @@
 "use client";
-import { ChevronLeft, Clock } from "lucide-react";
+import { Camera, ChevronLeft, Clock } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import VegMark from "@/components/VegMark";
+import DishUploadModal from "@/components/DishUploadModal";
 import { api } from "@/lib/api";
 import type { RecipeSummary } from "@/lib/types";
 
 export default function RecipesPage() {
   const router = useRouter();
   const [recipes, setRecipes] = useState<RecipeSummary[]>([]);
+  const [modalOpen, setModalOpen] = useState(false);
   useEffect(() => {
     api.recipes().then((d) => setRecipes(d.recipes)).catch(() => {});
   }, []);
@@ -20,10 +21,18 @@ export default function RecipesPage() {
         <button onClick={() => router.push("/")} className="p-1">
           <ChevronLeft size={22} />
         </button>
-        <div>
+        <div className="flex-1">
           <p className="font-bold">Cook something tonight</p>
           <p className="text-[11px] text-white/60">Pick a dish — we&apos;ll add every ingredient</p>
         </div>
+        {/* Camera / Upload icon — opens the AI dish recognition modal */}
+        <button
+          onClick={() => setModalOpen(true)}
+          aria-label="Identify dish from photo"
+          className="h-9 w-9 rounded-full bg-white/10 grid place-items-center text-white active:scale-95 transition"
+        >
+          <Camera size={20} />
+        </button>
       </header>
       <main className="flex-1 overflow-y-auto no-scrollbar p-3 pb-28">
         <div className="grid grid-cols-2 gap-2.5">
@@ -57,6 +66,8 @@ export default function RecipesPage() {
           ))}
         </div>
       </main>
+
+      <DishUploadModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
 }
