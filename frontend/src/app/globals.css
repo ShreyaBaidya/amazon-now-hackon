@@ -28,10 +28,10 @@ body {
 }
 
 body {
-  background:
+  /* background:
     radial-gradient(900px 500px at 15% -10%, #2a3a4d 0%, transparent 55%),
     radial-gradient(800px 600px at 110% 10%, #1c2733 0%, transparent 50%),
-    #0b1016;
+    #0b1016; */
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
 }

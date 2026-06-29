@@ -20,7 +20,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col h-full">
       <AppHeader greeting={boot ? `${boot.settings.demo_now_label} · Hi ${boot.user.first_name} 👋` : undefined} />
-      <main className="flex-1 overflow-y-auto no-scrollbar pb-28 pt-3">
+      <main className="flex-1 overflow-y-auto no-scrollbar pb-25 pt-2">
         <NowCast />
 
         {/* categories */}
@@ -44,7 +44,7 @@ export default function HomePage() {
         <section className="px-4 mt-5">
           <button
             onClick={() => router.push("/recipes")}
-            className="w-full rounded-2xl bg-gradient-to-r from-amzn-green to-emerald-700 text-white p-4 flex items-center justify-between text-left active:scale-[0.99] transition"
+            className="w-full rounded-2xl bg-gradient-to-r from-amzn-green to-emerald-700 text-white p-3.5 flex items-center justify-between text-left active:scale-[0.99] transition"
           >
             <div>
               <p className="font-bold text-[15px]">Cooking tonight? 🍳</p>
@@ -58,7 +58,7 @@ export default function HomePage() {
         <section className="px-4 mt-3">
           <button
             onClick={() => router.push("/group")}
-            className="w-full rounded-2xl bg-gradient-to-r from-amzn-purple to-indigo-700 text-white p-4 flex items-center justify-between text-left active:scale-[0.99] transition"
+            className="w-full rounded-2xl bg-gradient-to-r from-amzn-purple to-indigo-700 text-white p-3.5 flex items-center justify-between text-left active:scale-[0.99] transition "
           >
             <div>
               <p className="font-bold text-[15px]">Shop together 👨‍👩‍👧</p>

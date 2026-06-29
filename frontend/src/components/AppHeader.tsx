@@ -7,7 +7,7 @@ export default function AppHeader({ greeting }: { greeting?: string }) {
   const boot = useBoot();
   const router = useRouter();
   return (
-    <header className="bg-amzn-dark text-white px-4 pt-3 pb-3 shrink-0">
+    <header className="bg-amzn-dark text-white px-4 pt-2 pb-1 shrink-0">
       <div className="flex items-center justify-between">
         <button className="flex items-start gap-1.5 text-left">
           <MapPin size={18} className="text-amzn-orange mt-0.5" />
@@ -15,7 +15,7 @@ export default function AppHeader({ greeting }: { greeting?: string }) {
             <span className="flex items-center gap-1 text-[11px] text-white/70">
               Delivery in <b className="text-amzn-yellow">{boot?.settings.eta_default_min ?? 14} min</b>
             </span>
-            <span className="flex items-center gap-1 text-[13px] font-semibold">
+            <span className="flex items-center gap-1 text-[12px] font-semibold">
               {boot?.settings.delivery_zone ?? "Koramangala, Bengaluru"}
               <ChevronDown size={14} />
             </span>
@@ -24,7 +24,7 @@ export default function AppHeader({ greeting }: { greeting?: string }) {
         <button
           onClick={() => router.push("/profile")}
           aria-label="Your profile"
-          className="h-9 w-9 rounded-full grid place-items-center text-sm font-bold text-amzn-dark active:scale-95 transition"
+          className="h-8 w-8 rounded-full grid place-items-center text-sm font-bold text-amzn-dark active:scale-95 transition"
           style={{ background: boot?.user.avatar_color ?? "#FF9900" }}
         >
           {boot?.user.first_name?.[0] ?? "A"}
@@ -33,12 +33,12 @@ export default function AppHeader({ greeting }: { greeting?: string }) {
 
       <button
         onClick={() => router.push("/search")}
-        className="mt-3 w-full h-10 rounded-xl bg-white text-ink2 flex items-center gap-2 px-3 text-sm"
+        className="mt-2 w-full h-8 rounded-xl bg-white text-ink2 flex items-center gap-2 px-3 text-sm"
       >
-        <Search size={17} />
+        <Search size={15} />
         <span>Search Amazon Now</span>
       </button>
-      {greeting && <p className="mt-2 text-[13px] text-white/80">{greeting}</p>}
+      {greeting && <p className="mt-1 text-[12px] text-white/80">{greeting}</p>}
     </header>
   );
 }

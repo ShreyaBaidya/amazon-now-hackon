@@ -88,7 +88,7 @@ export default function ProfilePage() {
         </div>
 
         {/* allergens */}
-        <div className="bg-white rounded-2xl border border-line shadow-card mt-3 p-4">
+        <div className="bg-white rounded-2xl border border-line shadow-card mt-3 mb-8 p-4">
           <p className="font-bold text-[15px] flex items-center gap-1.5">
             <AlertTriangle size={16} className="text-amzn-red" /> Allergies to flag
           </p>

@@ -1,13 +1,13 @@
 {
-  "_comment": "Scripted intents for NowSpeak (Act 2). Deterministic so the demo never depends on a live LLM. Matched on lowercased substring of the query; falls back to catalog search.",
+  "_comment": "Scripted intents for NowSpeak — covers common situations so the demo works without a live LLM. Matched on lowercased substring; falls back to catalog search.",
   "nowspeak": {
     "starter_chips": [
       "Making carbonara for 6 tonight",
       "A guest is vegan — what can I make?",
       "milk, eggs, bread, coffee, 2 onions",
-      "https://www.themealdb.com/meal/lasagne",
       "Got a headache and we're out of coffee",
-      "I want to cook biryani"
+      "Birthday party for 12 adults this weekend",
+      "Movie night with friends — need snacks"
     ],
     "intents": [
       {
@@ -28,16 +28,34 @@
         "note": "Vegan-safe for all 6"
       },
       {
-        "match": ["headache", "coffee", "out of coffee", "tired"],
-        "reply": "Two things, one tap: Dolo 650 for the headache, and your coffee beans — you reorder these every 9 days and it's day 9. Adding both.",
+        "match": ["headache", "not feeling well", "sick", "fever", "cold", "body pain", "unwell"],
+        "reply": "Hope you feel better soon! I put together a sick-day kit — paracetamol for the headache, ORS to keep hydrated, soup for comfort, and your usual coffee to get through the day.",
         "product_ids": ["paracetamol", "coffee-beans-250g", "water-1l"],
-        "note": "Relief + your usual reorder"
+        "note": "Get-well kit"
       },
       {
         "match": ["high-protein", "high protein", "protein dinner", "gym", "quick dinner"],
         "reply": "High-protein dinner for two: grilled chicken with paneer and a quick salad. ~45g protein a plate, on your doorstep in minutes.",
         "product_ids": ["chicken-breast-500g", "amul-paneer-200g", "spinach", "greek-yogurt-100g", "lemon-4"],
         "note": "~45g protein / serving"
+      },
+      {
+        "match": ["birthday", "party for", "party this", "party on", "house party", "get together", "gathering"],
+        "reply": "Birthday party bundle coming up! I added a cake, candles, balloons, chips, dips, soft drinks, and chocolates — everything for a great celebration. Tap to add them all.",
+        "product_ids": ["spaghetti", "bacon-200g", "parmesan-150g", "farm-eggs-6", "black-pepper-100g", "olive-oil-500ml"],
+        "note": "Party pack · ready to add"
+      },
+      {
+        "match": ["movie night", "movie", "snacks", "binge", "netflix", "watch"],
+        "reply": "Movie night sorted! I got popcorn, nachos, dip, Coke, chocolates, and ice cream — the perfect couch companion bundle.",
+        "product_ids": ["spaghetti", "bacon-200g", "parmesan-150g", "farm-eggs-6"],
+        "note": "Snack pack · ready to add"
+      },
+      {
+        "match": ["tired", "out of coffee", "no energy", "sleepy", "need energy"],
+        "reply": "I feel you! Grabbed your coffee beans (you're due for a reorder), some energy drink, and dark chocolate for a quick pick-me-up.",
+        "product_ids": ["coffee-beans-250g", "water-1l"],
+        "note": "Energy boost"
       }
     ],
     "fallback_reply": "Here's what I found for that — tap to add anything you need."

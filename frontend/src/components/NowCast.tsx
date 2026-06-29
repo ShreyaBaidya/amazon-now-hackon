@@ -32,24 +32,24 @@ export default function NowCast() {
   if (!data) return <NowCastSkeleton />;
 
   return (
-    <section className="px-3">
+    <section className="px-2">
       {/* hero banner */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="rounded-3xl bg-gradient-to-br from-amzn-dark to-amzn-blue2 text-white p-4"
+        className="rounded-3xl bg-gradient-to-br from-amzn-dark to-amzn-blue2 text-white p-4 pl-5"
       >
-        <div className="flex items-center gap-1.5 text-amzn-yellow text-[11px] font-bold tracking-wide uppercase">
-          <Sparkles size={13} /> NowCast
+        <div className="flex items-center gap-1.5 text-amzn-yellow text-[10px] font-bold tracking-wide uppercase mb-0">
+          <Sparkles size={12} /> NowCast
         </div>
-        <h1 className="text-[21px] font-bold leading-tight mt-1">3 things we lined up for you</h1>
-        <p className="text-[13px] text-white/70 mt-1">
-          From your calendar, fridge and habits. Tap any one to build your cart.
+        <h1 className="text-[18px] font-bold leading-tight">3 things we lined up for you</h1>
+        <p className="text-[12px] text-white/70 mt-1 line-height-0.5">
+          From your calendar, fridge and habits. Tap to build your cart.
         </p>
       </motion.div>
 
       {/* signal cards */}
-      <div className="mt-3 space-y-2.5">
+      <div className="mt-3 space-y-2">
         {data.groups.map((g, i) => (
           <SignalCard key={g.signal} group={g} event={g.signal === "calendar" ? data.event : null} index={i} />
         ))}
@@ -109,12 +109,12 @@ function SignalCard({
     >
       {/* header */}
       <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center gap-3 p-3.5 text-left">
-        <span className={`h-11 w-11 rounded-2xl grid place-items-center shrink-0 ${SIGNAL_COLOR[group.signal]}`}>
-          <Icon size={20} />
+        <span className={`h-9 w-9 rounded-xl grid place-items-center shrink-0 ${SIGNAL_COLOR[group.signal]}`}>
+          <Icon size={18} />
         </span>
         <div className="flex-1 min-w-0">
-          <p className="text-[14px] font-bold leading-tight">{group.title}</p>
-          <p className={`text-[11.5px] mt-0.5 flex items-center gap-1 ${added ? "text-amzn-green font-semibold" : "text-ink2"}`}>
+          <p className="text-[13px] font-bold leading-tight">{group.title}</p>
+          <p className={`text-[11px] mt-0.3 flex items-center gap-1 ${added ? "text-amzn-green font-semibold" : "text-ink2"}`}>
             {added && <Check size={12} />}
             {subtitle}
           </p>
@@ -151,28 +151,28 @@ function SignalCard({
                       <button
                         onClick={() => toggle(l.product.id, l.qty)}
                         disabled={added}
-                        className={`h-5 w-5 rounded-md border-2 grid place-items-center shrink-0 ${
+                        className={`h-4 w-4 rounded-md border-2 grid place-items-center shrink-0 ${
                           off ? "border-line bg-white" : "border-amzn-green bg-amzn-green"
                         }`}
                       >
-                        {!off && <Check size={13} className="text-white" strokeWidth={3} />}
+                        {!off && <Check size={10} className="text-white" strokeWidth={3} />}
                       </button>
-                      <div className={`h-10 w-10 rounded-lg bg-paper grid place-items-center shrink-0 overflow-hidden ${off ? "opacity-40" : ""}`}>
+                      <div className={`h-13.5 w-13.5 rounded-lg bg-paper grid place-items-center shrink-0 overflow-hidden ${off ? "opacity-40" : ""}`}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={l.product.image} alt="" className="h-[85%] w-[85%] object-contain" />
                       </div>
                       <div className={`flex-1 min-w-0 ${off ? "opacity-40" : ""}`}>
-                        <p className="text-[12.5px] font-semibold leading-tight truncate">
+                        <p className="text-[12px] font-semibold leading-tight truncate">
                           {l.product.name}
                         </p>
                         <p className="text-[11px] text-ink2 truncate">{l.reason}</p>
                       </div>
                       <div className={`shrink-0 flex flex-col items-end gap-1 ${off ? "opacity-50" : ""}`}>
-                        <span className={`text-[12.5px] font-bold ${off ? "line-through" : ""}`}>
+                        <span className={`text-[13px] font-bold ${off ? "line-through" : ""}`}>
                           {rupee(l.product.price * qty)}
                         </span>
                         {!added && (
-                          <div className="h-7 w-[78px] rounded-lg bg-amzn-green text-white text-[12px] font-bold flex items-center justify-between px-1">
+                          <div className="h-6.5 w-[70px] rounded-lg bg-amzn-green text-white text-[12px] font-bold flex items-center justify-between px-1">
                             <button
                               onClick={() => setLineQty(l.product.id, qty - 1)}
                               className="grid place-items-center h-full w-6"

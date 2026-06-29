@@ -12,7 +12,7 @@ export default function PhoneFrame({ children }: { children: React.ReactNode }) 
         style={{ maxWidth: 412, height: "min(880px, 100svh)" }}
       >
         {/* status bar */}
-        <div className="relative z-30 flex items-center justify-between px-6 pt-2 pb-1 bg-amzn-dark text-white text-[12px] font-semibold shrink-0">
+        <div className="relative z-30 flex items-center justify-between px-6 pt-1 bg-amzn-dark text-white text-[12px] font-semibold shrink-0">
           <span>9:41</span>
           <div className="absolute left-1/2 -translate-x-1/2 top-0 h-5 w-28 bg-black rounded-b-2xl hidden sm:block" />
           <div className="flex items-center gap-1.5">

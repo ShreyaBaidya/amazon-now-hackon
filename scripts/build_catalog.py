@@ -65,10 +65,25 @@ NONFOOD = {
     "shampoo": [U("1556228578-8c89e6adf883"), U("1600857544200-b2f666a9a2ec")],
     "tissue": [U("1583947581924-860bda6a26df")],
     "diapers": [U("1515488042361-ee00e0ddd4e4")],
-    "wipes": [U("1584305574647-0cc949a2bb9f"), U("1515488042361-ee00e0ddd4e4")],
     "formula": [U("1612257999756-94f1e6f5f0f8"), U("1471864190281-a93a3070b6de")],
     "pads": [U("1628771065518-0d82f1938462"), U("1583947581924-860bda6a26df")],
     "facewash": [U("1556228578-8c89e6adf883"), U("1600857544200-b2f666a9a2ec")],
+    "flowers": [U("1561181286-d3efa7dcc180")],
+    "candle": [U("1603006905003-be475563bc64")],
+    "handwash": [U("1600857544200-b2f666a9a2ec")],
+    "napkins": [U("1583947581924-860bda6a26df")],
+    "cups": [U("1517256064527-09c73fc73e38")],
+    "tissues": [U("1584305574647-0cc949a2bb9f")],
+    "card": [U("1549465220-1a8b9238cd48")],
+    "gift_bag": [U("1549465220-1a8b9238cd48")],
+    "perfume": [U("1556228578-8c89e6adf883")],
+    "cleaner": [U("1528459801416-a9e53bbf4e17")],
+    "ice": [U("1608270586620-248524c67de9")],
+    "wipes": [U("1584305574647-0cc949a2bb9f"), U("1515488042361-ee00e0ddd4e4"),U("1584305574647-0cc949a2bb9f")],
+    "sunscreen": [U("1556228578-8c89e6adf883")],
+    "coconut water": [U("1561668045-21d96075905d")],
+    "balloons": [U("1519758245394-bc2396a0cfcc"), U("1590228192057-24bbf703a65f")],
+    "vaporub": [U("1618086883601-e88a3d62b7e6")],
 }
 
 # Catalog rows. img is either ("m", "<MealDB ingredient>") or ("n", "<NONFOOD key>")
@@ -201,6 +216,36 @@ PRODUCTS = [
     ("baby-wipes", "Baby Wipes", "Pampers", 199, "72 pcs", "baby_care", ("n", "wipes"), [VG], [], 4.5, "Fragrance-free gentle wipes."),
     ("baby-formula", "Infant Formula Stage 1", "Nan Pro", 750, "400 g", "baby_care", ("n", "formula"), [V], ["dairy"], 4.5, "Spray-dried infant milk formula."),
     ("baby-lotion", "Baby Lotion", "Johnson's", 199, "200 ml", "baby_care", ("n", "soap"), [V], [], 4.5, "Mild moisturising baby lotion."),
+# ---- missing food items for the 7 scenarios ----
+    ("besan-1kg", "Organic Besan (Gram Flour)", "Rajdhani", 120, "1 kg", "staples_grocery", ("m", "Flour"), [VG, GF], [], 4.5, "Premium fine-ground chana dal flour for frying."),
+    ("eno-fruit-salt", "Eno Regular Fruit Salt Sachet", "Eno", 10, "5 g", "medicine_health", ("n", "pills"), [VG, GF], [], 4.8, "Fast-acting relief from acidity and stomach gas."),
+    ("raw-coconut-water", "Natural Tender Coconut Water", "Raw Pressery", 70, "200 ml", "beverages", ("m", "Coconut Water"), [VG, GF], [], 4.6, "100% pure naturally hydrating electrolyte beverage."),
+    ("pintola-peanut-butter", "Unsweetened Creamy Peanut Butter", "Pintola", 165, "350 g", "snacks", ("m", "Peanut Butter"), [VG, GF], ["nuts"], 4.7, "Pure roasted peanut paste with no added oil or sugars."),
+    ("epigamia-almond-milk", "Unsweetened Plant Almond Milk", "Epigamia", 140, "1 L", "dairy_eggs", ("m", "Almond Milk"), [VG, GF], ["nuts"], 4.3, "Creamy plant-based dairy milk alternative."),
+    ("ferrero-rocher-4pc", "Ferrero Rocher Premium Chocolates", "Ferrero", 150, "4 pcs", "snacks", ("m", "Chocolate"), [V], ["dairy", "nuts", "gluten"], 4.8, "Crispy hazelnut chocolate truffles."),
+
+    # ---- home_decor_lifestyle ----
+    ("red-roses-bouquet", "Fresh Premium Red Roses Bouquet", "Ferns N Petals", 399, "1 bunch", "home_decor_lifestyle", ("n", "flowers"), [VG, GF], [], 4.6, "A bunch of 6 elegant, freshly-cut red roses."),
+    ("scented-candle", "Aromatic Lavender Scented Candle", "Miniso", 249, "1 unit", "home_decor_lifestyle", ("n", "candle"), [VG, GF], [], 4.4, "Soothing hand-poured wax jar candle for ambience."),
+
+    # ---- party_festive ----
+    ("red-plastic-cups", "Red Party Plastic Cups", "Origami", 85, "25 pcs", "party_festive", ("n", "cups"), [VG, GF], [], 4.2, "Disposable premium red cups for cold beverages."),
+    ("soan-papdi-500g", "Premium Soan Papdi Sweet Box", "Haldiram's", 160, "500 g", "party_festive", ("m", "Flour"), [V], ["gluten", "nuts", "dairy"], 4.5, "Flaky traditional sweet made with ghee and dry fruits."),
+    ("gift-bag", "Elegant Birthday Gift Bag", "Paperkraft", 60, "1 unit", "party_festive", ("n", "gift_bag"), [VG, GF], [], 4.3, "Thick glossy gift wrapping bag with ribbon handles."),
+
+    # ---- updated extra accessories ----
+    ("colin-spray", "Colin Glass and Surface Cleaner", "Colin", 105, "500 ml", "household_cleaning", ("n", "cleaner"), [VG], [], 4.5, "Shine and disinfection booster spray for glass tables."),
+    ("hand-sanitizer-wipe", "Dettol Anti-Bacterial Wet Wipes", "Dettol", 75, "15 wipes", "personal_care", ("n", "wipes"), [VG], [], 4.6, "Skin-safe disinfecting travel wet tissues."),
+
+    ("whole-bay-leaf", "Whole Bay Leaf / Tejpatta", "Catch", 45, "20 g", "staples_grocery", ("m", "Bay Leaf"), [VG, GF], [], 4.5, "Aromatically fragrant whole dried bay leaves."),
+    ("cinnamon-sticks", "Dalchini / Cinnamon Sticks", "Catch", 65, "50 g", "staples_grocery", ("m", "Cinnamon"), [VG, GF], [], 4.6, "Premium sweet-aroma cinnamon whole sticks."),
+    ("whole-cloves", "Laung / Whole Cloves", "Catch", 55, "50 g", "staples_grocery", ("m", "Cloves"), [VG, GF], [], 4.4, "Handpicked premium pungent whole cloves."),
+    ("green-cardamom", "Hari Elaichi / Green Cardamom", "Catch", 120, "50 g", "staples_grocery", ("m", "Cardamom"), [VG, GF], [], 4.7, "Whole aromatic green cardamom pods."),
+    ("chocolate-cake", "Rich Chocolate Cake Slice", "Bombay Baking", 120, "1 slice", "party_festive", ("n", "candle"), [V], ["gluten", "dairy"], 4.6, "Moist layered chocolate cake with chocolate ganache."),
+    ("latex-balloons", "Colourful Latex Balloons", "Party Supplies", 60, "12 pcs", "party_festive", ("n", "balloons"), [VG, GF], [], 4.3, "Assorted bright-coloured 12-inch latex balloons."),
+    ("ready-to-eat-soup", "Mixed Vegetable Soup", "Knorr", 50, "65 g", "staples_grocery", ("m", "Soup"), [V, GF], [], 4.2, "Instant cup-of-soup mix, just add hot water."),
+    ("vaporub", "Vicks VapoRub", "Vicks", 135, "25 ml", "medicine_health", ("n", "vaporub"), [VG], [], 4.7, "Ayurvedic balm for cold, cough and headache relief."),
+    ("honey", "Pure Honey", "Dabur", 195, "500 g", "staples_grocery", ("m", "Honey"), [VG], [], 4.6, "100% pure natural honey for tea and home remedies."),
 ]
 
 
