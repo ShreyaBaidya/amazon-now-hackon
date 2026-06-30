@@ -1,9 +1,9 @@
-"""Core demo logic: NowCast prediction, recipe scaling, NowSpeak intent, NowSOS."""
+﻿"""Core demo logic: NowCast prediction, recipe scaling, NowSpeak intent, NowSOS."""
 from __future__ import annotations
 
 import re
 
-from . import data
+from . import data, gcal
 
 
 # --------------------------------------------------------------------------
@@ -40,20 +40,45 @@ def _history_signals() -> list[dict]:
     return out
 
 
+def _live_calendar() -> dict:
+    """Return calendar data — live Google Calendar when connected, else mock."""
+    return gcal.get_calendar_with_fallback()
+
+
 def _hero_event() -> dict | None:
-    return next((e for e in data.calendar()["events"] if e.get("is_hero")), None)
+    """Pick the hero event from today's calendar data only.
+
+    For live Google Calendar data, hero selection is done in gcal.select_hero.
+    For mock data, fall back to the legacy is_hero flag — but only if that
+    event is actually today.
+    """
+    cal = _live_calendar()
+    events = cal.get("events", [])
+    # events list is already filtered to today by get_calendar_with_fallback
+    return next((e for e in events if e.get("is_hero")), None)
 
 
 def _calendar_signals() -> list[dict]:
+    """Build NowCast signals from the hero event's needs list.
+
+    Works with both live (AI-inferred) and static needs[] arrays.
+    """
     ev = _hero_event()
     if not ev:
         return []
-    return [{"product_id": n["product_id"], "qty": n.get("qty", 1),
-             "reason": n["reason"], "signal": "calendar"} for n in ev.get("needs", [])]
+    return [
+        {
+            "product_id": n["product_id"],
+            "qty": n.get("qty", 1),
+            "reason": n["reason"],
+            "signal": "calendar",
+        }
+        for n in ev.get("needs", [])
+    ]
 
 
 _SIGNAL_META = {
-    "calendar": {"title": "For tonight's dinner party", "icon": "calendar",
+    "calendar": {"title": "For your upcoming event", "icon": "calendar",
                  "blurb": "From your calendar"},
     "fridge": {"title": "Running low at home", "icon": "fridge",
                "blurb": "Your smart fridge"},
@@ -105,16 +130,29 @@ def nowcast() -> dict:
         count += m["qty"]
 
     out_groups = []
+    ev = _hero_event()
+
+    # Build a dynamic title for the calendar group based on the hero event
+    cal_title = "For your upcoming event"
+    if ev:
+        t = ev.get("title", "")
+        if t:
+            # Strip emoji and trim for a clean card title
+            clean = re.sub(r"[^\w\s\-&'@]", "", t).strip()
+            cal_title = f"For: {clean}" if clean else "For your upcoming event"
+
     for sig in _ORDER:
         items = groups[sig]
         if not items:
             continue
         items.sort(key=lambda x: -x["line_total"])
-        out_groups.append({"signal": sig, **_SIGNAL_META[sig],
+        meta = dict(_SIGNAL_META[sig])
+        if sig == "calendar":
+            meta["title"] = cal_title
+        out_groups.append({"signal": sig, **meta,
                            "subtotal": sum(i["line_total"] for i in items),
                            "items": items})
 
-    ev = _hero_event()
     st = data.settings()
     hour = data.now().hour
     part = "morning" if hour < 12 else "afternoon" if hour < 17 else "evening"
@@ -141,6 +179,35 @@ def _scale_qty(qty, factor):
         return None
     v = qty * factor
     return int(v) if abs(v - round(v)) < 1e-6 else round(v, 2)
+
+
+def _is_recipe_excluded(r: dict, prefs: list[str]) -> bool:
+    """Return True if this recipe conflicts with the user's dietary preferences.
+
+    Hierarchy:
+    - vegan:       only 'vegan' recipes shown
+    - vegetarian:  only 'vegetarian' or 'vegan' — eggetarian is excluded
+    - eggetarian:  'vegetarian', 'vegan', 'eggetarian' shown — non-veg excluded
+    - gluten-free: only 'gluten-free' recipes shown
+    """
+    if not prefs:
+        return False
+    tags = set(r.get("dietary_tags", []))
+
+    if "vegan" in prefs:
+        return "vegan" not in tags
+
+    if "vegetarian" in prefs:
+        # Strictly only vegetarian or vegan — eggetarian recipes excluded
+        return not (tags & {"vegetarian", "vegan"})
+
+    if "eggetarian" in prefs:
+        return not (tags & {"vegetarian", "vegan", "eggetarian"})
+
+    if "gluten-free" in prefs:
+        return "gluten-free" not in tags
+
+    return False
 
 
 def recipe_scaled(rid: str, servings: int) -> dict | None:
@@ -172,11 +239,32 @@ def recipe_scaled(rid: str, servings: int) -> dict | None:
             "ingredients": ings, "ingredient_count": len(ings), "total": total}
 
 
-def recipe_list() -> list[dict]:
-    return [{"id": r["id"], "name": r["name"], "cuisine": r["cuisine"],
-             "category": r.get("category", ""), "image": r["image"],
-             "time_min": r["time_min"], "dietary_tags": r["dietary_tags"],
-             "ingredient_count": r["ingredient_count"]} for r in data.recipes()]
+def recipe_list(show_excluded: bool = False) -> list[dict]:
+    """Return the recipe list, filtered by the active user's dietary preferences.
+
+    Set show_excluded=True to return all recipes regardless of preferences
+    (with diet_excluded flag set so the frontend can still indicate them).
+    """
+    user = data.active_user()
+    prefs = user.get("dietary", {}).get("preferences", [])
+
+    result = []
+    for r in data.recipes():
+        excluded = _is_recipe_excluded(r, prefs)
+        if excluded and not show_excluded:
+            continue
+        result.append({
+            "id": r["id"],
+            "name": r["name"],
+            "cuisine": r["cuisine"],
+            "category": r.get("category", ""),
+            "image": r["image"],
+            "time_min": r["time_min"],
+            "dietary_tags": r["dietary_tags"],
+            "ingredient_count": r["ingredient_count"],
+            "diet_excluded": excluded,
+        })
+    return result
 
 
 # --------------------------------------------------------------------------
@@ -193,6 +281,7 @@ def _keyword_resolve(query: str) -> dict:
     raw = query or ""
     q = raw.lower().strip()
     sc = data.scenarios()["nowspeak"]
+    user = data.active_user()  # for dietary filtering
 
     # 1) a recipe link / URL — "fetch" the dish and pull every ingredient.
     #    (before keyword intents: a URL/list is an explicit structured input.)
@@ -208,13 +297,15 @@ def _keyword_resolve(query: str) -> dict:
     if "," in raw or "\n" in raw:
         items = _split_list(raw)
         if len(items) >= 2:
-            user = data.active_user()
             prods, seen = [], set()
             for term in items:
                 p = _best_match(term)
                 if p and p["id"] not in seen:
+                    dec = data.decorate(p, user)
+                    if dec.get("diet_excluded"):  # skip diet-excluded
+                        continue
                     seen.add(p["id"])
-                    prods.append(data.decorate(p, user))
+                    prods.append(dec)
             if prods:
                 return {
                     "reply": f"Got your list — found {len(prods)} of {len(items)} items. "
@@ -247,8 +338,15 @@ def _keyword_resolve(query: str) -> dict:
 
 def _speak_payload(intent: dict) -> dict:
     user = data.active_user()
-    products = [data.decorate(data.product(pid), user)
-                for pid in intent.get("product_ids", []) if data.product(pid)]
+    products = []
+    for pid in intent.get("product_ids", []):
+        p = data.product(pid)
+        if not p:
+            continue
+        dec = data.decorate(p, user)
+        if dec.get("diet_excluded"):  # skip diet-excluded
+            continue
+        products.append(dec)
     recipe = recipe_scaled(intent["recipe_id"], intent.get("servings", 4)) \
         if intent.get("recipe_id") else None
     return {
@@ -267,8 +365,14 @@ def _recipe_speak(rec: dict, servings: int, reply: str, note: str) -> dict:
     for ing in rec["ingredients"]:
         p = ing.get("product")
         if p and p["id"] not in seen:
+            raw_p = data.product(p["id"])
+            if not raw_p:
+                continue
+            dec = data.decorate(raw_p, user)
+            if dec.get("diet_excluded"):  # skip diet-excluded ingredients
+                continue
             seen.add(p["id"])
-            prods.append(data.decorate(data.product(p["id"]), user))
+            prods.append(dec)
     return {"reply": reply, "products": prods, "recipe": rec, "note": note,
             "total": sum(p["price"] for p in prods)}
 
@@ -400,8 +504,10 @@ def _agent_handlers(state: dict, block: list[str]):
         qs = inp.get("queries") or ([inp["query"]] if inp.get("query") else [])
         cat = inp.get("category", "")
         results = {}
+        prefs = user.get("dietary", {}).get("preferences", [])
         for q in [str(x) for x in qs][:8]:
-            rows = data.retrieve(q, cat, limit=8, exclude_allergens=block)
+            rows = data.retrieve(q, cat, limit=8, exclude_allergens=block,
+                                 exclude_dietary=prefs)
             results[q] = rows
             state["searched"].extend(rows)
         return {"results": results}
@@ -463,6 +569,8 @@ def _agent_resolve(query: str) -> dict:
         if data.allergen_conflict(p, block):  # safety gate — never deliver an allergen
             continue
         dec = data.decorate(p, user)
+        if dec.get("diet_excluded"):  # safety gate — never deliver diet-excluded
+            continue
         seen.add(it["product_id"])
         prods.append(dec)
 

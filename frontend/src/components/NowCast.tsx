@@ -4,15 +4,23 @@ import {
   Calendar,
   Check,
   ChevronRight,
+  Clock,
+  Loader2,
+  MapPin,
   Refrigerator,
   RefreshCw,
   Sparkles,
+  Users,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { useCart } from "@/lib/cart";
 import { rupee } from "@/lib/format";
+import { useGoogleCalendar } from "@/lib/useGoogleCalendar";
+import { useTimeRemaining } from "@/lib/useTimeRemaining";
 import type { NowCast as NowCastT, NowCastGroup } from "@/lib/types";
+import CalendarConnect from "./CalendarConnect";
+import VegMark, { AllergenBadge, DietaryTags } from "./VegMark";
 
 const SIGNAL_ICON = { calendar: Calendar, fridge: Refrigerator, history: RefreshCw } as const;
 const SIGNAL_COLOR = {
@@ -24,12 +32,45 @@ const CTA = { calendar: "Prepare cart", fridge: "Add what's low", history: "Top 
 
 export default function NowCast() {
   const [data, setData] = useState<NowCastT | null>(null);
+  const [loadError, setLoadError] = useState(false);
+  const gcal = useGoogleCalendar();
 
-  useEffect(() => {
-    api.nowcast().then(setData).catch(() => {});
+  const fetchNowcast = useCallback(() => {
+    setLoadError(false);
+    api.nowcast()
+      .then(setData)
+      .catch(() => setLoadError(true));
   }, []);
 
-  if (!data) return <NowCastSkeleton />;
+  useEffect(() => {
+    fetchNowcast();
+  }, [fetchNowcast]);
+
+  // Re-fetch NowCast after a calendar refresh so new products appear immediately
+  const handleCalendarRefresh = useCallback(() => {
+    // Small delay so backend finishes the new fetch before we request NowCast
+    setTimeout(fetchNowcast, 600);
+  }, [fetchNowcast]);
+
+  if (!data && !loadError) return <NowCastSkeleton />;
+
+  if (loadError) {
+    return (
+      <section className="px-3">
+        <div className="rounded-3xl border border-red-200 bg-red-50 p-4 flex flex-col items-center gap-3 text-center">
+          <p className="text-[13px] font-semibold text-red-700">
+            Couldn't load your NowCast. Check your connection.
+          </p>
+          <button
+            onClick={fetchNowcast}
+            className="flex items-center gap-1.5 text-[12px] font-bold text-red-600 bg-red-100 px-3 py-1.5 rounded-xl"
+          >
+            <RefreshCw size={13} /> Retry
+          </button>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="px-3">
@@ -48,10 +89,24 @@ export default function NowCast() {
         </p>
       </motion.div>
 
+      {/* Google Calendar connect / status banner */}
+      <div className="mt-2.5">
+        <CalendarConnect gcal={gcal} onRefresh={handleCalendarRefresh} />
+      </div>
+
       {/* signal cards */}
-      <div className="mt-3 space-y-2.5">
-        {data.groups.map((g, i) => (
-          <SignalCard key={g.signal} group={g} event={g.signal === "calendar" ? data.event : null} index={i} />
+      <div className="mt-1 space-y-2.5">
+        {/* If calendar is connected but there's no calendar group, show empty state */}
+        {gcal.state === "connected" && !data!.groups.find(g => g.signal === "calendar") && (
+          <NoEventsToday />
+        )}
+        {data!.groups.map((g, i) => (
+          <SignalCard
+            key={g.signal}
+            group={g}
+            event={g.signal === "calendar" ? data!.event : null}
+            index={i}
+          />
         ))}
       </div>
     </section>
@@ -71,6 +126,9 @@ function SignalCard({
   const [open, setOpen] = useState(false);
   const [added, setAdded] = useState(false);
   const [qtyById, setQtyById] = useState<Record<string, number>>({});
+  const timeRemaining = useTimeRemaining(
+    group.signal === "calendar" ? event?.dt_utc : null
+  );
 
   const Icon = SIGNAL_ICON[group.signal];
   const qtyOf = (id: string, fallback: number) => qtyById[id] ?? fallback;
@@ -80,10 +138,21 @@ function SignalCard({
   const count = included.reduce((s, l) => s + l.selected_qty, 0);
   const total = included.reduce((s, l) => s + l.product.price * l.selected_qty, 0);
 
+  // Build a rich subtitle line for the calendar card
+  const calendarSubtitle = event
+    ? [
+        event.when_label,
+        event.guests ? `${event.guests} guests` : null,
+        `${group.items.length} items`,
+      ]
+        .filter(Boolean)
+        .join(" · ")
+    : `${group.items.length} items · ${group.blurb}`;
+
   const subtitle = added
     ? `Added ${count} item${count > 1 ? "s" : ""} to cart`
-    : event
-      ? `${event.when_label} · ${event.guests} guests · ${group.items.length} items`
+    : group.signal === "calendar"
+      ? calendarSubtitle
       : `${group.items.length} items · ${group.blurb}`;
 
   const setLineQty = (id: string, qty: number) =>
@@ -131,6 +200,11 @@ function SignalCard({
         )}
       </button>
 
+      {/* Calendar event metadata strip — shown only for calendar cards */}
+      {group.signal === "calendar" && event && !added && (
+        <CalendarEventMeta event={event} timeRemaining={timeRemaining} />
+      )}
+
       {/* expandable body */}
       <AnimatePresence initial={false}>
         {open && (
@@ -154,6 +228,7 @@ function SignalCard({
                         className={`h-5 w-5 rounded-md border-2 grid place-items-center shrink-0 ${
                           off ? "border-line bg-white" : "border-amzn-green bg-amzn-green"
                         }`}
+                        aria-label={`${off ? "include" : "exclude"} ${l.product.name}`}
                       >
                         {!off && <Check size={13} className="text-white" strokeWidth={3} />}
                       </button>
@@ -162,10 +237,15 @@ function SignalCard({
                         <img src={l.product.image} alt="" className="h-[85%] w-[85%] object-contain" />
                       </div>
                       <div className={`flex-1 min-w-0 ${off ? "opacity-40" : ""}`}>
-                        <p className="text-[12.5px] font-semibold leading-tight truncate">
-                          {l.product.name}
-                        </p>
+                        <div className="flex items-center gap-1">
+                          <VegMark product={l.product} size={11} />
+                          <p className="text-[12.5px] font-semibold leading-tight truncate">
+                            {l.product.name}
+                          </p>
+                        </div>
                         <p className="text-[11px] text-ink2 truncate">{l.reason}</p>
+                        <DietaryTags product={l.product} max={1} />
+                        <AllergenBadge product={l.product} />
                       </div>
                       <div className={`shrink-0 flex flex-col items-end gap-1 ${off ? "opacity-50" : ""}`}>
                         <span className={`text-[12.5px] font-bold ${off ? "line-through" : ""}`}>
@@ -216,6 +296,70 @@ function SignalCard({
   );
 }
 
+/**
+ * CalendarEventMeta
+ * A compact strip showing event details: guests, location, time remaining.
+ * Rendered between the card header and the expandable body.
+ */
+function CalendarEventMeta({
+  event,
+  timeRemaining,
+}: {
+  event: NowCastT["event"];
+  timeRemaining: string | null;
+}) {
+  if (!event) return null;
+
+  const chips = [
+    event.guests && event.guests > 0
+      ? { icon: <Users size={11} />, label: `${event.guests} guests` }
+      : null,
+    event.location
+      ? { icon: <MapPin size={11} />, label: event.location.split(",")[0] }
+      : null,
+    timeRemaining
+      ? { icon: <Clock size={11} />, label: timeRemaining }
+      : null,
+  ].filter(Boolean) as { icon: React.ReactNode; label: string }[];
+
+  if (chips.length === 0) return null;
+
+  return (
+    <div className="px-3.5 pb-2 flex flex-wrap gap-1.5">
+      {chips.map((c) => (
+        <span
+          key={c.label}
+          className="flex items-center gap-1 text-[10.5px] font-semibold text-amzn-purple/80 bg-amzn-purple/8 px-2 py-0.5 rounded-full"
+        >
+          {c.icon}
+          {c.label}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/** Shown when Google Calendar is connected but there are no events today. */
+function NoEventsToday() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="rounded-3xl border border-dashed border-amzn-purple/30 bg-amzn-purple/5 p-4 flex items-center gap-3"
+    >
+      <span className="h-11 w-11 rounded-2xl grid place-items-center shrink-0 text-amzn-purple bg-amzn-purple/10">
+        <Calendar size={20} />
+      </span>
+      <div>
+        <p className="text-[13px] font-bold text-amzn-purple">No events today</p>
+        <p className="text-[11.5px] text-ink2 mt-0.5">
+          Your Google Calendar is clear for today.
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
 function NowCastSkeleton() {
   return (
     <section className="px-3">
@@ -231,6 +375,11 @@ function NowCastSkeleton() {
             <div className="h-9 w-24 bg-paper rounded-xl shimmer" />
           </div>
         ))}
+      </div>
+      {/* Loading indicator */}
+      <div className="flex items-center justify-center gap-2 mt-4 text-[11px] text-ink2">
+        <Loader2 size={13} className="animate-spin" />
+        Building your cart…
       </div>
     </section>
   );

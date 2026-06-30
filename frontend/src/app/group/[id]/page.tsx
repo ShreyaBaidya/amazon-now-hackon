@@ -8,6 +8,7 @@ import { useBoot } from "@/lib/boot";
 import { useCart } from "@/lib/cart";
 import { rupee } from "@/lib/format";
 import type { GroupCart, Product } from "@/lib/types";
+import VegMark, { AllergenBadge } from "@/components/VegMark";
 
 type ActivityToast = {
   name: string;
@@ -193,15 +194,19 @@ export default function GroupCartPage() {
                   <img src={it.product.image} alt="" className="h-[85%] w-[85%] object-contain" />
                 </div>
                 <div className={`flex-1 min-w-0 ${off ? "opacity-40" : ""}`}>
-                  <p className="text-[13px] font-semibold leading-tight truncate">
-                    {it.product.name}
-                  </p>
+                  <div className="flex items-center gap-1">
+                    <VegMark product={it.product} size={12} />
+                    <p className="text-[13px] font-semibold leading-tight truncate">
+                      {it.product.name}
+                    </p>
+                  </div>
                   <span className="inline-flex items-center gap-1 text-[11px] mt-0.5" style={{ color: it.added_by_color }}>
                     <span className="h-3.5 w-3.5 rounded-full grid place-items-center text-[8px] font-bold text-white" style={{ background: it.added_by_color }}>
                       {it.added_by[0]}
                     </span>
                     {it.added_by}
                   </span>
+                  <AllergenBadge product={it.product} />
                 </div>
                 <div className={`shrink-0 flex flex-col items-end gap-1 ${off ? "opacity-50" : ""}`}>
                   <span className={`text-[13px] font-bold ${off ? "line-through" : ""}`}>{rupee(it.line_total)}</span>
@@ -360,8 +365,14 @@ function PickerSheet({ open, onClose, onPick }: { open: boolean; onClose: () => 
               <img src={p.image} alt="" className="h-[85%] w-[85%] object-contain" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-[12.5px] font-semibold truncate">{p.name}</p>
+              <div className="flex items-center gap-1">
+                <VegMark product={p} size={12} />
+                <p className="text-[12.5px] font-semibold truncate">{p.name}</p>
+              </div>
               <p className="text-[11px] text-ink2">{rupee(p.price)} · {p.size}</p>
+              {p.allergen_conflict && (
+                <span className="text-[10px] text-amzn-red font-semibold">⚠ {p.warnings?.[0]}</span>
+              )}
             </div>
             <Plus size={18} className="text-amzn-green" />
           </button>

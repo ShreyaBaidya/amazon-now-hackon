@@ -14,13 +14,20 @@ function SearchInner() {
   const [q, setQ] = useState(params.get("q") ?? "");
   const [cat, setCat] = useState(params.get("category") ?? "");
   const [products, setProducts] = useState<Product[]>([]);
+  const [showExcluded, setShowExcluded] = useState(false);
+
+  // Does the user have a dietary preference that filters products?
+  const hasDietFilter = (boot?.user.dietary.preferences?.length ?? 0) > 0;
+  const dietLabel = boot?.user.dietary.preferences_label ?? "";
 
   useEffect(() => {
     const t = setTimeout(() => {
-      api.catalog(q, cat, 40).then((d) => setProducts(d.products)).catch(() => {});
+      api.catalog(q, cat, 40, showExcluded)
+        .then((d) => setProducts(d.products))
+        .catch(() => {});
     }, 180);
     return () => clearTimeout(t);
-  }, [q, cat]);
+  }, [q, cat, showExcluded]);
 
   const catLabel = useMemo(
     () => boot?.categories.find((c) => c.id === cat)?.label,
@@ -62,14 +69,36 @@ function SearchInner() {
         </div>
       </header>
 
-      <main className="flex-1 overflow-y-auto no-scrollbar p-3 pb-28">
-        <p className="text-[12px] text-ink2 mb-2">
-          {catLabel ? catLabel : q ? `Results for “${q}”` : "Popular right now"} · {products.length} items
-        </p>
-        <div className="grid grid-cols-2 gap-2.5">
-          {products.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
+      <main className="flex-1 overflow-y-auto no-scrollbar pb-28">
+        {/* Diet filter bar — only shown when user has a preference set */}
+        {hasDietFilter && (
+          <div className="flex items-center justify-between px-3 py-2 bg-amzn-greenlite border-b border-amzn-green/20">
+            <span className="text-[11.5px] font-semibold text-amzn-green">
+              🌿 Filtered for {dietLabel}
+            </span>
+            <button
+              onClick={() => setShowExcluded((v) => !v)}
+              className={`text-[11px] font-bold px-2.5 py-1 rounded-full border transition ${
+                showExcluded
+                  ? "bg-amzn-red/10 text-amzn-red border-amzn-red/30"
+                  : "bg-white text-ink2 border-line"
+              }`}
+            >
+              {showExcluded ? "Hide non-veg" : "Show all"}
+            </button>
+          </div>
+        )}
+
+        <div className="p-3">
+          <p className="text-[12px] text-ink2 mb-2">
+            {catLabel ? catLabel : q ? `Results for "${q}"` : "Popular right now"} · {products.length} items
+            {hasDietFilter && !showExcluded ? " (filtered)" : ""}
+          </p>
+          <div className="grid grid-cols-2 gap-2.5">
+            {products.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
         </div>
       </main>
     </div>

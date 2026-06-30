@@ -100,32 +100,104 @@ def now() -> datetime:
 
 # ---- dietary / allergen flagging ------------------------------------------
 
+def _is_diet_excluded(p: dict, prefs: list[str]) -> bool:
+    """Return True if this product should be excluded for the given dietary preferences.
+
+    Hierarchy (strictest first):
+    - vegan:       only products tagged 'vegan' are shown
+    - vegetarian:  only products tagged 'vegetarian' or 'vegan' are shown
+                   (eggetarian and non-veg are BOTH excluded)
+    - eggetarian:  products tagged 'vegetarian', 'vegan', or 'eggetarian' are shown
+    - gluten-free: products tagged 'gluten-free' are shown; others excluded
+    - keto/halal:  products tagged with that preference are shown; others excluded
+    """
+    if not prefs:
+        return False
+    tags = set(p.get("dietary_tags", []))
+    cat = p.get("category", "")
+
+    # Food categories where dietary exclusions apply
+    food_cats = {"fresh_produce", "dairy_eggs", "bakery", "staples_grocery",
+                 "meat_seafood", "beverages", "snacks", "frozen"}
+    is_food = cat in food_cats
+
+    if "vegan" in prefs:
+        # Only vegan products allowed
+        return is_food and "vegan" not in tags
+
+    if "vegetarian" in prefs:
+        # Only vegetarian or vegan products allowed — eggetarian is NOT allowed
+        if cat == "meat_seafood":
+            return True
+        if is_food and tags and "vegetarian" not in tags and "vegan" not in tags:
+            return True
+        # Products with empty tags in food categories are non-veg by default
+        if is_food and not tags and cat in ("snacks", "frozen", "bakery"):
+            return True
+        return False
+
+    if "eggetarian" in prefs:
+        # Vegetarian, vegan, and eggetarian allowed — only pure non-veg excluded
+        if cat == "meat_seafood":
+            return True
+        if is_food and tags and not (tags & {"vegetarian", "vegan", "eggetarian"}):
+            return True
+        return False
+
+    if "gluten-free" in prefs:
+        return is_food and tags and "gluten-free" not in tags
+
+    if "keto" in prefs:
+        return is_food and tags and "keto" not in tags
+
+    if "halal" in prefs:
+        return cat == "meat_seafood" and "halal" not in tags
+
+    return False
+
+
 def decorate(p: dict, user: dict | None = None) -> dict:
-    """Return a copy of product p with dietary warnings for the given user."""
+    """Return a copy of product p with dietary warnings and flags for the given user."""
     if p is None:
         return None
     user = user or active_user()
     diet = user.get("dietary", {})
     out = dict(p)
     warnings: list[str] = []
+    prefs = diet.get("preferences", [])
     allergens = set(diet.get("allergens", []))
+
+    # Allergen conflict
     hit = allergens & set(p.get("allergen_tags", []))
     if hit:
         warnings.append("Contains " + ", ".join(sorted(hit)))
-    prefs = diet.get("preferences", [])
-    if "vegetarian" in prefs and "vegetarian" not in p.get("dietary_tags", []) \
-            and p.get("category") == "meat_seafood":
+
+    # Dietary preference mismatch warnings
+    tags = set(p.get("dietary_tags", []))
+    if "vegetarian" in prefs and p.get("category") == "meat_seafood":
         warnings.append("Not vegetarian")
-    if "vegan" in prefs and "vegan" not in p.get("dietary_tags", []):
+    if "vegan" in prefs and "vegan" not in tags:
         warnings.append("Not vegan")
+
     out["warnings"] = warnings
     out["allergen_conflict"] = bool(hit)
+    # Mark dietary exclusion so the frontend can show/hide appropriately
+    out["diet_excluded"] = _is_diet_excluded(p, prefs)
     return out
 
 
-def search(q: str = "", category: str = "", limit: int = 40) -> list[dict]:
+def search(q: str = "", category: str = "", limit: int = 40,
+           show_excluded: bool = False) -> list[dict]:
+    """Search the catalog.
+
+    By default, products excluded by the user's dietary preferences are hidden.
+    Pass show_excluded=True to include them (with diet_excluded=True flag set).
+    """
     q = (q or "").strip().lower()
     cat = (category or "").strip()
+    user = active_user()
+    prefs = user.get("dietary", {}).get("preferences", [])
+
     rows = catalog()
     if cat:
         rows = [p for p in rows if p["category"] == cat]
@@ -135,7 +207,6 @@ def search(q: str = "", category: str = "", limit: int = 40) -> list[dict]:
         for p in rows:
             hay = f"{p['name']} {p['brand']} {p['category']} {p.get('match_key','')}".lower()
             score = sum(1 for t in toks if t in hay)
-            # prefer name-start matches
             if p["name"].lower().startswith(q):
                 score += 3
             if score:
@@ -144,7 +215,13 @@ def search(q: str = "", category: str = "", limit: int = 40) -> list[dict]:
         rows = [p for _, p in scored]
     else:
         rows = sorted(rows, key=lambda p: -p["rating"])
-    return [decorate(p) for p in rows[:limit]]
+
+    decorated = [decorate(p, user) for p in rows[:limit * 2]]  # extra headroom for filtering
+
+    if not show_excluded and prefs:
+        decorated = [p for p in decorated if not p.get("diet_excluded")]
+
+    return decorated[:limit]
 
 
 # ---- LLM-facing retrieval -------------------------------------------------
@@ -225,17 +302,25 @@ def compact(p: dict) -> dict:
 
 
 def retrieve(query: str, category: str = "", limit: int = 8,
-             exclude_allergens: list[str] | None = None) -> list[dict]:
-    """Deterministic ranked search for one query. Allergen-conflict items are
-    dropped before results are returned, so the agent never sees them."""
+             exclude_allergens: list[str] | None = None,
+             exclude_dietary: list[str] | None = None) -> list[dict]:
+    """Deterministic ranked search for one query.
+
+    - Allergen-conflict items are dropped (safety gate — never shown to agent)
+    - Diet-excluded items are also dropped so the agent only picks from
+      products compatible with the user's dietary preferences
+    """
     terms = _expand(query)
     cat = (category or "").strip()
     block = exclude_allergens or []
+    prefs = exclude_dietary or []
     scored = []
     for p in catalog():
         if cat and p["category"] != cat:
             continue
         if allergen_conflict(p, block):
+            continue
+        if prefs and _is_diet_excluded(p, prefs):
             continue
         s = _score(p, terms)
         if s:

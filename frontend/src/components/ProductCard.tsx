@@ -1,22 +1,22 @@
 "use client";
-import { AlertTriangle, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { useCart } from "@/lib/cart";
 import { rupee } from "@/lib/format";
 import type { Product } from "@/lib/types";
 import Stepper from "./Stepper";
-import VegMark from "./VegMark";
+import VegMark, { AllergenBadge, DietaryTags } from "./VegMark";
 
 export function ProductCard({ product }: { product: Product }) {
   const { qtyOf, add, setQty } = useCart();
   const qty = qtyOf(product.id);
   return (
-    <div className="w-full bg-white rounded-2xl border border-line p-2.5 flex flex-col shadow-card">
+    <div className={`w-full bg-white rounded-2xl border p-2.5 flex flex-col shadow-card ${product.allergen_conflict ? "border-amzn-red/40" : "border-line"}`}>
       <div className="relative aspect-square rounded-xl bg-paper overflow-hidden grid place-items-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={product.image} alt={product.name} className="h-[82%] w-[82%] object-contain" loading="lazy" />
         {product.allergen_conflict && (
-          <span className="absolute top-1.5 left-1.5 bg-amzn-red text-white text-[9px] font-bold px-1.5 py-0.5 rounded-md flex items-center gap-0.5">
-            <AlertTriangle size={9} /> {product.warnings?.[0]}
+          <span className="absolute top-1.5 left-1.5 bg-amzn-red text-white text-[9px] font-bold px-1.5 py-0.5 rounded-md">
+            ⚠ {product.warnings?.[0]}
           </span>
         )}
       </div>
@@ -32,6 +32,10 @@ export function ProductCard({ product }: { product: Product }) {
           {product.rating.toFixed(1)} <Star size={8} fill="white" />
         </span>
         <span>{product.size}</span>
+      </div>
+      {/* Extra dietary tags (GF, Keto, Halal) */}
+      <div className="mt-1">
+        <DietaryTags product={product} />
       </div>
       <div className="flex items-center justify-between mt-2">
         <span className="text-sm font-bold">{rupee(product.price)}</span>
@@ -77,11 +81,8 @@ export function ProductRow({
         </p>
         {reason && <p className="text-[11px] text-ink2 mt-0.5 truncate">{reason}</p>}
         {badge}
-        {product.allergen_conflict && (
-          <span className="inline-flex items-center gap-0.5 text-[10px] text-amzn-red font-semibold mt-0.5">
-            <AlertTriangle size={10} /> {product.warnings?.[0]}
-          </span>
-        )}
+        <DietaryTags product={product} />
+        <AllergenBadge product={product} />
       </div>
       <div className="flex flex-col items-end gap-1 shrink-0">
         <span className="text-sm font-bold">{rupee(product.price)}</span>

@@ -20,6 +20,7 @@ import { useBoot } from "@/lib/boot";
 import { useCart } from "@/lib/cart";
 import { rupee } from "@/lib/format";
 import type { CouponEval } from "@/lib/types";
+import VegMark, { AllergenBadge, DietaryTags } from "@/components/VegMark";
 
 export default function CheckoutPage() {
   return (
@@ -156,8 +157,13 @@ function CheckoutContent() {
                 <img src={i.product.image} alt="" className="h-[85%] w-[85%] object-contain" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[13px] font-semibold leading-tight truncate">{i.product.name}</p>
+                <div className="flex items-center gap-1">
+                  <VegMark product={i.product} size={12} />
+                  <p className="text-[13px] font-semibold leading-tight truncate">{i.product.name}</p>
+                </div>
                 <p className="text-[11px] text-ink2">{i.product.size}</p>
+                <DietaryTags product={i.product} />
+                <AllergenBadge product={i.product} />
               </div>
               <div className="flex items-center gap-1 bg-paper rounded-lg h-8 px-1">
                 <button onClick={() => setQty(i.product.id, i.qty - 1)} className="w-7 text-amzn-green font-bold">

@@ -12,10 +12,12 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
+import { useBootRefresh } from "@/lib/boot";
 import type { Profile } from "@/lib/types";
 
 export default function ProfilePage() {
   const router = useRouter();
+  const refreshBoot = useBootRefresh();
   const [p, setP] = useState<Profile | null>(null);
   const [prefs, setPrefs] = useState<string[]>([]);
   const [allergens, setAllergens] = useState<string[]>([]);
@@ -36,6 +38,7 @@ export default function ProfilePage() {
 
   const save = async () => {
     await api.updateDietary({ preferences: prefs, allergens, exclude_keywords: [] });
+    refreshBoot(); // update global boot context so filters apply immediately everywhere
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
   };
