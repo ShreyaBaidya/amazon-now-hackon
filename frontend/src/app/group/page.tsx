@@ -113,7 +113,7 @@ function GroupEntry() {
 
         {/* active membership banner */}
         {active && (
-          <div className="bg-amzn-greenlite border border-amzn-green/40 rounded-2xl p-4 mt-4 flex items-center gap-3">
+          <div className="bg-amzn-greenlite border border-amzn-green/40 rounded-2xl p-2 mt-3 flex items-center gap-3">
             <div className="h-10 w-10 rounded-full bg-amzn-green grid place-items-center shrink-0">
               <Users size={18} className="text-white" />
             </div>
@@ -138,7 +138,7 @@ function GroupEntry() {
         )}
 
         {/* create */}
-        <div className="bg-white rounded-2xl border border-line shadow-card p-4 mt-4">
+        <div className="bg-white rounded-2xl border border-line shadow-card p-4 mt-3">
           <p className="font-bold text-[15px]">Start a group cart</p>
           <p className="text-[12px] text-ink2 mt-0.5">
             {items.length > 0
@@ -176,7 +176,7 @@ function GroupEntry() {
           <button
             onClick={join}
             disabled={busy || !code.trim() || !name.trim()}
-            className="mt-3 w-full rounded-xl bg-amzn-dark text-white font-bold py-3 disabled:opacity-40"
+            className="mt-3 w-full rounded-xl bg-amzn-dark text-white font-bold py-2 disabled:opacity-40"
           >
             Join cart
           </button>

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Check, ChevronLeft, Clock, Minus, Plus, Users } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import VegMark from "@/components/VegMark";
+import VegMark, { AllergenBadge, DietaryTags } from "@/components/VegMark";
 import { api } from "@/lib/api";
 import { useCart } from "@/lib/cart";
 import { rupee } from "@/lib/format";
@@ -116,6 +116,8 @@ export default function RecipeDetail() {
                     <p className="text-[13px] font-semibold truncate">{ing.name}</p>
                   </div>
                   <p className="text-[11px] text-ink2">{ing.display_qty}</p>
+                  {ing.product && <DietaryTags product={ing.product} />}
+                  {ing.product && <AllergenBadge product={ing.product} />}
                 </div>
                 <div className={`shrink-0 flex flex-col items-end gap-1 ${off ? "opacity-50" : ""}`}>
                   <span className={`text-[12px] font-bold ${off ? "line-through" : ""}`}>

@@ -18,13 +18,13 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full ">
       <AppHeader greeting={boot ? `${boot.settings.demo_now_label} · Hi ${boot.user.first_name} 👋` : undefined} />
       <main className="flex-1 overflow-y-auto no-scrollbar pb-25 pt-2">
         <NowCast />
 
         {/* categories */}
-        <section className="px-4 mt-6">
+        <section className="px-5 mt-6">
           <h2 className="text-[15px] font-bold mb-2">Shop by category</h2>
           <div className="grid grid-cols-4 gap-2">
             {(boot?.categories ?? []).map((c) => (

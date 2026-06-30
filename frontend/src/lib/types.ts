@@ -13,6 +13,7 @@ export type Product = {
   description: string;
   warnings?: string[];
   allergen_conflict?: boolean;
+  diet_excluded?: boolean;   // true when product conflicts with user's dietary prefs
 };
 
 export type NowCastLine = {
@@ -42,6 +43,15 @@ export type CalendarEvent = {
   is_hero?: boolean;
   summary?: string;
   linked_recipe?: string;
+  // Extended fields for live Google Calendar
+  location?: string;
+  dt_utc?: string;       // ISO 8601 UTC, used for time-remaining countdown
+  needs_shopping?: boolean;
+};
+
+export type CalendarStatus = {
+  connected: boolean;
+  has_credentials: boolean;
 };
 
 export type NowCast = {
@@ -66,6 +76,7 @@ export type RecipeSummary = {
   time_min: number;
   dietary_tags: string[];
   ingredient_count: number;
+  diet_excluded?: boolean;  // true when recipe conflicts with user's dietary prefs
 };
 
 export type RecipeIngredient = {

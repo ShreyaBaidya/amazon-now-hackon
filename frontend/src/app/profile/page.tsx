@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import {
   AlertTriangle,
+  Calendar,
   Check,
   ChevronLeft,
   Leaf,
@@ -12,10 +13,15 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
+import { useBootRefresh } from "@/lib/boot";
+import { useGoogleCalendar } from "@/lib/useGoogleCalendar";
 import type { Profile } from "@/lib/types";
+import CalendarConnect from "@/components/CalendarConnect";
 
 export default function ProfilePage() {
   const router = useRouter();
+  const refreshBoot = useBootRefresh();
+  const gcal = useGoogleCalendar();
   const [p, setP] = useState<Profile | null>(null);
   const [prefs, setPrefs] = useState<string[]>([]);
   const [allergens, setAllergens] = useState<string[]>([]);
@@ -36,6 +42,7 @@ export default function ProfilePage() {
 
   const save = async () => {
     await api.updateDietary({ preferences: prefs, allergens, exclude_keywords: [] });
+    refreshBoot(); // update global boot context so filters apply immediately everywhere
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
   };
@@ -72,6 +79,35 @@ export default function ProfilePage() {
           </button>
         </div>
 
+        {/* Smart Event Planning */}
+        <div className="bg-white rounded-2xl border border-line shadow-card mt-3 overflow-hidden">
+          <div className="p-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-xl bg-orange-50 flex items-center justify-center">
+                <Calendar size={20} className="text-amzn-orange" />
+              </div>
+
+              <div>
+                <p className="font-bold text-[15px]">
+                  Smart Event Planning
+                </p>
+                <p className="text-[12px] text-ink2">
+                  Never miss groceries for upcoming events.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-xl bg-[#FFF8EF] border border-orange-100 p-3">
+              <CalendarConnect
+                gcal={gcal}
+                compact
+                onRefresh={refreshBoot}
+              />
+            </div>
+          </div>
+        </div>
+
+
         {/* dietary preferences */}
         <div className="bg-white rounded-2xl border border-line shadow-card mt-3 p-4">
           <p className="font-bold text-[15px] flex items-center gap-1.5">
@@ -88,7 +124,7 @@ export default function ProfilePage() {
         </div>
 
         {/* allergens */}
-        <div className="bg-white rounded-2xl border border-line shadow-card mt-3 mb-8 p-4">
+        <div className="bg-white rounded-2xl border border-line shadow-card mt-3 mb-10 p-4">
           <p className="font-bold text-[15px] flex items-center gap-1.5">
             <AlertTriangle size={16} className="text-amzn-red" /> Allergies to flag
           </p>
@@ -120,6 +156,7 @@ export default function ProfilePage() {
         </button>
       </div>
     </div>
+  
   );
 }
 

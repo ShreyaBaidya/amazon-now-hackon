@@ -1,5 +1,6 @@
 import type {
   Bootstrap,
+  CalendarStatus,
   CouponEval,
   DishAnalysis,
   GroupCart,
@@ -43,11 +44,12 @@ export const api = {
       body: JSON.stringify(d),
     }).then((r) => r.json() as Promise<Dietary>),
   nowcast: () => get<NowCast>("/api/nowcast"),
-  catalog: (q = "", category = "", limit = 40) =>
+  catalog: (q = "", category = "", limit = 40, showExcluded = false) =>
     get<{ products: Product[] }>(
-      `/api/catalog?q=${encodeURIComponent(q)}&category=${encodeURIComponent(category)}&limit=${limit}`,
+      `/api/catalog?q=${encodeURIComponent(q)}&category=${encodeURIComponent(category)}&limit=${limit}&show_excluded=${showExcluded}`,
     ),
-  recipes: () => get<{ recipes: RecipeSummary[] }>("/api/recipes"),
+  recipes: (showExcluded = false) =>
+    get<{ recipes: RecipeSummary[] }>(`/api/recipes?show_excluded=${showExcluded}`),
   recipe: (id: string, servings: number) =>
     get<Recipe>(`/api/recipe/${id}?servings=${servings}`),
   speakStarters: () => get<{ chips: string[] }>("/api/nowspeak/starters"),
@@ -101,6 +103,14 @@ export const api = {
       return r.json() as Promise<DishAnalysis>;
     });
   },
+
+  // Google Calendar integration
+  calendarStatus: () => get<CalendarStatus>("/api/calendar/status"),
+  calendarAuthUrl: () => `${BASE}/api/calendar/auth`,
+  calendarDisconnect: () =>
+    fetch(`${BASE}/api/calendar/disconnect`, { method: "POST" })
+      .then((r) => r.json() as Promise<{ ok: boolean; connected: boolean }>),
+  calendarRefresh: () => get<{ events: unknown[]; source: string; connected: boolean }>("/api/calendar/refresh"),
 };
 
 export const img = (path: string) => (path ? `${path}` : "");
