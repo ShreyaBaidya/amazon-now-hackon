@@ -44,6 +44,8 @@ _client = None
 
 
 def available() -> bool:
+    """Check if Bedrock is accessible. Returns True even when throttled (daily
+    quota exhausted) — the runner loop will try and fail gracefully."""
     try:
         c = client()
         c.converse(
@@ -53,6 +55,11 @@ def available() -> bool:
         )
         return True
     except Exception as e:
+        err = str(e)
+        # Throttling = configured but rate-limited; still return True so the
+        # runner tries it. Credential/AccessDenied = not usable.
+        if "Throttling" in err or "Too many tokens" in err:
+            return True
         return False
 
 

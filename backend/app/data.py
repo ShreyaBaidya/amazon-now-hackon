@@ -225,9 +225,26 @@ _SYNONYMS = {
 
     "tea": ["chai"],
 
-    "handwash": ["liquid handwash"],
+    "handwash": ["liquid handwash", "hand wash", "soap"],
+    "hand wash": ["handwash", "liquid handwash", "soap"],
 
-    "napkins": ["tissue", "paper napkins"],
+    "napkin": ["napkins", "tissue", "paper napkin", "paper napkins"],
+    "napkins": ["tissue", "paper napkins", "napkin"],
+    "plate": ["plates", "paper plate", "paper plates", "disposable plate", "disposable plates"],
+    "plates": ["paper plates", "disposable plates", "plate"],
+        # Tablecloth / party supplies
+    "tablecloth": ["table cover", "plastic table cover"],
+    "table cloth": ["table cover", "plastic table cover"],
+    
+    # Rice precision — stops "rice" matching "rice stick noodles"
+    # by giving it a strong preferred match
+    "rice": ["basmati rice", "basmati"],
+    "basmati": ["basmati rice", "rice"],
+    
+    # More party supply gaps
+    "forks": ["disposable forks", "plastic forks"],
+    "plates": ["paper plates", "disposable plates"],
+    "candles": ["birthday candles", "candle"],
 }
 
 
@@ -236,9 +253,23 @@ def _expand(term: str) -> list[str]:
     return [t, *_SYNONYMS.get(t, [])]
 
 
-# Allergen keyword backstop — catalog allergen_tags are incomplete (many nut
-# products are untagged), so safety can't depend on tags alone. Names are
-# specific to avoid false positives ("coconut"/"nutmeg"/"chestnut" are NOT nuts).
+    # Allergen keyword backstop — catalog allergen_tags are incomplete (many nut
+    # products are untagged), so safety can't depend on tags alone. Names are
+    # specific to avoid false positives ("coconut"/"nutmeg"/"chestnut" are NOT nuts).
+
+# Category fallback — when a search term matches a high-level intent (e.g.
+# "cleaning", "hurt", "party"), return the top-rated products from that
+# category instead of nothing.
+_CATEGORY_FALLBACK = {
+    "household_cleaning": ["clean", "cleaning", "household"],
+    "medicine_health": ["medicine", "first aid", "pain", "hurt", "injury",
+                        "sick", "ill", "wound", "tablet", "bandage"],
+    "party_festive": ["party", "birthday", "celebration", "festive", "decoration"],
+    "snacks": ["snack", "snacks", "munchies"],
+    "beverages": ["drink", "drinks", "beverage"],
+    "fresh_produce": ["vegetable", "vegetables", "fruit", "fruits", "produce"],
+    "personal_care": ["handwash", "soap", "shampoo", "sanitizer", "deodorant"],
+}
 _ALLERGEN_KEYWORDS = {
     "nuts": ["cashew", "almond", "peanut", "walnut", "pista", "pistachio",
              "hazelnut", "pecan", "pine nut", "pine-nut", "macadamia", "praline"],
@@ -347,6 +378,18 @@ def retrieve(query: str, category: str = "", limit: int = 8,
         if s:
             scored.append((s, p))
             
+    # --- CATEGORY FALLBACK ---
+    # If nothing scored, check if the query is a high-level intent keyword
+    # and return top products from that category.
+    if not scored:
+        for cat, keywords in _CATEGORY_FALLBACK.items():
+            if any(kw in q_clean for kw in keywords):
+                cat_prods = [p for p in catalog() if p["category"] == cat]
+                cat_prods.sort(key=lambda p: (-p.get("rating", 0), -p.get("rating_count", 0)))
+                scored = [(50, p) for p in cat_prods[:limit]]
+                print(f"[CATEGORY FALLBACK] '{q_clean}' → {cat} ({len(scored)} products)")
+                break
+
     scored.sort(key=lambda x: (-x[0], -x[1]["rating"], -x[1].get("rating_count", 0)))
     return [compact(p) for _, p in scored[:limit]]
 

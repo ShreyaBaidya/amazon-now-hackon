@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-from . import bedrock, data, engine, group
+from . import azure, bedrock, data, engine, group
 
 app = FastAPI(title="Amazon Now API", version="1.0")
 app.add_middleware(
@@ -116,16 +116,21 @@ def nowspeak(q: str):
 
 @app.get("/api/nowspeak/stream")
 async def nowspeak_stream(q: str):
-    """SSE: stream the reply word-by-word, then a final 'result' event with products."""
-    result = engine.speak_resolve(q)
-    reply = result.pop("reply", "")
+    """SSE: kick off agent in background, stream tokens as they arrive,
+    then push the final result event. User sees first word in ~1s."""
 
     async def gen():
+        # Run blocking agent in thread pool so we don't block the event loop
+        loop = asyncio.get_event_loop()
+        result = await loop.run_in_executor(None, engine.speak_resolve, q)
+        
+        reply = result.pop("reply", "")
         words = reply.split(" ")
         for i, w in enumerate(words):
             chunk = w + (" " if i < len(words) - 1 else "")
             yield f"event: token\ndata: {json.dumps({'t': chunk})}\n\n"
-            await asyncio.sleep(0.035)
+            await asyncio.sleep(0.025)   # slightly faster word drip
+        
         yield f"event: result\ndata: {json.dumps(result)}\n\n"
         yield "event: done\ndata: {}\n\n"
 
@@ -299,49 +304,79 @@ Respond ONLY with a valid JSON array of short search strings (e.g. ["garlic","gi
 Return at most 4 items. Return [] if it is already a basic product."""
 
 
-# ── Bedrock JSON helper ──────────────────────────────────────────────────
+# ── AI JSON helper (Azure → Bedrock fallback) ────────────────────────────
 
-def _bedrock_json(messages: list[dict], system: str) -> dict:
-    resp = bedrock.converse(messages, system=system)
-    raw = resp["output"]["message"]["content"][0]["text"].strip()
+def _ai_json(messages: list[dict], system: str) -> dict:
+    """Call an LLM and parse the response as JSON. Tries Azure first, then Bedrock."""
+    raw = ""
+    if azure.available():
+        try:
+            resp = azure.converse(messages, system=system)
+            raw = resp["output"]["message"]["content"][0]["text"].strip()
+        except Exception as e:
+            print(f"[AI JSON] Azure failed: {e}")
+    if not raw and bedrock.available():
+        try:
+            resp = bedrock.converse(messages, system=system)
+            raw = resp["output"]["message"]["content"][0]["text"].strip()
+        except Exception as e:
+            print(f"[AI JSON] Bedrock failed: {e}")
     if raw.startswith("```"):
         raw = "\n".join(ln for ln in raw.splitlines() if not ln.startswith("```")).strip()
     return json.loads(raw)
 
 
-def _identify_dish(image_bytes: bytes, media_type: str) -> dict:
+_IDENTIFY_AND_INGREDIENTS_SYSTEM = """You are a culinary AI for Amazon Now (India).
+Look at the food image and respond ONLY with valid JSON — no markdown, no explanation.
+
+Return exactly:
+{
+  "dish_name": "string",
+  "cuisine": "string", 
+  "confidence": number,
+  "error": null,
+  "cooking_time_min": number,
+  "base_servings": 4,
+  "ingredients": [{"name":"string","qty":number or null,"unit":"string","search_term":"string"}]
+}
+
+Rules for ingredients:
+- qty is numeric OR null (never empty string)
+- unit MUST always be present (g, kg, ml, tsp, tbsp, cups, pcs, pinch, etc.)
+- search_term = simplest grocery search term
+- Split compound ingredients into separate items
+- Set error to a short message if not a food image, else null
+- If error is set, ingredients can be []"""
+
+
+def _identify_and_generate(image_bytes: bytes, media_type: str) -> dict:
+    """Single Bedrock call that does both vision ID and ingredient generation."""
     fmt = media_type.split("/")[-1] if "/" in media_type else "jpeg"
     msgs = [{"role": "user", "content": [
         {"image": {"format": fmt, "source": {"bytes": image_bytes}}},
-        {"text": "Identify this dish. Respond ONLY with the JSON object as instructed."},
+        {"text": "Identify this dish and list all ingredients needed to cook it. Respond ONLY with the JSON as instructed."},
     ]}]
-    return _bedrock_json(msgs, _IDENTIFY_SYSTEM)
+    return _ai_json(msgs, _IDENTIFY_AND_INGREDIENTS_SYSTEM)
 
 
-def _generate_ingredients(dish_name: str, cuisine: str) -> dict:
-    msgs = [{"role": "user", "content": [{"text": (
-        f"Generate the complete ingredient list for: {dish_name} ({cuisine} cuisine). "
-        "Respond ONLY with the JSON object as instructed."
-    )}]}]
-    return _bedrock_json(msgs, _INGREDIENTS_SYSTEM)
-
-
-def _ai_decompose(ingredient_name: str) -> list[str]:
+def _ai_decompose_batch(ingredient_names: list[str]) -> dict[str, list[str]]:
+    """Decompose multiple ingredients in ONE AI call instead of N calls."""
+    if not ingredient_names:
+        return {}
     try:
-        msgs = [{"role": "user", "content": [{"text": (
-            f"Ingredient: {ingredient_name}\n"
-            "List commonly available grocery items needed to make or substitute this."
-        )}]}]
-        resp = bedrock.converse(msgs, system=_DECOMPOSE_SYSTEM)
-        raw = resp["output"]["message"]["content"][0]["text"].strip()
-        if raw.startswith("```"):
-            raw = "\n".join(ln for ln in raw.splitlines() if not ln.startswith("```")).strip()
-        result = json.loads(raw)
-        if isinstance(result, list):
-            return [str(x).strip() for x in result if x]
-    except Exception:  # noqa: BLE001
+        prompt = (
+            "For each ingredient below, list which basic grocery items are needed to buy it.\n"
+            "Respond ONLY with a JSON object: {ingredient_name: [search_term, ...]}\n"
+            "Max 3 items per ingredient. Return [] if it is already a basic product.\n\n"
+            + "\n".join(f"- {name}" for name in ingredient_names)
+        )
+        msgs = [{"role": "user", "content": [{"text": prompt}]}]
+        result = _ai_json(msgs, _DECOMPOSE_SYSTEM)
+        if isinstance(result, dict):
+            return result
+    except Exception:
         pass
-    return []
+    return {}
 
 
 # ── Recipe database matching (Issue 3) ──────────────────────────────────
@@ -517,25 +552,27 @@ def _best_product(term: str) -> dict | None:
     return None
 
 
+
+
+
+def _build_display_qty(ing: dict) -> str:
+    qty = ing.get("qty")
+    unit = (ing.get("unit") or "").strip()
+    if qty is not None and unit:
+        return f"{qty:g} {unit}".strip()
+    if qty is not None:
+        return f"{qty:g} pcs"
+    if unit:
+        return unit
+    return ing.get("display_qty", "").strip() or "as needed"
+
+
 def _map_single_ingredient(ing: dict) -> list[dict]:
     name = ing.get("name", "")
     search_term = ing.get("search_term") or name
-    qty = ing.get("qty")       # may be None for descriptive-only ingredients
+    qty = ing.get("qty")
     unit = (ing.get("unit") or "").strip()
-
-    # Build display_qty — must always be non-empty and include the unit.
-    # If qty is a number and unit is present: "2 tbsp", "500 g", "3 sliced thinly"
-    # If qty is None but unit is present: "Leaves", "Handful", "To taste"
-    # Fallback: use whatever came in the original display_qty field if set.
-    if qty is not None and unit:
-        display_qty = f"{qty:g} {unit}".strip()
-    elif qty is not None:
-        # bare number — unit was missing despite instructions; label it as "pcs" to avoid bare digits
-        display_qty = f"{qty:g} pcs"
-    elif unit:
-        display_qty = unit
-    else:
-        display_qty = ing.get("display_qty", "").strip() or "as needed"
+    display_qty = _build_display_qty(ing)
 
     def line(n: str, prod: dict | None) -> dict:
         return {"name": n, "display_qty": display_qty, "qty": qty, "unit": unit,
@@ -572,23 +609,49 @@ def _map_single_ingredient(ing: dict) -> list[dict]:
 
 
 def _map_ingredients_to_products(ingredients: list[dict]) -> list[dict]:
-    """
-    Map all ingredients using intelligent matching.
-    Compound ingredients may expand into multiple rows.
-    Deduplicates only true duplicates: same ingredient name AND same product id.
-    """
     result: list[dict] = []
-    seen: set[tuple] = set()   # (ingredient_name, product_id)
+    seen: set[tuple] = set()
+    
+    # First pass — map without AI decomposition
+    unmatched_names = []
+    first_pass = []
     for ing in ingredients:
-        for ln in _map_single_ingredient(ing):
+        lines = _map_single_ingredient(ing)
+        first_pass.append((ing, lines))
+        if all(not ln["available"] for ln in lines):
+            unmatched_names.append(ing.get("name", ""))
+    
+    # ONE batch AI call for all unmatched ingredients
+    decomposed = _ai_decompose_batch(unmatched_names) if unmatched_names else {}
+    
+    # Second pass — apply decomposition results
+    for ing, lines in first_pass:
+        name = ing.get("name", "")
+        if all(not ln["available"] for ln in lines) and name in decomposed:
+            parts = decomposed[name]
+            new_lines = []
+            for p_name in parts:
+                prod = _best_product(p_name)
+                if prod:
+                    display_qty = _build_display_qty(ing)
+                    new_lines.append({
+                        "name": name, "display_qty": display_qty,
+                        "qty": ing.get("qty"), "unit": ing.get("unit", ""),
+                        "search_term": p_name, "product": prod,
+                        "price": prod["price"], "available": True
+                    })
+            if new_lines:
+                lines = new_lines
+
+        for ln in lines:
             pid = ln["product"]["id"] if ln["product"] else None
             key = (ln["name"].lower().strip(), pid or "")
             if key in seen:
                 continue
             seen.add(key)
             result.append(ln)
+    
     return result
-
 
 def _recipe_to_dish_analysis(recipe: dict) -> dict:
     """
@@ -634,32 +697,22 @@ _MAX_SIZE_BYTES = 5 * 1024 * 1024  # 5 MB
 
 @app.post("/api/dish/analyze")
 async def dish_analyze(image: UploadFile = File(...)):
-    """
-    Step 1: Identify dish from image (Bedrock vision).
-    Step 2: Check existing recipe database — return directly if found.
-    Step 3: Generate ingredients via Bedrock (only when no recipe match).
-    Step 4: Map ingredients to catalog products (intelligent matching).
-    """
     content_type = (image.content_type or "").lower()
     if content_type not in _ALLOWED_TYPES:
-        raise HTTPException(status_code=400,
-            detail=f"Unsupported image format '{content_type}'. "
-                   "Please upload a JPEG, PNG, or WebP image.")
+        raise HTTPException(status_code=400, detail=f"Unsupported image format '{content_type}'.")
 
     image_bytes = await image.read()
     if len(image_bytes) > _MAX_SIZE_BYTES:
-        raise HTTPException(status_code=400,
-            detail="Image is too large. Please upload an image under 5 MB.")
+        raise HTTPException(status_code=400, detail="Image too large (max 5 MB).")
     if len(image_bytes) == 0:
         raise HTTPException(status_code=400, detail="Empty image file.")
 
-    # Step 1 — identify dish
+    # ONE call: vision ID + ingredient generation combined
     try:
-        dish_info = _identify_dish(image_bytes, content_type)
+        dish_info = _identify_and_generate(image_bytes, content_type)
     except json.JSONDecodeError:
-        raise HTTPException(status_code=502,
-            detail="AI returned an unexpected response. Please try again.")
-    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=502, detail="AI returned unexpected response. Please try again.")
+    except Exception as e:
         raise HTTPException(status_code=502, detail=f"AI analysis failed: {str(e)}")
 
     if dish_info.get("error"):
@@ -668,10 +721,9 @@ async def dish_analyze(image: UploadFile = File(...)):
     dish_name: str = dish_info.get("dish_name", "")
     cuisine: str = dish_info.get("cuisine", "")
     if not dish_name:
-        raise HTTPException(status_code=422,
-            detail="Could not identify a dish in this image. Please try a clearer food photo.")
+        raise HTTPException(status_code=422, detail="Could not identify a dish. Please try a clearer food photo.")
 
-    # Step 2 — try existing recipe
+    # Check stored recipe first — skip AI ingredients if we have one
     recipe_id = _find_stored_recipe(dish_name)
     if recipe_id:
         from . import engine as _eng
@@ -679,28 +731,17 @@ async def dish_analyze(image: UploadFile = File(...)):
         if recipe:
             return _recipe_to_dish_analysis(recipe)
 
-    # Step 3 — generate ingredient list
-    try:
-        ing_info = _generate_ingredients(dish_name, cuisine)
-    except json.JSONDecodeError:
-        raise HTTPException(status_code=502,
-            detail="AI returned an unexpected response. Please try again.")
-    except Exception as e:  # noqa: BLE001
-        raise HTTPException(status_code=502, detail=f"AI analysis failed: {str(e)}")
-
-    ingredients_raw = ing_info.get("ingredients", [])
+    # Use the ingredients already returned in the same call
+    ingredients_raw = dish_info.get("ingredients", [])
     if not ingredients_raw:
-        raise HTTPException(status_code=422,
-            detail="No ingredients could be detected. Please try a clearer food image.")
+        raise HTTPException(status_code=422, detail="No ingredients detected. Please try a clearer photo.")
 
-    # Step 4 — intelligent product mapping
     mapped = _map_ingredients_to_products(ingredients_raw)
-
     return {
         "dish_name": dish_name,
         "cuisine": cuisine,
-        "cooking_time_min": ing_info.get("cooking_time_min", 30),
-        "base_servings": max(1, int(ing_info.get("base_servings", 4))),
+        "cooking_time_min": dish_info.get("cooking_time_min", 30),
+        "base_servings": max(1, int(dish_info.get("base_servings", 4))),
         "ingredients": mapped,
         "ingredient_count": len(mapped),
         "from_stored_recipe": False,

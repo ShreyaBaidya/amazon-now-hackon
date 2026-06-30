@@ -61,25 +61,25 @@ export default function RecipeDetail() {
         </div>
 
         {/* servings */}
-        <div className="bg-white mx-3 mt-3 rounded-2xl border border-line p-3 flex items-center justify-between">
+        <div className="bg-white mx-3 mt-2.5 rounded-2xl border border-line p-3 flex items-center justify-between">
           <span className="flex items-center gap-2 text-[14px] font-semibold">
             <Users size={18} className="text-amzn-orange" /> Servings
           </span>
           <div className="flex items-center gap-3">
             <button
               onClick={() => setServings((s) => Math.max(1, s - 1))}
-              className="h-8 w-8 rounded-lg bg-paper grid place-items-center text-amzn-green"
+              className="h-6 w-6 rounded-lg bg-paper grid place-items-center text-amzn-green"
             >
-              <Minus size={16} />
+              <Minus size={15} />
             </button>
-            <motion.span key={servings} initial={{ scale: 0.7 }} animate={{ scale: 1 }} className="w-6 text-center text-[17px] font-bold">
+            <motion.span key={servings} initial={{ scale: 0.7 }} animate={{ scale: 1 }} className="w-6 text-center text-[15px] font-bold">
               {servings}
             </motion.span>
             <button
               onClick={() => setServings((s) => Math.min(12, s + 1))}
-              className="h-8 w-8 rounded-lg bg-paper grid place-items-center text-amzn-green"
+              className="h-6 w-6 rounded-lg bg-paper grid place-items-center text-amzn-green"
             >
-              <Plus size={16} />
+              <Plus size={15} />
             </button>
           </div>
         </div>
@@ -97,14 +97,14 @@ export default function RecipeDetail() {
                 {ing.product && (
                   <button
                     onClick={() => setLineQty(id, off ? 1 : 0)}
-                    className={`h-5 w-5 rounded-md border-2 grid place-items-center shrink-0 ${
+                    className={`h-4 w-4 rounded-md border-2 grid place-items-center shrink-0 ${
                       off ? "border-line bg-white" : "border-amzn-green bg-amzn-green"
                     }`}
                   >
                     {!off && <Check size={13} className="text-white" strokeWidth={3} />}
                   </button>
                 )}
-                <div className="h-11 w-11 rounded-lg bg-paper grid place-items-center overflow-hidden shrink-0">
+                <div className="h-12 w-12 rounded-lg bg-paper grid place-items-center overflow-hidden shrink-0">
                   {ing.product?.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={ing.product.image} alt="" className={`h-[85%] w-[85%] object-contain ${off ? "opacity-40" : ""}`} />
@@ -122,7 +122,7 @@ export default function RecipeDetail() {
                     {rupee(ing.price * Math.max(0, qty || 1))}
                   </span>
                   {ing.product && (
-                    <div className="h-7 w-[78px] rounded-lg bg-amzn-green text-white text-[12px] font-bold flex items-center justify-between px-1">
+                    <div className="h-6.5 w-[70px] rounded-lg bg-amzn-green text-white text-[12px] font-bold flex items-center justify-between px-1">
                       <button
                         onClick={() => setLineQty(id, qty - 1)}
                         className="grid place-items-center h-full w-6"

@@ -182,3 +182,56 @@ def run_tools(messages: list[dict], system: str, tools: list[dict],
             })
 
     return messages, calls
+
+
+def _messages_to_azure_input(messages: list[dict]) -> list[dict]:
+    """Convert Bedrock-format messages (text + image) to Azure Responses API input array."""
+    import base64
+    azure_msgs = []
+    for m in messages:
+        items = []
+        for c in m.get("content", []):
+            if "text" in c:
+                items.append({"type": "input_text", "text": c["text"]})
+            elif "image" in c:
+                img = c["image"]
+                fmt = img.get("format", "jpeg")
+                source = img.get("source", {})
+                if "bytes" in source:
+                    b64 = base64.b64encode(source["bytes"]).decode()
+                    items.append({
+                        "type": "input_image",
+                        "image_url": f"data:image/{fmt};base64,{b64}"
+                    })
+        if items:
+            azure_msgs.append({"role": m["role"], "content": items})
+    return azure_msgs
+
+
+def converse(messages: list[dict], system: str | None = None) -> dict:
+    """Match bedrock.converse signature — supports text + image input."""
+    body: dict = {
+        "model": MODEL,
+        "input": _messages_to_azure_input(messages),
+        "max_output_tokens": 2048,
+        "reasoning": {"effort": "low"},
+    }
+    if system:
+        body["instructions"] = system
+
+    raw = _call(body)
+
+    text_parts = []
+    for item in raw.get("output", []):
+        if item.get("type") == "message":
+            for c in item.get("content", []):
+                if c.get("type") == "output_text":
+                    text_parts.append(c.get("text", ""))
+
+    return {
+        "output": {
+            "message": {
+                "content": [{"text": "".join(text_parts)}]
+            }
+        }
+    }

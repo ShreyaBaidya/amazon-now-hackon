@@ -1,6 +1,7 @@
 """Core demo logic: NowCast prediction, recipe scaling, NowSpeak intent, NowSOS."""
 from __future__ import annotations
 
+import json
 import re
 
 from . import bedrock, gemini, azure, data
@@ -345,37 +346,36 @@ out what they need, spanning fresh groceries, home essentials, party supplies, e
 
 Shopper: {name}. Allergens to AVOID at all costs: {allergens}. Dietary preference: {diet}.
 
+IMPORTANT — ALWAYS search for products. Never respond with just advice or text.
+For ANY request — medical, emotional, household, party — search for relevant products.
+If the shopper asks for multiple categories (e.g. food AND cleaning), add ALL categories to cart.
+
 Hard rules:
 - You may ONLY add products returned by search_catalog or find_recipe. NEVER invent product ids.
 - Never add anything containing the shopper's allergens.
-- Search broadly, then pick the single best match for each item (prefer higher rating + diet).
-- CRITICAL: search_catalog ONLY understands single, atomic, baseline nouns. NEVER include adjectives, cuisines, or descriptors. 
-  * BAD SEARCH: "italian pasta", "pasta sauce", "red roses", "scented candle"
-  * GOOD SEARCH: "pasta", "sauce", "roses", "candle"
+- Search broadly, pick the single best match for each item (prefer higher rating + diet).
+- search_catalog: use atomic nouns. GOOD: "pasta", "sauce", "roses", "candle".
+  BAD: "italian pasta", "pasta sauce", "red roses", "scented candle".
 
-  
 How to think:
 1. Understand the shopper's real-world situation.
 2. Infer both explicit and implicit needs.
 3. Think like an experienced Amazon shopping assistant helping a customer complete their mission quickly.
-4. Consider:
-   - number of guests
-   - occasion
-   - time of day
-   - convenience
-   - serving essentials
-   - comfort items
-5. For every need, convert it to simple atomic nouns from the categories above.
-6. After searching, call add_to_cart to add items to the cart. Include a short reason for each item.
+4. Consider: guests, occasion, time of day, convenience, serving essentials, comfort.
+5. Convert every need to simple atomic nouns. Search. Then add_to_cart.
+6. Add ALL item categories the shopper asked for — don't skip any.
 
 Examples:
-- "headache" -> paracetamol (medicine), tea (comfort), ginger (home remedy), vapoRub (relief)
+- "got hurt" -> paracetamol, adhesive bandages, vaporub, antiseptic
+- "headache" -> paracetamol, tea, ginger, vaporub
 - "cold and fever" -> paracetamol, ORS, soup, ginger, tea, honey, vaporub
 - "stomach upset" -> ORS, curd, ginger, lemon, eno, digestive biscuits
 - "kitty party" -> samosa, biscuits, drinks, plates, tissues
 - "romantic dinner" -> pasta, sauce, flowers, candle, chocolate
-- "in-laws visiting" -> tea, snacks, sweets, napkins, handwash
-- "road trip" -> wipes, sanitizer, snacks, charger
+- "in-laws visiting" -> tea, snacks, sweets, napkins, handwash, floor cleaner
+- "cleaning" -> dishwash, floor cleaner, toilet cleaner, garbage bags
+- "party" -> balloons, cups, cake, snacks, drinks
+- "road trip" -> wipes, sanitizer, snacks, charger, water
 """
 _AGENT_TOOLS = [
     {"toolSpec": {
@@ -411,8 +411,7 @@ _AGENT_TOOLS = [
                 "items": {"type": "array", "items": {
                     "type": "object",
                     "properties": {"product_id": {"type": "string"},
-                                   "qty": {"type": "integer"},
-                                   "reason": {"type": "string", "description": "Why this item was chosen for the user's situation"}},
+                                   "qty": {"type": "integer"}},
                     "required": ["product_id", "qty"]}},
             },
             "required": ["items"]}}}},
@@ -485,7 +484,7 @@ def _agent_handlers(state: dict, block: list[str]):
                 for i in rec["ingredients"] if i.get("product")]
         return {"found": True, "name": rec["name"], "servings": servings, "ingredients": ings}
 
-    MAX_CART_ITEMS = 8
+    MAX_CART_ITEMS = 20
 
     def h_add(inp: dict) -> dict:
 
@@ -510,7 +509,6 @@ def _agent_handlers(state: dict, block: list[str]):
             state["picks"].append({
                 "product_id": pid,
                 "qty": max(1, int(it.get("qty") or 1)),
-                "reason": it.get("reason", "")
             })
 
             existing.add(pid)
@@ -527,6 +525,95 @@ def _agent_handlers(state: dict, block: list[str]):
     return {"search_catalog": h_search, "find_recipe": h_recipe, "add_to_cart": h_add}
 
 
+_DISH_EXTRACT_PATTERNS = [
+    re.compile(r'(?:make|cook|prepare|cooking|making|recipe\s+for)\s+([a-z\s]+?)(?:$|\.|,|and|\s+with|\s+also)'),
+    re.compile(r'([a-z\s]+?)\s+recipe'),
+]
+_FOOD_WORDS = {'biryani', 'pasta', 'curry', 'dal', 'rice', 'roti', 'naan', 'paneer',
+    'chicken', 'mutton', 'fish', 'egg', 'salad', 'soup', 'sandwich', 'pizza',
+    'noodle', 'dosa', 'idli', 'chapati', 'paratha', 'pulao', 'korma', 'tikka',
+    'kebab', 'burger', 'wrap', 'bread', 'cake', 'cookie', 'biscuit', 'dessert',
+    'sweet', 'snack', 'chaat', 'samosa', 'pakora', 'pancake', 'waffle', 'brownie',
+    'muffin', 'pie', 'quiche', 'frittata', 'curd', 'yogurt', 'rice', 'daal',
+    'dal', 'rajma', 'chole', 'chana', 'sabzi', 'subzi', 'sambar', 'rasam'}
+
+def _extract_dish_name(query: str) -> str | None:
+    q = query.lower().strip()
+    for pat in _DISH_EXTRACT_PATTERNS:
+        m = pat.search(q)
+        if m:
+            dish = m.group(1).strip()
+            if dish and len(dish) > 2:
+                return dish
+    words = set(re.findall(r'[a-z]+', q))
+    if words & _FOOD_WORDS:
+        return q
+    return None
+
+_AI_INGREDIENTS_SYSTEM = """Given a dish name, list the ingredients needed to cook it for 4 people.
+Respond ONLY with a valid JSON array of strings — ingredient names. No markdown, no explanation.
+Example response: ["chicken", "rice", "yogurt", "onion", "ginger", "garlic", "biryani masala", "oil", "salt"]
+Max 15 ingredients. Use simple grocery search terms."""
+
+def _ai_generate_ingredients(dish_name: str) -> list[str]:
+    """Generate ingredient list for a dish using Bedrock (primary) or Azure (fallback)."""
+    try:
+        if bedrock.available():
+            msgs = [{"role": "user", "content": [{"text": dish_name}]}]
+            resp = bedrock.converse(msgs, system=_AI_INGREDIENTS_SYSTEM)
+            raw = resp["output"]["message"]["content"][0]["text"].strip()
+        elif azure.available():
+            msgs = [{"role": "user", "content": [{"text": dish_name}]}]
+            msgs_out, _ = azure.run_tools(msgs, _AI_INGREDIENTS_SYSTEM, [], {}, max_calls=1)
+            raw = ""
+            for m in reversed(msgs_out):
+                if m.get("role") == "assistant":
+                    raw = " ".join(b["text"] for b in m.get("content", []) if "text" in b)
+                    break
+        else:
+            return []
+        raw = re.sub(r'```(?:json)?', '', raw).strip()
+        result = json.loads(raw)
+        return [str(x).strip() for x in result if x] if isinstance(result, list) else []
+    except Exception:
+        return []
+
+def _resolve_recipe_products(query: str, block: list[str]) -> tuple[list[dict], dict | None, str]:
+    """Resolve recipe products: deterministic lookup first, then AI fallback.
+    Returns (products, recipe_info, reply_text)."""
+    user = data.active_user()
+    
+    # 1) Deterministic recipe match
+    recipe_id = _find_recipe_id(query)
+    if recipe_id:
+        rec = recipe_scaled(recipe_id, 4)
+        prods = []
+        for ing in rec["ingredients"]:
+            p = ing.get("product")
+            if p and p["id"]:
+                full = data.product(p["id"])
+                if full and not data.allergen_conflict(full, block):
+                    prods.append(data.decorate(full, user))
+        if prods:
+            return prods, rec, f"Found {rec['name']} recipe — {len(prods)} ingredients ready"
+    
+    # 2) AI fallback — generate ingredients
+    dish = _extract_dish_name(query)
+    if dish:
+        ings = _ai_generate_ingredients(dish)
+        if ings:
+            prods, seen = [], set()
+            for name in ings:
+                best = _best_match(name)
+                if best and best["id"] not in seen and not data.allergen_conflict(best, block):
+                    seen.add(best["id"])
+                    prods.append(data.decorate(best, user))
+            if prods:
+                return prods, None, f"Found {len(prods)} ingredients for your request"
+    
+    return [], None, ""
+
+
 def _final_text(messages: list[dict]) -> str:
     for m in reversed(messages):
         if m.get("role") == "assistant":
@@ -535,25 +622,33 @@ def _final_text(messages: list[dict]) -> str:
                 return txt
     return ""
 
-
-def _agent_resolve(query: str) -> dict:
+def _agent_resolve(query: str, recipe_handled: bool = False,
+                   recipe_name: str = "") -> dict:
     user = data.active_user()
     diet = user.get("dietary", {})
     block = diet.get("allergens", [])
-    
-    # FORCE A FRESH STATE RESET HERE
+
     state = {
-        "picks": [],        # Clear past cart additions completely!
-        "searched": [],     # Clear past searches
-        "recipe_id": None, 
+        "picks": [],
+        "searched": [],
+        "recipe_id": None,
         "servings": 4
     }
-    
+
     system = _AGENT_SYSTEM.format(
         name=user.get("first_name", "there"),
         allergens=", ".join(block) or "none",
         diet=", ".join(diet.get("preferences", [])) or "no restriction",
     )
+    
+    if recipe_handled:
+        system += (
+            f"\n\nIMPORTANT: The recipe for {recipe_name} is ALREADY being handled. "
+            "Do NOT search for recipe ingredients. Only search for additional items "
+            "the shopper might need — cleaning supplies, party decorations, snacks, "
+            "drinks, or other non-recipe extras."
+        )
+
     messages = [{"role": "user", "content": [{"text": query}]}]
 
     runners = []
@@ -572,7 +667,7 @@ def _agent_resolve(query: str) -> dict:
                 system,
                 _AGENT_TOOLS,
                 _agent_handlers(state, block),
-                max_calls=10
+                max_calls=6
             )
 
             print(f"[NowSpeak] Success using {runner.__name__}")
@@ -591,7 +686,7 @@ def _agent_resolve(query: str) -> dict:
         for r in state["searched"]:
             if isinstance(r, dict) and r.get("id") and r["id"] not in seen_ids:
                 seen_ids.add(r["id"])
-                state["picks"].append({"product_id": r["id"], "qty": 1, "reason": r.get("name", "")})
+                state["picks"].append({"product_id": r["id"], "qty": 1})
 
     seen, prods = set(), []
     for it in state["picks"]:
@@ -600,17 +695,16 @@ def _agent_resolve(query: str) -> dict:
         p = data.product(it["product_id"])
         if not p:
             continue
-        if data.allergen_conflict(p, block):  # safety gate — never deliver an allergen
+        if data.allergen_conflict(p, block):
             continue
         dec = data.decorate(p, user)
-        raw = (it.get("reason") or "").strip().rstrip(".,; ")
-        dec["reason"] = (raw[0].upper() + raw[1:] if raw else raw) + "." if raw else ""
+        dec["reason"] = "Added just for you ✨"
         seen.add(it["product_id"])
         prods.append(dec)
 
     recipe = recipe_scaled(state["recipe_id"], state["servings"]) if state["recipe_id"] else None
     if not prods and not recipe:
-        raise RuntimeError("agent produced no grounded cart")  # -> keyword fallback
+        raise RuntimeError("agent produced no grounded cart")
 
     return {
         "reply": _final_text(messages) or "Here's your cart — tap add for anything you need.",
@@ -622,13 +716,56 @@ def _agent_resolve(query: str) -> dict:
 
 
 def speak_resolve(query: str) -> dict:
-    """NowSpeak entry point: real AI agent with graceful fallback."""
-    try:
-        return _agent_resolve(query)
+    """NowSpeak entry point: recipe-first, then AI agent, then keyword fallback."""
+    user = data.active_user()
+    block = user.get("dietary", {}).get("allergens", [])
 
+    # Phase 1: Recipe resolution (deterministic lookup → AI generation fallback)
+    recipe_products, recipe_info, recipe_reply = _resolve_recipe_products(query, block)
+    recipe_handled = bool(recipe_products)
+    recipe_name = recipe_info["name"] if recipe_info else ""
+
+    # Phase 2: AI agent for extras (non-recipe items)
+    agent_products = []
+    agent_reply = ""
+    try:
+        agent_result = _agent_resolve(query, recipe_handled=recipe_handled,
+                                       recipe_name=recipe_name)
+        agent_products = agent_result.get("products", [])
+        agent_reply = agent_result.get("reply", "")
     except Exception as e:
-        print(f"[NowSpeak] AI failed, using keyword fallback: {e}")
-        return _keyword_resolve(query)
+        print(f"[NowSpeak] Agent failed (non-fatal): {e}")
+
+    # Phase 3: Merge — deduplicate by product_id, recipe products take priority
+    seen_ids = set()
+    all_products = []
+    for p in recipe_products + agent_products:
+        if p["id"] not in seen_ids:
+            seen_ids.add(p["id"])
+            all_products.append(p)
+
+    if not all_products and not recipe_info:
+        # Phase 4: Ultimate fallback
+        try:
+            return _keyword_resolve(query)
+        except Exception:
+            return {
+                "reply": "Sorry, I couldn't find relevant products for that.",
+                "products": [], "recipe": None, "note": "", "total": 0
+            }
+
+    reply = recipe_reply or agent_reply or "Here's your cart — tap add for anything you need."
+    note = f"{len(all_products)} items"
+    if recipe_info:
+        note = f"{recipe_info['name']} · {note}"
+
+    return {
+        "reply": reply,
+        "products": all_products,
+        "recipe": recipe_info,
+        "note": note,
+        "total": sum(p["price"] for p in all_products),
+    }
 
 
 # --------------------------------------------------------------------------

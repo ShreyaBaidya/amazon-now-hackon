@@ -27,7 +27,7 @@
           "unit": "tbsp",
           "measure": "½ tbsp",
           "image": "/products/khus-khus.png",
-          "price": 160
+          "price": 45
         },
         {
           "product_id": "cumin-seeds",
@@ -72,7 +72,7 @@
           "unit": "Leaves",
           "measure": "Leaves",
           "image": "/products/mint.png",
-          "price": 180
+          "price": 65
         },
         {
           "product_id": "cilantro",
@@ -81,7 +81,7 @@
           "unit": "Leaves",
           "measure": "Leaves",
           "image": "/products/cilantro.png",
-          "price": 80
+          "price": 95
         },
         {
           "product_id": "saffron",
@@ -90,7 +90,7 @@
           "unit": "tsp dissolved in  0.5 cup warm milk",
           "measure": "½ tsp dissolved in ½ cup warm milk",
           "image": "/products/saffron.png",
-          "price": 190
+          "price": 195
         },
         {
           "product_id": "amul-ghee-500ml",
@@ -189,7 +189,7 @@
           "unit": "tbsp",
           "measure": "1 tbsp",
           "image": "/products/biryani-masala.png",
-          "price": 85
+          "price": 185
         }
       ],
       "steps": [
@@ -236,7 +236,7 @@
           "unit": "tbsp",
           "measure": "4 tbsp",
           "image": "/products/sunflower-oil.png",
-          "price": 30
+          "price": 95
         },
         {
           "product_id": "garlic-200g",
@@ -263,7 +263,7 @@
           "unit": "tbsp",
           "measure": "2 tbsp",
           "image": "/products/madras-paste.png",
-          "price": 155
+          "price": 75
         },
         {
           "product_id": "paprika",
@@ -272,7 +272,7 @@
           "unit": "tsp",
           "measure": "2 tsp",
           "image": "/products/paprika.png",
-          "price": 130
+          "price": 175
         },
         {
           "product_id": "cinnamon-sticks",
@@ -317,7 +317,7 @@
           "unit": "tbsp",
           "measure": "1 tbsp",
           "image": "/products/tomato-pur-e.png",
-          "price": 140
+          "price": 60
         },
         {
           "product_id": "mutton-500g",
@@ -441,7 +441,7 @@
           "unit": "tsp",
           "measure": "1/2 tsp",
           "image": "/products/mustard-seeds.png",
-          "price": 30
+          "price": 115
         },
         {
           "product_id": "whole-bay-leaf",
@@ -477,7 +477,7 @@
           "unit": "tbs",
           "measure": "2 tbs",
           "image": "/products/cilantro.png",
-          "price": 80
+          "price": 95
         },
         {
           "product_id": "capsicum",
@@ -559,7 +559,7 @@
           "unit": "tsp",
           "measure": "4 tsp",
           "image": "/products/paprika.png",
-          "price": 130
+          "price": 175
         },
         {
           "product_id": "onion-1kg",
@@ -681,7 +681,7 @@
           "unit": "g",
           "measure": "125g",
           "image": "/products/rice-noodles.png",
-          "price": 170
+          "price": 30
         },
         {
           "product_id": "lime",
@@ -690,7 +690,7 @@
           "unit": "Juice of 3",
           "measure": "Juice of 3",
           "image": "/products/lime.png",
-          "price": 85
+          "price": 120
         },
         {
           "product_id": "cayenne-pepper",
@@ -699,7 +699,7 @@
           "unit": "teaspoon",
           "measure": "1/2 teaspoon",
           "image": "/products/cayenne-pepper.png",
-          "price": 105
+          "price": 150
         },
         {
           "product_id": "sugar-1kg",
@@ -717,7 +717,7 @@
           "unit": "tablespoons",
           "measure": "2 tablespoons",
           "image": "/products/fish-sauce.png",
-          "price": 95
+          "price": 190
         },
         {
           "product_id": "sunflower-oil-1l",
@@ -753,7 +753,7 @@
           "unit": "g",
           "measure": "140g",
           "image": "/products/bean-sprouts.png",
-          "price": 105
+          "price": 70
         },
         {
           "product_id": "peanuts",
@@ -762,7 +762,7 @@
           "unit": "g",
           "measure": "25g",
           "image": "/products/peanuts.png",
-          "price": 150
+          "price": 130
         },
         {
           "product_id": "coriander",
@@ -780,7 +780,7 @@
           "unit": "",
           "measure": "2",
           "image": "/products/lime.png",
-          "price": 85
+          "price": 120
         },
         {
           "product_id": "green-chilli",
@@ -821,7 +821,7 @@
           "unit": "",
           "measure": "4",
           "image": "/products/pork-chops.png",
-          "price": 175
+          "price": 25
         },
         {
           "product_id": "atta-5kg",
@@ -866,7 +866,7 @@
           "unit": "tbs",
           "measure": "2 tbs",
           "image": "/products/tomato-ketchup.png",
-          "price": 95
+          "price": 25
         },
         {
           "product_id": "worcestershire-sauce",
@@ -875,7 +875,7 @@
           "unit": "tbs",
           "measure": "2 tbs",
           "image": "/products/worcestershire-sauce.png",
-          "price": 120
+          "price": 20
         },
         {
           "product_id": "oyster-sauce",
@@ -884,7 +884,7 @@
           "unit": "tbs",
           "measure": "1 tbs",
           "image": "/products/oyster-sauce.png",
-          "price": 40
+          "price": 45
         },
         {
           "product_id": "sugar-1kg",
@@ -927,7 +927,7 @@
           "unit": "g",
           "measure": "85g",
           "image": "/products/peanuts.png",
-          "price": 150
+          "price": 130
         },
         {
           "product_id": "coconut-cream",
@@ -936,7 +936,7 @@
           "unit": "ml can",
           "measure": "400ml can",
           "image": "/products/coconut-cream.png",
-          "price": 175
+          "price": 65
         },
         {
           "product_id": "massaman-curry-paste",
@@ -945,7 +945,7 @@
           "unit": "tbsp",
           "measure": "4 tbsp",
           "image": "/products/massaman-curry-paste.png",
-          "price": 115
+          "price": 50
         },
         {
           "product_id": "beef",
@@ -954,7 +954,7 @@
           "unit": "g stewing cut into strips",
           "measure": "600g stewing cut into strips",
           "image": "/products/beef.png",
-          "price": 180
+          "price": 35
         },
         {
           "product_id": "potato-1kg",
@@ -981,7 +981,7 @@
           "unit": "leaves",
           "measure": "4 leaves",
           "image": "/products/lime.png",
-          "price": 85
+          "price": 120
         },
         {
           "product_id": "cinnamon-sticks",
@@ -999,7 +999,7 @@
           "unit": "tbsp",
           "measure": "1 tbsp",
           "image": "/products/tamarind-paste.png",
-          "price": 130
+          "price": 125
         },
         {
           "product_id": "sugar-1kg",
@@ -1017,7 +1017,7 @@
           "unit": "tbsp",
           "measure": "1 tbsp",
           "image": "/products/fish-sauce.png",
-          "price": 95
+          "price": 190
         },
         {
           "product_id": "green-chilli",
@@ -1035,7 +1035,7 @@
           "unit": "to serve",
           "measure": "to serve",
           "image": "/products/jasmine-rice.png",
-          "price": 190
+          "price": 20
         }
       ],
       "steps": [
@@ -1076,7 +1076,7 @@
           "unit": "",
           "measure": "6",
           "image": "/products/egg-yolks.png",
-          "price": 115
+          "price": 25
         },
         {
           "product_id": "salt-1kg",
@@ -1103,7 +1103,7 @@
           "unit": "g",
           "measure": "50g",
           "image": "/products/pecorino.png",
-          "price": 160
+          "price": 65
         },
         {
           "product_id": "black-pepper-100g",
@@ -1177,7 +1177,7 @@
           "unit": "Stick",
           "measure": "1 Stick",
           "image": "/products/celery.png",
-          "price": 60
+          "price": 75
         },
         {
           "product_id": "carrot-500g",
@@ -1204,7 +1204,7 @@
           "unit": "g",
           "measure": "500g",
           "image": "/products/beef.png",
-          "price": 180
+          "price": 35
         },
         {
           "product_id": "tomato-puree",
@@ -1213,7 +1213,7 @@
           "unit": "tbls",
           "measure": "1 tbls",
           "image": "/products/tomato-puree.png",
-          "price": 175
+          "price": 160
         },
         {
           "product_id": "tomato-500g",
@@ -1226,12 +1226,12 @@
         },
         {
           "product_id": "honey",
-          "name": "Honey",
+          "name": "Pure Honey",
           "qty": 1.0,
           "unit": "tblsp",
           "measure": "1 tblsp",
           "image": "/products/honey.png",
-          "price": 45
+          "price": 195
         },
         {
           "product_id": "lasagne-sheets",
@@ -1240,7 +1240,7 @@
           "unit": "g",
           "measure": "500g",
           "image": "/products/lasagne-sheets.png",
-          "price": 105
+          "price": 20
         },
         {
           "product_id": "creme-fraiche",
@@ -1249,7 +1249,7 @@
           "unit": "ml",
           "measure": "400ml",
           "image": "/products/creme-fraiche.png",
-          "price": 150
+          "price": 45
         },
         {
           "product_id": "mozzarella-200g",
@@ -1350,7 +1350,7 @@
           "unit": "litre hot",
           "measure": "1 litre hot",
           "image": "/products/vegetable-stock.png",
-          "price": 110
+          "price": 35
         },
         {
           "product_id": "lemon-4",
@@ -1386,7 +1386,7 @@
           "unit": "g tips blanched briefly in boiling water",
           "measure": "100g tips blanched briefly in boiling water",
           "image": "/products/asparagus.png",
-          "price": 130
+          "price": 45
         },
         {
           "product_id": "black-pepper-100g",
@@ -1457,7 +1457,7 @@
           "unit": "g",
           "measure": "15g",
           "image": "/products/yeast.png",
-          "price": 190
+          "price": 150
         },
         {
           "product_id": "maida-1kg",
@@ -1493,7 +1493,7 @@
           "unit": "g",
           "measure": "80g",
           "image": "/products/passata.png",
-          "price": 65
+          "price": 35
         },
         {
           "product_id": "mozzarella-200g",
@@ -1511,7 +1511,7 @@
           "unit": "Peeled and Sliced",
           "measure": "Peeled and Sliced",
           "image": "/products/oregano.png",
-          "price": 60
+          "price": 105
         },
         {
           "product_id": "basil",
@@ -1592,7 +1592,7 @@
           "unit": "g",
           "measure": "500g",
           "image": "/products/beef.png",
-          "price": 180
+          "price": 35
         },
         {
           "product_id": "mushroom-200g",
@@ -1610,7 +1610,7 @@
           "unit": "tsp",
           "measure": "1tsp",
           "image": "/products/oregano.png",
-          "price": 60
+          "price": 105
         },
         {
           "product_id": "tomato-500g",
@@ -1628,7 +1628,7 @@
           "unit": "ml",
           "measure": "300ml",
           "image": "/products/beef.png",
-          "price": 180
+          "price": 35
         },
         {
           "product_id": "tomato-puree",
@@ -1637,7 +1637,7 @@
           "unit": "tbsp",
           "measure": "1tbsp",
           "image": "/products/tomato-puree.png",
-          "price": 175
+          "price": 160
         },
         {
           "product_id": "worcestershire-sauce",
@@ -1646,7 +1646,7 @@
           "unit": "tbsp",
           "measure": "1tbsp",
           "image": "/products/worcestershire-sauce.png",
-          "price": 120
+          "price": 20
         },
         {
           "product_id": "spaghetti",
@@ -1699,7 +1699,7 @@
           "unit": "large",
           "measure": "2 large",
           "image": "/products/aubergine.png",
-          "price": 85
+          "price": 75
         },
         {
           "product_id": "courgettes",
@@ -1708,7 +1708,7 @@
           "unit": "",
           "measure": "4",
           "image": "/products/courgettes.png",
-          "price": 115
+          "price": 60
         },
         {
           "product_id": "yellow-pepper",
@@ -1717,7 +1717,7 @@
           "unit": "",
           "measure": "2",
           "image": "/products/yellow-pepper.png",
-          "price": 140
+          "price": 170
         },
         {
           "product_id": "tomato-500g",
@@ -1771,7 +1771,7 @@
           "unit": "tsp",
           "measure": "1 tsp",
           "image": "/products/red-wine-vinegar.png",
-          "price": 45
+          "price": 145
         },
         {
           "product_id": "sugar-1kg",
@@ -1820,7 +1820,7 @@
           "unit": "g",
           "measure": "250g",
           "image": "/products/macaroni.png",
-          "price": 175
+          "price": 90
         },
         {
           "product_id": "amul-butter-100g",
@@ -1874,7 +1874,7 @@
           "unit": "tsp",
           "measure": "1 tsp",
           "image": "/products/mustard-seeds.png",
-          "price": 30
+          "price": 115
         },
         {
           "product_id": "capsicum",
@@ -1901,7 +1901,7 @@
           "unit": "tsp",
           "measure": "1/2 tsp",
           "image": "/products/cayenne-pepper.png",
-          "price": 105
+          "price": 150
         },
         {
           "product_id": "brown-bread",
@@ -1989,7 +1989,7 @@
           "unit": "g",
           "measure": "800g",
           "image": "/products/white-fish-fillets.png",
-          "price": 115
+          "price": 25
         },
         {
           "product_id": "maida-1kg",
@@ -2007,7 +2007,7 @@
           "unit": "Grating",
           "measure": "Grating",
           "image": "/products/nutmeg.png",
-          "price": 145
+          "price": 160
         },
         {
           "product_id": "fresh-cream-200ml",
@@ -2025,7 +2025,7 @@
           "unit": "g",
           "measure": "200g",
           "image": "/products/jerusalem-artichokes.png",
-          "price": 120
+          "price": 160
         },
         {
           "product_id": "leek",
@@ -2034,7 +2034,7 @@
           "unit": "finely sliced",
           "measure": "1 finely sliced",
           "image": "/products/leek.png",
-          "price": 135
+          "price": 65
         },
         {
           "product_id": "prawns-250g",
@@ -2052,7 +2052,7 @@
           "unit": "Large handful",
           "measure": "Large handful",
           "image": "/products/parsley.png",
-          "price": 105
+          "price": 115
         },
         {
           "product_id": "dill",
@@ -2061,7 +2061,7 @@
           "unit": "Handful",
           "measure": "Handful",
           "image": "/products/dill.png",
-          "price": 190
+          "price": 145
         },
         {
           "product_id": "lemon-4",
@@ -2079,7 +2079,7 @@
           "unit": "g grated",
           "measure": "25g grated",
           "image": "/products/gruy-re.png",
-          "price": 60
+          "price": 175
         },
         {
           "product_id": "lemon-4",
@@ -2128,7 +2128,7 @@
           "unit": "tablespoons",
           "measure": "2 tablespoons",
           "image": "/products/sunflower-oil.png",
-          "price": 30
+          "price": 95
         },
         {
           "product_id": "onion-1kg",
@@ -2182,7 +2182,7 @@
           "unit": "Handful",
           "measure": "Handful",
           "image": "/products/parsley.png",
-          "price": 105
+          "price": 115
         },
         {
           "product_id": "farm-eggs-6",
@@ -2296,7 +2296,7 @@
           "unit": "Spinkling",
           "measure": "Spinkling",
           "image": "/products/feta.png",
-          "price": 60
+          "price": 130
         }
       ],
       "steps": [
@@ -2355,7 +2355,7 @@
           "unit": "tbls",
           "measure": "1 tbls",
           "image": "/products/sunflower-oil.png",
-          "price": 30
+          "price": 95
         },
         {
           "product_id": "sugar-1kg",
@@ -2373,7 +2373,7 @@
           "unit": "to serve",
           "measure": "to serve",
           "image": "/products/raspberries.png",
-          "price": 80
+          "price": 45
         },
         {
           "product_id": "blueberries",
@@ -2382,7 +2382,7 @@
           "unit": "to serve",
           "measure": "to serve",
           "image": "/products/blueberries.png",
-          "price": 50
+          "price": 175
         }
       ],
       "steps": [
@@ -2412,7 +2412,7 @@
           "unit": "cut thick slices",
           "measure": "6 cut thick slices",
           "image": "/products/casabe.png",
-          "price": 95
+          "price": 110
         },
         {
           "product_id": "tomato-sauce",
@@ -2421,7 +2421,7 @@
           "unit": "g",
           "measure": "450g",
           "image": "/products/tomato-sauce.png",
-          "price": 130
+          "price": 135
         },
         {
           "product_id": "chorizo",
@@ -2430,7 +2430,7 @@
           "unit": "g",
           "measure": "225g",
           "image": "/products/chorizo.png",
-          "price": 55
+          "price": 110
         },
         {
           "product_id": "turkey-ham",
@@ -2439,7 +2439,7 @@
           "unit": "g",
           "measure": "225g",
           "image": "/products/turkey-ham.png",
-          "price": 100
+          "price": 25
         },
         {
           "product_id": "popcorn",
@@ -2466,7 +2466,7 @@
           "unit": "g",
           "measure": "55g",
           "image": "/products/paprika.png",
-          "price": 130
+          "price": 175
         },
         {
           "product_id": "mozzarella-200g",
@@ -2508,7 +2508,7 @@
           "unit": "ml",
           "measure": "300ml",
           "image": "/products/sushi-rice.png",
-          "price": 125
+          "price": 20
         },
         {
           "product_id": "rice-wine",
@@ -2517,7 +2517,7 @@
           "unit": "ml",
           "measure": "100ml",
           "image": "/products/rice-wine.png",
-          "price": 50
+          "price": 160
         },
         {
           "product_id": "sugar-1kg",
@@ -2535,7 +2535,7 @@
           "unit": "tbs",
           "measure": "3 tbs",
           "image": "/products/mayonnaise.png",
-          "price": 190
+          "price": 105
         },
         {
           "product_id": "rice-wine",
@@ -2544,7 +2544,7 @@
           "unit": "tbs",
           "measure": "1 tbs",
           "image": "/products/rice-wine.png",
-          "price": 50
+          "price": 160
         },
         {
           "product_id": "soy-sauce",
@@ -2553,7 +2553,7 @@
           "unit": "tbs",
           "measure": "1 tbs",
           "image": "/products/soy-sauce.png",
-          "price": 180
+          "price": 150
         },
         {
           "product_id": "cucumber",
@@ -2562,7 +2562,7 @@
           "unit": "",
           "measure": "1",
           "image": "/products/cucumber.png",
-          "price": 110
+          "price": 60
         }
       ],
       "steps": [
@@ -2618,7 +2618,7 @@
           "unit": "Bunch",
           "measure": "Bunch",
           "image": "/products/parsley.png",
-          "price": 105
+          "price": 115
         },
         {
           "product_id": "dry-sherry",
@@ -2627,7 +2627,7 @@
           "unit": "ml",
           "measure": "100 ml",
           "image": "/products/dry-sherry.png",
-          "price": 90
+          "price": 45
         },
         {
           "product_id": "mussels",
@@ -2636,7 +2636,7 @@
           "unit": "g",
           "measure": "500g",
           "image": "/products/mussels.png",
-          "price": 155
+          "price": 120
         },
         {
           "product_id": "saffron",
@@ -2645,7 +2645,7 @@
           "unit": "Pinch",
           "measure": "Pinch",
           "image": "/products/saffron.png",
-          "price": 190
+          "price": 195
         },
         {
           "product_id": "chorizo",
@@ -2654,7 +2654,7 @@
           "unit": "g",
           "measure": "150g",
           "image": "/products/chorizo.png",
-          "price": 55
+          "price": 110
         },
         {
           "product_id": "onion-1kg",
@@ -2681,7 +2681,7 @@
           "unit": "medium",
           "measure": "1 medium",
           "image": "/products/squid.png",
-          "price": 125
+          "price": 75
         },
         {
           "product_id": "tomato-500g",
@@ -2699,7 +2699,7 @@
           "unit": "g",
           "measure": "250g",
           "image": "/products/paella-rice.png",
-          "price": 160
+          "price": 120
         },
         {
           "product_id": "broad-beans",
@@ -2708,7 +2708,7 @@
           "unit": "g",
           "measure": "100g",
           "image": "/products/broad-beans.png",
-          "price": 85
+          "price": 45
         },
         {
           "product_id": "lemon-4",
@@ -2755,7 +2755,7 @@
           "unit": "lb",
           "measure": "1lb",
           "image": "/products/pork-chops.png",
-          "price": 175
+          "price": 25
         },
         {
           "product_id": "garlic-200g",
@@ -2782,7 +2782,7 @@
           "unit": "tbs",
           "measure": "1 tbs",
           "image": "/products/soy-sauce.png",
-          "price": 180
+          "price": 150
         },
         {
           "product_id": "sesame-seed-oil",
@@ -2791,7 +2791,7 @@
           "unit": "tsp",
           "measure": "1 tsp",
           "image": "/products/sesame-seed-oil.png",
-          "price": 45
+          "price": 65
         },
         {
           "product_id": "carrot-500g",
@@ -2809,7 +2809,7 @@
           "unit": "finely chopped",
           "measure": "3 finely chopped",
           "image": "/products/celery.png",
-          "price": 60
+          "price": 75
         },
         {
           "product_id": "onion-1kg",
@@ -2827,7 +2827,7 @@
           "unit": "Packet",
           "measure": "1 Packet",
           "image": "/products/wonton-skin.png",
-          "price": 80
+          "price": 145
         },
         {
           "product_id": "olive-oil-500ml",
