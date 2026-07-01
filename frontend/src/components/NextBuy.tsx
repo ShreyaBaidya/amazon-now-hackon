@@ -19,7 +19,7 @@ import { useCart } from "@/lib/cart";
 import { rupee } from "@/lib/format";
 import { useTimeRemaining } from "@/lib/useTimeRemaining";
 import { useGoogleCalendar } from "@/lib/useGoogleCalendar";
-import type { NowCast as NowCastT, NowCastGroup } from "@/lib/types";
+import type { NextBuy as NextBuyT, NextBuyGroup } from "@/lib/types";
 import VegMark, { AllergenBadge, DietaryTags } from "./VegMark";
 
 const SIGNAL_ICON = { calendar: Calendar, fridge: Refrigerator, history: RefreshCw } as const;
@@ -30,33 +30,35 @@ const SIGNAL_COLOR = {
 } as const;
 const CTA = { calendar: "Prepare cart", fridge: "Add what's low", history: "Top up supplies" } as const;
 
-export default function NowCast() {
-  const [data, setData] = useState<NowCastT | null>(null);
+export default function NextBuy() {
+  const [data, setData] = useState<NextBuyT | null>(null);
   const [loadError, setLoadError] = useState(false);
   const gcal = useGoogleCalendar();
 
-  const fetchNowcast = useCallback(() => {
+  const fetchNextbuy = useCallback(() => {
     setLoadError(false);
-    api.nowcast()
+    api.nextbuy()
       .then(setData)
       .catch(() => setLoadError(true));
   }, []);
 
-  useEffect(() => {
-    fetchNowcast();
-  }, [fetchNowcast]);
+useEffect(() => {
+  if (gcal.state === "connected") {
+    fetchNextbuy();
+  }
+}, [gcal.state, fetchNextbuy]);
 
-  if (!data && !loadError) return <NowCastSkeleton />;
+  if (!data && !loadError) return <NextBuySkeleton />;
 
   if (loadError) {
     return (
       <section className="px-3">
         <div className="rounded-3xl border border-red-200 bg-red-50 p-4 flex flex-col items-center gap-3 text-center">
           <p className="text-[13px] font-semibold text-red-700">
-            Couldn't load your NowCast. Check your connection.
+            Couldn't load your NextBuy. Check your connection.
           </p>
           <button
-            onClick={fetchNowcast}
+            onClick={fetchNextbuy}
             className="flex items-center gap-1.5 text-[12px] font-bold text-red-600 bg-red-100 px-3 py-1.5 rounded-xl"
           >
             <RefreshCw size={13} /> Retry
@@ -75,7 +77,7 @@ export default function NowCast() {
         className="rounded-3xl bg-gradient-to-br from-amzn-dark to-amzn-blue2 text-white p-4 pl-4"
       >
         <div className="flex items-center gap-1.5 text-amzn-yellow text-[12px] font-bold tracking-wide uppercase mb-1">
-          <Sparkles size={14} /> NowCast
+          <Sparkles size={14} /> NextBuy
         </div>
         <h1 className="text-[18px] font-bold leading-tight">3 things we lined up for you</h1>
         <p className="text-[12px] text-white/70 mt-1 line-height-0.5">
@@ -83,11 +85,11 @@ export default function NowCast() {
         </p>
       </motion.div>
 
-      {/* Google Calendar hint — links to profile for OAuth setup */}
+      {/* Google Calendar hint — links to profile for OAuth setup
     {gcal.state !== "connected" && (
       <Link
         href="/profile"
-        className="mt-2.5 flex items-center gap-2.5 rounded-2xl border border-dashed border-amzn-purple/40 bg-amzn-purple/5 px-3.5 py-2.5"
+        className="speaknow"
       >
         <span className="h-8 w-8 rounded-xl grid place-items-center shrink-0 bg-amzn-purple/10">
           <Calendar size={16} className="text-amzn-purple" />
@@ -108,7 +110,7 @@ export default function NowCast() {
           className="text-amzn-purple shrink-0"
         />
       </Link>
-    )}
+    )} */}
 
       {/* signal cards */}
       <div className="mt-1 space-y-2">
@@ -130,8 +132,8 @@ function SignalCard({
   event,
   index,
 }: {
-  group: NowCastGroup;
-  event: NowCastT["event"];
+  group: NextBuyGroup;
+  event: NextBuyT["event"];
   index: number;
 }) {
   const { addMany } = useCart();
@@ -317,7 +319,7 @@ function CalendarEventMeta({
   event,
   timeRemaining,
 }: {
-  event: NowCastT["event"];
+  event: NextBuyT["event"];
   timeRemaining: string | null;
 }) {
   if (!event) return null;
@@ -337,7 +339,7 @@ function CalendarEventMeta({
   if (chips.length === 0) return null;
 }
 
-function NowCastSkeleton() {
+function NextBuySkeleton() {
   return (
     <section className="px-3">
       <div className="rounded-3xl bg-gradient-to-br from-amzn-dark to-amzn-blue2 p-4 h-28 shimmer" />

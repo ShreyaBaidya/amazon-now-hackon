@@ -112,7 +112,7 @@ export default function CalendarConnect({
             <ul className="mt-3 space-y-2 text-[11px] text-ink2">
               <li>• Dinner party grocery suggestions</li>
               <li>• Guest arrival essentials</li>
-              <li>• Automatic NowCast recommendations</li>
+              <li>• Automatic NextBuy recommendations</li>
             </ul>
 
             {/* Connected actions */}

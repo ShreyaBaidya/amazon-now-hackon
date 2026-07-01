@@ -1,4 +1,4 @@
-"""NowSpeak agent tests.
+"""SpeakNow agent tests.
 
 Two layers:
   * Mocked — drive the tool loop / assembly with a fake Bedrock, no network.

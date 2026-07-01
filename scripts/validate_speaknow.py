@@ -1,10 +1,10 @@
-"""Live NowSpeak validation against real Bedrock.
+"""Live SpeakNow validation against real Bedrock.
 
 Runs the app's own hardcoded demo scenarios (the scripted intents + starter
 chips) through the real agent and prints the resolved cart with relevance and
 safety checks. Use this to eyeball that the LLM returns real, relevant results.
 
-Run from repo root:  uv run --project backend python scripts/validate_nowspeak.py
+Run from repo root:  uv run --project backend python scripts/validate_speaknow.py
 """
 import sys
 from pathlib import Path

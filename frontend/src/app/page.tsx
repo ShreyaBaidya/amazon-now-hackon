@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import AppHeader from "@/components/AppHeader";
-import NowCast from "@/components/NowCast";
+import NextBuy from "@/components/NextBuy";
 import { ProductCard } from "@/components/ProductCard";
 import { api } from "@/lib/api";
 import { useBoot } from "@/lib/boot";
@@ -21,7 +21,7 @@ export default function HomePage() {
     <div className="flex flex-col h-full ">
       <AppHeader greeting={boot ? `${boot.settings.demo_now_label} · Hi ${boot.user.first_name} 👋` : undefined} />
       <main className="flex-1 overflow-y-auto no-scrollbar pb-25 pt-2">
-        <NowCast />
+        <NextBuy />
 
         {/* categories */}
         <section className="px-5 mt-6">

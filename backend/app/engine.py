@@ -1,4 +1,4 @@
-﻿"""Core demo logic: NowCast prediction, recipe scaling, NowSpeak intent, NowSOS."""
+﻿"""Core demo logic: NextBuy prediction, recipe scaling, SpeakNow intent, NowSOS."""
 from __future__ import annotations
 
 import json
@@ -8,7 +8,7 @@ from . import bedrock, gemini, azure, data, gcal
 
 
 # --------------------------------------------------------------------------
-# NowCast — fuse fridge + history + calendar into one explainable cart.
+# NextBuy — fuse fridge + history + calendar into one explainable cart.
 # The signals are config; the fusion logic is real (and extensible to live data).
 # --------------------------------------------------------------------------
 
@@ -60,7 +60,7 @@ def _hero_event() -> dict | None:
 
 
 def _calendar_signals() -> list[dict]:
-    """Build NowCast signals from the hero event's needs list.
+    """Build NextBuy signals from the hero event's needs list.
 
     Works with both live (AI-inferred) and static needs[] arrays.
     """
@@ -89,7 +89,7 @@ _SIGNAL_META = {
 _ORDER = ["calendar", "fridge", "history"]
 
 
-def nowcast() -> dict:
+def nextbuy() -> dict:
     user = data.active_user()
 
     groups: dict[str, list] = {k: [] for k in _ORDER}
@@ -255,7 +255,7 @@ def recipe_list(show_excluded: bool = False) -> list[dict]:
 
 
 # --------------------------------------------------------------------------
-# NowSpeak — match scripted intent, else fall back to catalog search
+# SpeakNow — match scripted intent, else fall back to catalog search
 # --------------------------------------------------------------------------
 
 _URL_RE = re.compile(r"https?://\S+")
@@ -267,7 +267,7 @@ _STOP = {"the", "and", "for", "with", "recipe", "how", "make", "cook", "want",
 def _keyword_resolve(query: str) -> dict:
     raw = query or ""
     q = raw.lower().strip()
-    sc = data.scenarios()["nowspeak"]
+    sc = data.scenarios()["speaknow"]
     user = data.active_user()  # for dietary filtering
 
     # 1) a recipe link / URL — "fetch" the dish and pull every ingredient.
@@ -437,7 +437,7 @@ def _match_recipe(text: str):
 
 
 # --------------------------------------------------------------------------
-# NowSpeak — real agent (Amazon Bedrock). One model, a small tool set, a
+# SpeakNow — real agent (Amazon Bedrock). One model, a small tool set, a
 # capped tool loop. The model understands the request and PICKS; deterministic
 # code does all retrieval and enforces allergens. Any failure (throttle, no
 # creds, empty result) falls back to the keyword resolver above — the demo
@@ -575,7 +575,7 @@ def _agent_handlers(state: dict, block: list[str]):
             state["searched"].extend(best)
 
             print(
-                f"[NowSpeak] search_catalog → '{q}' →",
+                f"[SpeakNow] search_catalog → '{q}' →",
                 [r["name"] for r in best]
             )
 
@@ -583,7 +583,7 @@ def _agent_handlers(state: dict, block: list[str]):
 
     def h_recipe(inp: dict) -> dict:
         rid = _find_recipe_id(inp.get("query", ""))
-        print(f"[NowSpeak] find_recipe → '{inp.get('query', '')}' → {'found: '+rid if rid else 'not found'}")
+        print(f"[SpeakNow] find_recipe → '{inp.get('query', '')}' → {'found: '+rid if rid else 'not found'}")
         if not rid:
             return {"found": False}
         servings = int(inp.get("servings") or 4)
@@ -624,7 +624,7 @@ def _agent_handlers(state: dict, block: list[str]):
             existing.add(pid)
 
             print(
-                f"[NowSpeak] add_to_cart → '{pid}'"
+                f"[SpeakNow] add_to_cart → '{pid}'"
             )
 
         return {
@@ -770,7 +770,7 @@ def _agent_resolve(query: str, recipe_handled: bool = False,
     messages, _calls = [], 0
     for runner in runners:
         try:
-            print(f"[NowSpeak] Trying {runner.__name__}")
+            print(f"[SpeakNow] Trying {runner.__name__}")
 
             messages, _calls = runner.run_tools(
                 [{"role": "user", "content": [{"text": query}]}],
@@ -780,11 +780,11 @@ def _agent_resolve(query: str, recipe_handled: bool = False,
                 max_calls=6
             )
 
-            print(f"[NowSpeak] Success using {runner.__name__}")
+            print(f"[SpeakNow] Success using {runner.__name__}")
             break
 
         except Exception as e:
-            print(f"[NowSpeak] {runner.__name__} failed: {e}")
+            print(f"[SpeakNow] {runner.__name__} failed: {e}")
 
             if state["picks"] or state["recipe_id"]:
                 break
@@ -828,7 +828,7 @@ def _agent_resolve(query: str, recipe_handled: bool = False,
 
 
 def speak_resolve(query: str) -> dict:
-    """NowSpeak entry point: recipe-first, then AI agent, then keyword fallback."""
+    """SpeakNow entry point: recipe-first, then AI agent, then keyword fallback."""
     user = data.active_user()
     block = user.get("dietary", {}).get("allergens", [])
 
@@ -846,7 +846,7 @@ def speak_resolve(query: str) -> dict:
         agent_products = agent_result.get("products", [])
         agent_reply = agent_result.get("reply", "")
     except Exception as e:
-        print(f"[NowSpeak] Agent failed (non-fatal): {e}")
+        print(f"[SpeakNow] Agent failed (non-fatal): {e}")
 
     # Phase 3: Merge — deduplicate by product_id, recipe products take priority
     seen_ids = set()

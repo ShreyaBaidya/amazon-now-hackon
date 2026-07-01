@@ -4,7 +4,7 @@ import type {
   CouponEval,
   DishAnalysis,
   GroupCart,
-  NowCast,
+  NextBuy,
   Dietary,
   Order,
   PastOrder,
@@ -43,7 +43,7 @@ export const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(d),
     }).then((r) => r.json() as Promise<Dietary>),
-  nowcast: () => get<NowCast>("/api/nowcast"),
+  nextbuy: () => get<NextBuy>("/api/nextbuy"),
   catalog: (q = "", category = "", limit = 40, showExcluded = false) =>
     get<{ products: Product[] }>(
       `/api/catalog?q=${encodeURIComponent(q)}&category=${encodeURIComponent(category)}&limit=${limit}&show_excluded=${showExcluded}`,
@@ -52,8 +52,8 @@ export const api = {
     get<{ recipes: RecipeSummary[] }>(`/api/recipes?show_excluded=${showExcluded}`),
   recipe: (id: string, servings: number) =>
     get<Recipe>(`/api/recipe/${id}?servings=${servings}`),
-  speakStarters: () => get<{ chips: string[] }>("/api/nowspeak/starters"),
-  speak: (q: string) => get<SpeakResult>(`/api/nowspeak?q=${encodeURIComponent(q)}`),
+  speakStarters: () => get<{ chips: string[] }>("/api/speaknow/starters"),
+  speak: (q: string) => get<SpeakResult>(`/api/speaknow?q=${encodeURIComponent(q)}`),
   coupons: (items: { product_id: string; qty: number }[], payment = "upi") =>
     fetch(`${BASE}/api/coupons`, {
       method: "POST",
@@ -68,7 +68,7 @@ export const api = {
     }).then((r) => r.json() as Promise<Order>),
   getOrder: (id: string) => get<Order>(`/api/order/${id}`),
   orders: () => get<{ orders: PastOrder[] }>("/api/orders"),
-  streamUrl: (q: string) => `${BASE}/api/nowspeak/stream?q=${encodeURIComponent(q)}`,
+  streamUrl: (q: string) => `${BASE}/api/speaknow/stream?q=${encodeURIComponent(q)}`,
 
   groupCreate: (items: { product_id: string; qty: number }[]) =>
     fetch(`${BASE}/api/group/create`, {

@@ -1,5 +1,5 @@
 {
-  "_comment": "Current smart-fridge / pantry inventory. status: out | low | ok. NowCast surfaces out+low.",
+  "_comment": "Current smart-fridge / pantry inventory. status: out | low | ok. NextBuy surfaces out+low.",
   "updated_label": "Synced 8 min ago · Samsung Family Hub",
   "items": [
     { "product_id": "amul-milk-500ml",   "qty_left": 1, "typical_qty": 4, "status": "low", "note": "1 carton left" },

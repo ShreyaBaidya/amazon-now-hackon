@@ -24,8 +24,8 @@ def test_bootstrap():
     assert "nuts" in b["user"]["dietary"]["allergens"]
 
 
-def test_nowcast_fuses_three_signals():
-    d = client.get("/api/nowcast").json()
+def test_nextbuy_fuses_three_signals():
+    d = client.get("/api/nextbuy").json()
     signals = {g["signal"] for g in d["groups"]}
     assert signals == {"calendar", "fridge", "history"}  # all three present
     assert d["item_count"] > 0 and d["total"] > 0
@@ -37,8 +37,8 @@ def test_nowcast_fuses_three_signals():
             assert it["product"]["image"].startswith("/products/")
 
 
-def test_nowcast_reorder_reason_mentions_cadence():
-    d = client.get("/api/nowcast").json()
+def test_nextbuy_reorder_reason_mentions_cadence():
+    d = client.get("/api/nextbuy").json()
     hist = next(g for g in d["groups"] if g["signal"] == "history")
     assert any("every" in it["reason"] for it in hist["items"])
 
@@ -52,26 +52,26 @@ def test_recipe_scaling_is_proportional():
     assert bq is not None
 
 
-def test_nowspeak_vegan_intent_is_dietary_aware():
-    d = client.get("/api/nowspeak", params={"q": "a guest is vegan"}).json()
+def test_speaknow_vegan_intent_is_dietary_aware():
+    d = client.get("/api/speaknow", params={"q": "a guest is vegan"}).json()
     assert d["recipe"]["name"] == "Ratatouille"
     assert "Vegan" in (d.get("dietary_note") or "")
     assert len(d["products"]) > 0
 
 
-def test_nowspeak_headache_cross_domain():
-    d = client.get("/api/nowspeak", params={"q": "headache and out of coffee"}).json()
+def test_speaknow_headache_cross_domain():
+    d = client.get("/api/speaknow", params={"q": "headache and out of coffee"}).json()
     ids = {p["id"] for p in d["products"]}
     assert "paracetamol" in ids and "coffee-beans-250g" in ids
 
 
-def test_nowspeak_fallback_searches_catalog():
-    d = client.get("/api/nowspeak", params={"q": "chocolate"}).json()
+def test_speaknow_fallback_searches_catalog():
+    d = client.get("/api/speaknow", params={"q": "chocolate"}).json()
     assert len(d["products"]) > 0
 
 
-def test_nowspeak_list_resolves_each_item():
-    d = client.get("/api/nowspeak", params={"q": "milk, eggs, bread, coffee, 2 onions"}).json()
+def test_speaknow_list_resolves_each_item():
+    d = client.get("/api/speaknow", params={"q": "milk, eggs, bread, coffee, 2 onions"}).json()
     ids = {p["id"] for p in d["products"]}
     assert "farm-eggs-6" in ids
     assert {"amul-milk-500ml", "amul-gold-1l"} & ids
@@ -79,14 +79,14 @@ def test_nowspeak_list_resolves_each_item():
     assert len(d["products"]) >= 4
 
 
-def test_nowspeak_recipe_link_fetches_ingredients():
-    d = client.get("/api/nowspeak", params={"q": "https://www.themealdb.com/meal/lasagne"}).json()
+def test_speaknow_recipe_link_fetches_ingredients():
+    d = client.get("/api/speaknow", params={"q": "https://www.themealdb.com/meal/lasagne"}).json()
     assert d["recipe"]["name"] == "Lasagne"
     assert len(d["products"]) > 5
 
 
-def test_nowspeak_cook_dish_by_name():
-    d = client.get("/api/nowspeak", params={"q": "i want to cook biryani"}).json()
+def test_speaknow_cook_dish_by_name():
+    d = client.get("/api/speaknow", params={"q": "i want to cook biryani"}).json()
     assert "Biryani" in d["recipe"]["name"]
 
 
@@ -168,7 +168,7 @@ def test_order_history_for_reorder():
 
 
 def test_sse_stream_emits_tokens_and_result():
-    with client.stream("GET", "/api/nowspeak/stream", params={"q": "a guest is vegan"}) as s:
+    with client.stream("GET", "/api/speaknow/stream", params={"q": "a guest is vegan"}) as s:
         body = "".join(chunk for chunk in s.iter_text())
     assert "event: token" in body
     assert "event: result" in body

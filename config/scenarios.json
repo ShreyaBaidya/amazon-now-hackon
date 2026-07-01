@@ -1,6 +1,6 @@
 {
-  "_comment": "Scripted intents for NowSpeak — covers common situations so the demo works without a live LLM. Matched on lowercased substring; falls back to catalog search.",
-  "nowspeak": {
+  "_comment": "Scripted intents for SpeakNow — covers common situations so the demo works without a live LLM. Matched on lowercased substring; falls back to catalog search.",
+  "speaknow": {
     "starter_chips": [
       "Making carbonara for 6 tonight",
       "A guest is vegan — what can I make?",

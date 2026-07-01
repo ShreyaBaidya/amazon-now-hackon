@@ -103,7 +103,7 @@ export function useGoogleCalendar(): UseGoogleCalendarReturn {
     setIsLoading(true);
     try {
       await api.calendarRefresh();
-      // NowCast will re-fetch automatically; just clear any error
+      // NextBuy will re-fetch automatically; just clear any error
       setErrorMsg(null);
     } catch {
       setErrorMsg("Could not refresh calendar data.");

@@ -16,7 +16,7 @@ export type Product = {
   diet_excluded?: boolean;   // true when product conflicts with user's dietary prefs
 };
 
-export type NowCastLine = {
+export type NextBuyLine = {
   product: Product;
   qty: number;
   reason: string;
@@ -25,13 +25,13 @@ export type NowCastLine = {
   line_total: number;
 };
 
-export type NowCastGroup = {
+export type NextBuyGroup = {
   signal: "calendar" | "fridge" | "history";
   title: string;
   icon: string;
   blurb: string;
   subtotal: number;
-  items: NowCastLine[];
+  items: NextBuyLine[];
 };
 
 export type CalendarEvent = {
@@ -54,13 +54,13 @@ export type CalendarStatus = {
   has_credentials: boolean;
 };
 
-export type NowCast = {
+export type NextBuy = {
   greeting: string;
   headline: string;
   subtext: string;
   event: CalendarEvent | null;
   fridge_sync: string;
-  groups: NowCastGroup[];
+  groups: NextBuyGroup[];
   item_count: number;
   total: number;
   eta_min: number;

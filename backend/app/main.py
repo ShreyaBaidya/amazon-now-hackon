@@ -77,9 +77,9 @@ def update_dietary(req: DietaryReq):
     return data.active_user()["dietary"]
 
 
-@app.get("/api/nowcast")
-def nowcast():
-    return engine.nowcast()
+@app.get("/api/nextbuy")
+def nextbuy():
+    return engine.nextbuy()
 
 
 @app.get("/api/catalog")
@@ -105,18 +105,18 @@ def recipe(rid: str, servings: int = 4):
     return r or {"error": "not found"}
 
 
-@app.get("/api/nowspeak/starters")
+@app.get("/api/speaknow/starters")
 def speak_starters():
-    return {"chips": data.scenarios()["nowspeak"]["starter_chips"]}
+    return {"chips": data.scenarios()["speaknow"]["starter_chips"]}
 
 
-@app.get("/api/nowspeak")
-def nowspeak(q: str):
+@app.get("/api/speaknow")
+def speaknow(q: str):
     return engine.speak_resolve(q)
 
 
-@app.get("/api/nowspeak/stream")
-async def nowspeak_stream(q: str):
+@app.get("/api/speaknow/stream")
+async def speaknow_stream(q: str):
     """SSE: kick off agent in background, stream tokens as they arrive,
     then push the final result event. User sees first word in ~1s."""
 

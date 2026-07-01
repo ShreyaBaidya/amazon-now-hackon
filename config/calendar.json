@@ -1,5 +1,5 @@
 {
-  "_comment": "Calendar signal. The Sat 7pm dinner party is the hero event. needs[] map to products with reasons so NowCast can assemble + explain the party portion of the cart.",
+  "_comment": "Calendar signal. The Sat 7pm dinner party is the hero event. needs[] map to products with reasons so NextBuy can assemble + explain the party portion of the cart.",
   "events": [
     {
       "id": "dinner-party",

@@ -16,8 +16,8 @@ Urgent shopping fails on the same friction every time: you know *what you're try
 
 The product is organized around two intelligence-first surfaces and a supporting commerce layer:
 
-### 🔮 NowCast — the predictive home
-The home screen doesn't lead with a search bar — it shows what you're about to need. NowCast fuses three live signals into ranked, explainable triggers you build with one tap:
+### 🔮 NextBuy — the predictive home
+The home screen doesn't lead with a search bar — it shows what you're about to need. NextBuy fuses three live signals into ranked, explainable triggers you build with one tap:
 
 - **Calendar** — an upcoming dinner party surfaces the exact ingredients for the headcount.
 - **Smart-fridge** — items running low or out are flagged before you notice.
@@ -25,8 +25,8 @@ The home screen doesn't lead with a search bar — it shows what you're about to
 
 Every line carries a human reason ("you reorder this every 9 days — last bought 9 days ago"), so the prediction is always explainable, never a black box.
 
-### 🎙️ NowSpeak — the conversational agent
-Describe the situation in plain language and the agent resolves it to a ready cart. NowSpeak handles four input modes through one interface, streamed token-by-token:
+### 🎙️ SpeakNow — the conversational agent
+Describe the situation in plain language and the agent resolves it to a ready cart. SpeakNow handles four input modes through one interface, streamed token-by-token:
 
 - **Natural language** — "a guest is vegan, what can I cook?" → a dietary-safe recipe + its full ingredient cart.
 - **Pasted lists** — "milk, eggs, bread, coffee, 2 onions" → each item matched to a real product with quantities.
@@ -51,7 +51,7 @@ Amazon Now is a service-oriented application: a stateless API tier in front of a
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │  Storefront (PWA)            Next.js 16 · Tailwind v4          │
-│  NowCast · NowSpeak · Cook · Group · Checkout · Tracking      │
+│  NextBuy · SpeakNow · Cook · Group · Checkout · Tracking      │
 └───────────────┬───────────────────────────┬──────────────────┘
                 │ REST + Server-Sent Events  │
 ┌───────────────▼───────────────────────────▼──────────────────┐
@@ -66,7 +66,7 @@ Amazon Now is a service-oriented application: a stateless API tier in front of a
 └──────────────┘   └─────────────────┘   └─────────────────┘
 ```
 
-The NowSpeak agent and NowCast ranking run on the **Amazon Bedrock** model stack, with the rest of the product backed by managed AWS services for data, search, and delivery.
+The SpeakNow agent and NextBuy ranking run on the **Amazon Bedrock** model stack, with the rest of the product backed by managed AWS services for data, search, and delivery.
 
 📖 **Deeper docs:**
 - [`docs/SYSTEM.md`](docs/SYSTEM.md) — the running system: modules, data store, full HTTP/SSE API reference, and per-feature flows.
@@ -119,7 +119,7 @@ amazonNow/
 │   │   └── group.py      shared-cart engine
 │   └── tests/
 ├── frontend/         Next.js 16 PWA
-│   └── src/app/         NowCast · NowSpeak · Cook · Group · Checkout
+│   └── src/app/         NextBuy · SpeakNow · Cook · Group · Checkout
 ├── config/           catalog, recipes, signals, pricing, personas
 └── scripts/          catalog + recipe build pipeline
 ```

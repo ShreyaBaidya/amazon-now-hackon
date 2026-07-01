@@ -41,7 +41,7 @@ Two processes, talking over REST + Server-Sent Events.
 | Module | Responsibility | Key exports |
 |---|---|---|
 | `app/main.py` | HTTP/SSE routes, request models | FastAPI `app`, all endpoints |
-| `app/engine.py` | Core logic: NowCast fusion, recipe scaling, NowSpeak resolve, coupons, orders | `nowcast`, `recipe_scaled`, `speak_resolve`, `evaluate_coupons`, `create_order`, `order_history` |
+| `app/engine.py` | Core logic: NextBuy fusion, recipe scaling, SpeakNow resolve, coupons, orders | `nextbuy`, `recipe_scaled`, `speak_resolve`, `evaluate_coupons`, `create_order`, `order_history` |
 | `app/group.py` | In-memory group ("shop together") carts + scripted live-fill | `create`, `join`, `add_item`, `enrich`, `play_member` |
 | `app/data.py` | Config loading, catalog index, search, dietary/allergen decoration | `catalog`, `product`, `search`, `decorate`, `active_user`, `set_dietary` |
 
@@ -66,13 +66,13 @@ Loaded once per process, memoized via `lru_cache`.
 |---|---|---|
 | `catalog.json` | products (`id`, `name`, `brand`, `price`, `category`, `rating`, `dietary_tags`, `allergen_tags`, `match_key`) | `data.catalog` |
 | `recipes.json` | recipes (`ingredients` → `product_id`, `qty`, `unit`, `steps`, `base_servings`) | `data.recipes` |
-| `fridge.json` | smart-fridge items + `status` (`out`/`low`/ok), `updated_label` | NowCast, `/api/fridge` |
-| `history.json` | purchase `cadence` (avg interval, last ordered) + `recent_orders` | NowCast, order history |
-| `calendar.json` | events; the `is_hero` event carries `needs` (product_id, qty, reason) | NowCast, `/api/calendar` |
+| `fridge.json` | smart-fridge items + `status` (`out`/`low`/ok), `updated_label` | NextBuy, `/api/fridge` |
+| `history.json` | purchase `cadence` (avg interval, last ordered) + `recent_orders` | NextBuy, order history |
+| `calendar.json` | events; the `is_hero` event carries `needs` (product_id, qty, reason) | NextBuy, `/api/calendar` |
 | `coupons.json` | coupons (`type`: flat/percent/category_percent/free_delivery, eligibility) | coupon engine |
 | `personas.json` | users; `active_user` pointer; per-user `dietary` (prefs, allergens) | `data.active_user` |
 | `family.json` | scripted group members + their picks + `joins_after` (ms) | group live-fill |
-| `scenarios.json` | NowSpeak scripted `intents` (`match` keywords → reply + product_ids/recipe), `starter_chips`, `fallback_reply` | NowSpeak |
+| `scenarios.json` | SpeakNow scripted `intents` (`match` keywords → reply + product_ids/recipe), `starter_chips`, `fallback_reply` | SpeakNow |
 | `settings.json` | `demo_now`, `eta_default_min`, `delivery_fee`, `free_delivery_above`, `reorder_due_ratio`, `dark_store` | many |
 
 Build pipeline (`/scripts`): `build_catalog.py` (hero products + imagery),
@@ -93,11 +93,11 @@ Base: `http://127.0.0.1:8010`. All JSON unless noted. `●` = in-memory write.
 | GET | `/api/profile` | — | full profile + diet/allergen option lists |
 | POST | `/api/profile/dietary` ● | `{preferences[], allergens[], exclude_keywords[]}` | updated dietary block (runtime override) |
 
-### NowCast (predictive home)
+### NextBuy (predictive home)
 
 | Method | Path | Returns |
 |---|---|---|
-| GET | `/api/nowcast` | greeting + grouped triggers (calendar/fridge/history), totals, ETA |
+| GET | `/api/nextbuy` | greeting + grouped triggers (calendar/fridge/history), totals, ETA |
 | GET | `/api/fridge` | fridge items decorated with products |
 | GET | `/api/calendar` | raw calendar events |
 
@@ -110,13 +110,13 @@ Base: `http://127.0.0.1:8010`. All JSON unless noted. `●` = in-memory write.
 | GET | `/api/recipes` | — | `{recipes[]}` summaries |
 | GET | `/api/recipe/{rid}` | `servings=4` (clamped 1–12) | scaled recipe + priced ingredients |
 
-### NowSpeak (agent)
+### SpeakNow (agent)
 
 | Method | Path | Params | Returns |
 |---|---|---|---|
-| GET | `/api/nowspeak/starters` | — | `{chips[]}` |
-| GET | `/api/nowspeak` | `q` | `{reply, products[], recipe?, note, total, dietary_note?}` |
-| GET | `/api/nowspeak/stream` | `q` | **SSE**: `token`* → `result` → `done` |
+| GET | `/api/speaknow/starters` | — | `{chips[]}` |
+| GET | `/api/speaknow` | `q` | `{reply, products[], recipe?, note, total, dietary_note?}` |
+| GET | `/api/speaknow/stream` | `q` | **SSE**: `token`* → `result` → `done` |
 
 ### Coupons / orders
 
@@ -143,7 +143,7 @@ Base: `http://127.0.0.1:8010`. All JSON unless noted. `●` = in-memory write.
 
 ## 5. SSE event contracts
 
-### `GET /api/nowspeak/stream?q=...`
+### `GET /api/speaknow/stream?q=...`
 
 Reply resolved server-side, then streamed word-by-word (~35 ms/word).
 
@@ -172,7 +172,7 @@ event: done    data: {}
 
 ## 6. Feature flows
 
-### NowCast — predicted cart (`engine.nowcast`)
+### NextBuy — predicted cart (`engine.nextbuy`)
 
 ```
 fridge.json (out/low)  ─┐
@@ -186,7 +186,7 @@ calendar.json (hero)   ─┘   (each w/ reason)  (dedup, keep      (calendar>fr
 - **Calendar:** hero event's `needs` become lines (headcount-scaled `qty` baked into config).
 - Each line carries human `reasons[]` — predictions are explainable.
 
-### NowSpeak — request → cart (`engine.speak_resolve`)
+### SpeakNow — request → cart (`engine.speak_resolve`)
 
 Deterministic priority ladder (first match wins):
 
@@ -202,7 +202,7 @@ query
 
 Each tier resolves the input to real, priced products and (where relevant) a
 scaled recipe, with a human-readable `reply`. The
-[target design](./ARCHITECTURE.md#13-nowspeak--the-agent-loop) extends this same
+[target design](./ARCHITECTURE.md#13-speaknow--the-agent-loop) extends this same
 contract with retrieval + LLM tool-use behind tiers 3–5, keeping the URL and
 list fast-paths deterministic.
 
@@ -248,8 +248,8 @@ reads the active user's `dietary` block and attaches:
 
 The Profile screen can override the active dietary profile at runtime via
 `POST /api/profile/dietary` (`data.set_dietary`), and every subsequent decorated
-response reflects it. This is the real, shared safety layer across NowCast,
-NowSpeak, recipes, catalog, and group carts.
+response reflects it. This is the real, shared safety layer across NextBuy,
+SpeakNow, recipes, catalog, and group carts.
 
 ---
 

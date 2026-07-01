@@ -87,9 +87,9 @@ function CheckoutContent() {
           <div>
             <ShoppingBag size={48} className="mx-auto text-line" />
             <p className="font-bold mt-3">Your cart is empty</p>
-            <p className="text-[13px] text-ink2 mt-1">Let NowCast build it for you.</p>
+            <p className="text-[13px] text-ink2 mt-1">Let NextBuy build it for you.</p>
             <button onClick={() => router.push("/")} className="mt-4 bg-amzn-yellow2 text-amzn-dark font-bold px-5 py-2.5 rounded-xl">
-              Go to NowCast
+              Go to NextBuy
             </button>
           </div>
         </div>

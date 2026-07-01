@@ -37,7 +37,7 @@ pricing, and money.
         ▼                     ▼      ▼      ▼                     ▼
  ┌────────────┐    ┌────────────────┐ ┌───────┐ ┌──────────┐ ┌────────────┐
  │ PREDICTION │    │ AGENT          │ │CATALOG│ │ PRICING/ │ │ ORDER/     │
- │ (NowCast)  │    │ (NowSpeak)     │ │SEARCH │ │ PROMO    │ │ FULFIL     │
+ │ (NextBuy)  │    │ (SpeakNow)     │ │SEARCH │ │ PROMO    │ │ FULFIL     │
  └─────┬──────┘    └──────┬─────────┘ └───┬───┘ └────┬─────┘ └─────┬──────┘
        │            ┌─────▼──────┐        │          │       ┌─────▼──────┐
        │            │ LLM INFER  │        │          │       │ GROUP CART │
@@ -61,14 +61,14 @@ pricing, and money.
 
 | Service | Owns | Gap from current demo |
 |---|---|---|
-| **Prediction (NowCast)** | fuse signals → ranked explainable triggers | logic real; needs **live feeds**, not static config |
-| **Agent (NowSpeak)** | NL / list / link / voice → structured cart intent | **biggest gap** — keyword match → LLM + retrieval |
+| **Prediction (NextBuy)** | fuse signals → ranked explainable triggers | logic real; needs **live feeds**, not static config |
+| **Agent (SpeakNow)** | NL / list / link / voice → structured cart intent | **biggest gap** — keyword match → LLM + retrieval |
 | **Catalog / Search** | product corpus, lexical + semantic search | static JSON → indexed store + vector index |
 | **Pricing / Promo** | coupon eval, best-offer pick | already real; needs live coupon source |
 | **Order / Fulfil** | order lifecycle, ETA, rider tracking | in-memory → persisted, event-driven |
 | **Group cart** | shared cart, live merge | needs real pub/sub fan-out |
 
-### 1.3 NowSpeak — the agent loop
+### 1.3 SpeakNow — the agent loop
 
 ```
 user query ─┐
@@ -107,7 +107,7 @@ user query ─┐
 **Principle: LLM proposes from retrieved candidates, deterministic code disposes.**
 Hallucination-proof (only real SKUs survive) and allergy-safe (the gate is code).
 
-### 1.4 NowCast — signals → predicted cart
+### 1.4 NextBuy — signals → predicted cart
 
 ```
  calendar    fridge    purchase log    live feeds → SIGNALS STORE
@@ -165,7 +165,7 @@ depends on. Same services as above, organized by user journey instead of by tier
 │  DISCOVER ───────────────► DECIDE ───────────────► BUY              │
 │                                                                      │
 │  ┌──────────────┐   ┌──────────────┐   ┌──────────────────────┐   │
-│  │ NowCast      │   │ NowSpeak     │   │ Cart & Checkout       │   │
+│  │ NextBuy      │   │ SpeakNow     │   │ Cart & Checkout       │   │
 │  │ predictive   │   │ conversational│   │                       │   │
 │  │ home         │   │ agent        │   │ • best-coupon auto    │   │
 │  │              │   │              │   │ • compare/switch offer│   │
@@ -203,10 +203,10 @@ the whole product — and that **dietary safety is shared by all of them**.
 
 | Feature | Predict | Retrieval | LLM | Pricing | Realtime | Dietary guard |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
-| NowCast home | ● | | | | | ● |
-| NowSpeak (NL) | | ● | ● | | | ● |
-| NowSpeak (list) | | ● | | | | ● |
-| NowSpeak (link) | | ● | ● | | | ● |
+| NextBuy home | ● | | | | | ● |
+| SpeakNow (NL) | | ● | ● | | | ● |
+| SpeakNow (list) | | ● | | | | ● |
+| SpeakNow (link) | | ● | ● | | | ● |
 | Cook / recipes | | ● | | | | ● |
 | Group cart | | | | | ● | ● |
 | Checkout | | | | ● | | |
@@ -218,9 +218,9 @@ the whole product — and that **dietary safety is shared by all of them**.
 ```
  trigger                resolution              commit
  ───────                ──────────              ──────
- NowCast tap   ─┐
+ NextBuy tap   ─┐
                 ├─► assembled cart ─► review ─► best coupon ─► place ─► track
- NowSpeak ask  ─┘    (real SKUs,       (edit    auto-applied   order   ETA +
+ SpeakNow ask  ─┘    (real SKUs,       (edit    auto-applied   order   ETA +
  Cook add-all  ─┘     priced, diet-     qty)     (switchable)           rider
  Reorder       ─┘     safe)
 ```
@@ -234,8 +234,8 @@ safety, and checkout pipeline downstream.
 
 Dietary and allergen enforcement is **not** a feature of one screen — it's a gate
 every cart-producing flow passes through, enforced server-side in code (never
-prompt-trust). A vegan profile or a nut allergy filters NowCast predictions,
-NowSpeak resolutions, recipe ingredients, and reorders identically.
+prompt-trust). A vegan profile or a nut allergy filters NextBuy predictions,
+SpeakNow resolutions, recipe ingredients, and reorders identically.
 
 ```
 any cart-producing flow ──► [ DIETARY / ALLERGEN GUARD ] ──► cart

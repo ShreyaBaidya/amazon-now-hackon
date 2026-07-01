@@ -17,7 +17,7 @@ type Msg = {
   streaming?: boolean;
 };
 
-export default function NowSpeakPage() {
+export default function SpeakNowPage() {
   const [chips, setChips] = useState<string[]>([]);
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
@@ -82,7 +82,7 @@ export default function NowSpeakPage() {
 
   const addAll = (r: SpeakResult) => {
     addMany(r.products.map((p) => ({ product: p, qty: 1 })));
-    router.push("/checkout?src=nowspeak");
+    router.push("/checkout?src=speaknow");
   };
 
   return (
@@ -94,7 +94,7 @@ export default function NowSpeakPage() {
         </button>
         <div className="flex-1">
           <div className="flex items-center gap-1.5 font-bold">
-            <Sparkles size={16} className="text-amzn-yellow" /> NowSpeak
+            <Sparkles size={16} className="text-amzn-yellow" /> SpeakNow
           </div>
           <p className="text-[11px] text-white/60">Describe the situation — skip the search</p>
         </div>
