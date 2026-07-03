@@ -6,9 +6,21 @@ import re
 from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
+import os
+
+import boto3
+from boto3.dynamodb.conditions import Key
 
 CONFIG_DIR = Path(__file__).resolve().parents[2] / "config"
 
+# --- DynamoDB Configuration ---
+AWS_REGION = os.environ.get("AWS_REGION")
+USERS_TABLE_NAME = os.environ.get("USERS_TABLE_NAME")
+PRODUCTS_TABLE_NAME = os.environ.get("PRODUCTS_TABLE_NAME")
+
+dynamodb = boto3.resource("dynamodb", region_name=AWS_REGION)
+users_table = dynamodb.Table(USERS_TABLE_NAME)
+products_table = dynamodb.Table(PRODUCTS_TABLE_NAME)
 
 def _load(name: str) -> dict:
     with open(CONFIG_DIR / name, encoding="utf-8") as f:
@@ -22,6 +34,19 @@ def settings() -> dict:
 
 @lru_cache(maxsize=1)
 def personas() -> dict:
+    try:
+        # Try to scan/query DynamoDB for personas if possible, but keep local fallback
+        response = users_table.scan()
+        items = response.get("Items", [])
+        if items:
+            # Reconstruct the original personas format for compatibility
+            local_p = _load("personas.json")
+            return {
+                "active_user": local_p.get("active_user", "aarav"),
+                "users": items
+            }
+    except Exception as e:
+        print(f"[DynamoDB] Failed to load personas, falling back to local file. Error: {e}")
     return _load("personas.json")
 
 
@@ -57,6 +82,15 @@ def coupons() -> list[dict]:
 
 @lru_cache(maxsize=1)
 def catalog() -> list[dict]:
+    try:
+        response = products_table.scan()
+        items = response.get("Items", [])
+        if items:
+            # DynamoDB returns decimals which we convert to float/int if needed, 
+            # but boto3 resource handles most standard JSON types.
+            return items
+    except Exception as e:
+        print(f"[DynamoDB] Failed to load catalog, falling back to local file. Error: {e}")
     return _load("catalog.json")["products"]
 
 
@@ -71,6 +105,13 @@ def _catalog_index() -> dict[str, dict]:
 
 
 def product(pid: str) -> dict | None:
+    try:
+        response = products_table.get_item(Key={"id": pid})
+        item = response.get("Item")
+        if item:
+            return item
+    except Exception as e:
+        print(f"[DynamoDB] Failed to load product {pid}, falling back to memory. Error: {e}")
     return _catalog_index().get(pid)
 
 
@@ -78,16 +119,42 @@ _dietary_override: dict | None = None
 
 
 def set_dietary(d: dict) -> None:
-    """Runtime override for the active user's dietary profile (from the Profile screen)."""
+    """Runtime override for the active user's dietary profile. Saves directly to DynamoDB, falling back to memory."""
     global _dietary_override
     prefs = d.get("preferences", [])
     label = ", ".join(p.capitalize() for p in prefs) if prefs else "No diet restriction"
-    _dietary_override = {**d, "preferences_label": label}
+    updated_dietary = {**d, "preferences_label": label}
+    _dietary_override = updated_dietary
+
+    try:
+        u = active_user()
+        uid = u["id"]
+        # Update user profile in DynamoDB table
+        users_table.update_item(
+            Key={"id": uid},
+            UpdateExpression="set dietary = :d",
+            ExpressionAttributeValues={":d": updated_dietary}
+        )
+        print(f"[DynamoDB] Successfully updated dietary preferences for user: {uid}")
+    except Exception as e:
+        print(f"[DynamoDB] Failed to save dietary preferences to DynamoDB, kept in-memory: {e}")
 
 
 def active_user() -> dict:
     p = personas()
     uid = p["active_user"]
+    try:
+        # Fetch fresh state directly from DynamoDB for consistency
+        response = users_table.get_item(Key={"id": uid})
+        u = response.get("Item")
+        if u:
+            # Apply in-memory override if not yet synced or as local cache
+            if _dietary_override is not None:
+                u = {**u, "dietary": {**u.get("dietary", {}), **_dietary_override}}
+            return u
+    except Exception as e:
+        print(f"[DynamoDB] Failed to fetch active user from database, falling back to local file. Error: {e}")
+
     u = next(x for x in p["users"] if x["id"] == uid)
     if _dietary_override is not None:
         u = {**u, "dietary": {**u.get("dietary", {}), **_dietary_override}}

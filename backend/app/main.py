@@ -6,12 +6,12 @@ import json
 import re
 
 
-from fastapi import FastAPI, HTTPException, Query, UploadFile, File
+from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, RedirectResponse, StreamingResponse
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
-from . import bedrock, data, engine, group, gcal, azure
+from . import azure, bedrock, data, engine, group
 
 app = FastAPI(title="Amazon Now API", version="1.0")
 app.add_middleware(
@@ -83,9 +83,8 @@ def nextbuy():
 
 
 @app.get("/api/catalog")
-def catalog(q: str = "", category: str = "", limit: int = 40,
-            show_excluded: bool = False):
-    return {"products": data.search(q, category, limit, show_excluded=show_excluded)}
+def catalog(q: str = "", category: str = "", limit: int = 40):
+    return {"products": data.search(q, category, limit)}
 
 
 @app.get("/api/product/{pid}")
@@ -95,8 +94,8 @@ def product(pid: str):
 
 
 @app.get("/api/recipes")
-def recipes(show_excluded: bool = False):
-    return {"recipes": engine.recipe_list(show_excluded=show_excluded)}
+def recipes():
+    return {"recipes": engine.recipe_list()}
 
 
 @app.get("/api/recipe/{rid}")
@@ -269,78 +268,9 @@ def fridge():
     return {"updated_label": data.fridge()["updated_label"], "items": items}
 
 
-# ---------------------------------------------------------------------------
-# Calendar endpoints — static + Google Calendar integration
-# ---------------------------------------------------------------------------
-
 @app.get("/api/calendar")
 def calendar():
-    """Return calendar events. Uses live Google Calendar when connected,
-    falls back to config/calendar.json automatically."""
-    return gcal.get_calendar_with_fallback()
-
-
-@app.get("/api/calendar/status")
-def calendar_status():
-    """Returns whether Google Calendar is currently connected."""
-    return {
-        "connected": gcal.is_connected(),
-        "has_credentials": gcal.has_credentials(),
-    }
-
-
-@app.get("/api/calendar/debug")
-def calendar_debug():
-    """Diagnostic endpoint — shows token state without exposing secrets."""
-    return gcal.debug_status()
-
-
-@app.get("/api/calendar/auth")
-def calendar_auth(state: str = Query(default="")):
-    """Redirect the user to Google's OAuth consent screen.
-    Requires GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET env vars."""
-    if not gcal.has_credentials():
-        raise HTTPException(
-            status_code=501,
-            detail="Google Calendar credentials not configured. "
-                   "Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables.",
-        )
-    auth_url = gcal.build_auth_url(state=state)
-    return RedirectResponse(url=auth_url)
-
-
-@app.get("/api/calendar/callback")
-def calendar_callback(code: str = Query(default=""), error: str = Query(default="")):
-    """Handle the OAuth redirect from Google. Exchanges the code for tokens,
-    then redirects back to the frontend."""
-    # Frontend origin for the post-auth redirect
-    frontend_origin = "http://localhost:3000"
-
-    if error:
-        return RedirectResponse(url=f"{frontend_origin}/?calendar_error={error}")
-
-    if not code:
-        return RedirectResponse(url=f"{frontend_origin}/?calendar_error=no_code")
-
-    success = gcal.exchange_code(code)
-    if success:
-        return RedirectResponse(url=f"{frontend_origin}/?calendar_connected=1")
-    else:
-        return RedirectResponse(url=f"{frontend_origin}/?calendar_error=exchange_failed")
-
-
-@app.post("/api/calendar/disconnect")
-def calendar_disconnect():
-    """Revoke Google Calendar access and clear stored tokens."""
-    gcal.clear_tokens()
-    return {"ok": True, "connected": False}
-
-
-@app.get("/api/calendar/refresh")
-def calendar_refresh():
-    """Force a fresh fetch from Google Calendar (bypasses any caching).
-    Returns the latest calendar data."""
-    return gcal.get_calendar_with_fallback()
+    return data.calendar()
 
 
 # ---------------------------------------------------------------------------
@@ -447,12 +377,6 @@ def _ai_decompose_batch(ingredient_names: list[str]) -> dict[str, list[str]]:
     except Exception:
         pass
     return {}
-
-
-def _ai_decompose(ingredient_name: str) -> list[str]:
-    """Decompose a single ingredient via AI. Wraps _ai_decompose_batch."""
-    result = _ai_decompose_batch([ingredient_name])
-    return result.get(ingredient_name, [])
 
 
 # ── Recipe database matching (Issue 3) ──────────────────────────────────

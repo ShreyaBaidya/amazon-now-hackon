@@ -13,7 +13,8 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
+import useSWR from "swr";
 import { api } from "@/lib/api";
 import { useCart } from "@/lib/cart";
 import { rupee } from "@/lib/format";
@@ -31,21 +32,21 @@ const SIGNAL_COLOR = {
 const CTA = { calendar: "Prepare cart", fridge: "Add what's low", history: "Top up supplies" } as const;
 
 export default function NextBuy() {
-  const [data, setData] = useState<NextBuyT | null>(null);
-  const [loadError, setLoadError] = useState(false);
-  const gcal = useGoogleCalendar();
+  const { data, error, mutate } = useSWR(
+    "nextbuy_cache",
+    () => api.nextbuy(),
+    {
+      revalidateOnFocus: false,      // Prevent refetching when switching browser tabs
+      revalidateOnMount: true,       // Update data quietly in the background if stale
+      dedupingInterval: 30000,       // Reuse cached results completely for 30 seconds
+      keepPreviousData: true,        // Keep showing old cached data during background revalidation
+    }
+  );
 
-  const fetchNextbuy = useCallback(() => {
-    setLoadError(false);
-    api.nextbuy()
-      .then(setData)
-      .catch(() => setLoadError(true));
-  }, []);
+  // FIXED: Map data and error cleanly without redeclaring 'data'
+  const nextBuyData = data || null;
+  const loadError = !!error;
 
-useEffect(() => {
-  // Always fetch if we want it to load, but differentiate based on auth state if necessary
-  fetchNextbuy();
-}, [fetchNextbuy]);
 
   if (!data && !loadError) return <NextBuySkeleton />;
 
@@ -57,7 +58,7 @@ useEffect(() => {
             Couldn't load your NextBuy. Check your connection.
           </p>
           <button
-            onClick={fetchNextbuy}
+            onClick={() => window.location.reload()}
             className="flex items-center gap-1.5 text-[12px] font-bold text-red-600 bg-red-100 px-3 py-1.5 rounded-xl"
           >
             <RefreshCw size={13} /> Retry
@@ -83,33 +84,6 @@ useEffect(() => {
           From your calendar, fridge & habits. Tap to build your cart.
         </p>
       </motion.div>
-
-      {/* Google Calendar hint — links to profile for OAuth setup
-    {gcal.state !== "connected" && (
-      <Link
-        href="/profile"
-        className="speaknow"
-      >
-        <span className="h-8 w-8 rounded-xl grid place-items-center shrink-0 bg-amzn-purple/10">
-          <Calendar size={16} className="text-amzn-purple" />
-        </span>
-
-        <div className="flex-1 min-w-0">
-          <p className="text-[12.5px] font-bold text-amzn-purple">
-            Connect your Google Calendar
-          </p>
-
-          <p className="text-[11px] text-amzn-purple/70">
-            Auto-detect events &amp; prep your cart
-          </p>
-        </div>
-
-        <ChevronRight
-          size={15}
-          className="text-amzn-purple shrink-0"
-        />
-      </Link>
-    )} */}
 
       {/* signal cards */}
       <div className="mt-1 space-y-2">
@@ -151,7 +125,6 @@ function SignalCard({
   const count = included.reduce((s, l) => s + l.selected_qty, 0);
   const total = included.reduce((s, l) => s + l.product.price * l.selected_qty, 0);
 
-  // Build a rich subtitle line for the calendar card
   const calendarSubtitle = event
     ? [
         event.when_label,
@@ -189,7 +162,6 @@ function SignalCard({
         added ? "border-amzn-green/40" : "border-line"
       }`}
     >
-      {/* header */}
       <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center gap-3 p-3.5 text-left">
         <span className={`h-9 w-9 rounded-xl grid place-items-center shrink-0 ${SIGNAL_COLOR[group.signal]}`}>
           <Icon size={18} />
@@ -213,12 +185,10 @@ function SignalCard({
         )}
       </button>
 
-      {/* Calendar event metadata strip — shown only for calendar cards */}
       {group.signal === "calendar" && event && !added && (
         <CalendarEventMeta event={event} timeRemaining={timeRemaining} />
       )}
 
-      {/* expandable body */}
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
@@ -246,7 +216,6 @@ function SignalCard({
                         {!off && <Check size={10} className="text-white" strokeWidth={3} />}
                       </button>
                       <div className={`h-13.5 w-13.5 rounded-lg bg-paper grid place-items-center shrink-0 overflow-hidden ${off ? "opacity-40" : ""}`}>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={l.product.image} alt="" className="h-[85%] w-[85%] object-contain" />
                       </div>
                       <div className={`flex-1 min-w-0 ${off ? "opacity-40" : ""}`}>
@@ -269,7 +238,6 @@ function SignalCard({
                             <button
                               onClick={() => setLineQty(l.product.id, qty - 1)}
                               className="grid place-items-center h-full w-6"
-                              aria-label={`decrease ${l.product.name}`}
                             >
                               -
                             </button>
@@ -279,7 +247,6 @@ function SignalCard({
                             <button
                               onClick={() => setLineQty(l.product.id, qty + 1)}
                               className="grid place-items-center h-full w-6"
-                              aria-label={`increase ${l.product.name}`}
                             >
                               +
                             </button>
@@ -309,11 +276,6 @@ function SignalCard({
   );
 }
 
-/**
- * CalendarEventMeta
- * A compact strip showing event details: guests, location, time remaining.
- * Rendered between the card header and the expandable body.
- */
 function CalendarEventMeta({
   event,
   timeRemaining,
@@ -336,6 +298,17 @@ function CalendarEventMeta({
   ].filter(Boolean) as { icon: React.ReactNode; label: string }[];
 
   if (chips.length === 0) return null;
+
+  return (
+    <div>
+      {/* {chips.map((c, i) => (
+        <div key={i} className="flex items-center gap-1 bg-paper border border-line text-ink2 text-[10.5px] px-2 py-0.5 rounded-md font-medium">
+          {c.icon}
+          <span>{c.label}</span>
+        </div>
+      ))} */}
+    </div>
+  );
 }
 
 function NextBuySkeleton() {
@@ -354,7 +327,6 @@ function NextBuySkeleton() {
           </div>
         ))}
       </div>
-      {/* Loading indicator */}
       <div className="flex items-center justify-center gap-2 mt-4 text-[11px] text-ink2">
         <Loader2 size={13} className="animate-spin" />
         Building your cart…

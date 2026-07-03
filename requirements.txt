@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+pydantic
+requests
+python-dotenv
+jsonschema
+mako
+PyYAML
+beautifulsoup4
+langchain
+speechrecognition
+# pyaudio
+# pydub
+websockets
+openai
+boto3
