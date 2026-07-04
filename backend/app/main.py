@@ -3,7 +3,10 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import re
+
+
 
 
 from fastapi import FastAPI, HTTPException, UploadFile, File, Query
@@ -17,7 +20,7 @@ from . import azure, bedrock, data, engine, group, gcal
 app = FastAPI(title="Amazon Now API", version="1.0")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[os.environ.get("FRONTEND_ORIGIN", "http://localhost:3000")],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -231,23 +234,30 @@ async def group_stream(gid: str, play: int = 0):
         return StreamingResponse(err(), media_type="text/event-stream")
 
     g = group.get(gid)
-    should_play = bool(play) and not g.get("played")
+    # migrate old "played" flag to new "played_members" list
+    if g and "played" in g:
+        if g["played"] and "played_members" not in g:
+            g["played_members"] = [m["name"] for m in g["members"] if not m.get("host")]
+        del g["played"]
+    should_play = bool(play)
     q = group.subscribe(gid)
 
     async def gen():
-        yield f"event: state\ndata: {json.dumps(state)}\n\n"
+        yield f"event: state\ndata: {json.dumps(jsonable_encoder(state))}\n\n"
 
         # play scripted timeline if host shared the link
         if should_play:
-            g["played"] = True
             elapsed = 0
             for m in group.family_script():
+                if m["name"] in g.get("played_members", []):
+                    elapsed = m.get("joins_after", 0)
+                    continue
                 delay = max(0, m.get("joins_after", 0) - elapsed) / 1000
                 await asyncio.sleep(delay)
                 elapsed = m.get("joins_after", 0)
                 updated = group.play_member(gid, m)
-                ev = {"state": updated, "joined": {"name": m["name"], "relation": m.get("relation"),
-                                                   "color": m.get("color"), "count": len(m.get("items", []))}}
+                ev = {"state": jsonable_encoder(updated), "joined": {"name": m["name"], "relation": m.get("relation"),
+                                                    "color": m.get("color"), "count": len(m.get("items", []))}}
                 yield f"event: update\ndata: {json.dumps(ev)}\n\n"
 
         # push updates instantly as they happen
@@ -307,7 +317,7 @@ def calendar_callback(code: str = Query(default=""), error: str = Query(default=
     """Handle the OAuth redirect from Google. Exchanges the code for tokens,
     then redirects back to the frontend."""
     # Frontend origin for the post-auth redirect
-    frontend_origin = "http://localhost:3000"
+    frontend_origin = os.environ.get("FRONTEND_ORIGIN", "http://localhost:3000")
 
     if error:
         return RedirectResponse(url=f"{frontend_origin}/?calendar_error={error}")

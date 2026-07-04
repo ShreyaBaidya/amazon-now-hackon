@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+import decimal
 import json
 
 from . import data
@@ -29,9 +30,10 @@ def _bump(gid: str) -> None:
         return
     subs = _SUBSCRIBERS.get(gid, [])
     dead = []
+    payload = json.dumps({"state": state}, default=lambda o: float(o) if isinstance(o, decimal.Decimal) else str(o))
     for q in subs:
         try:
-            q.put_nowait(json.dumps({"state": state}))
+            q.put_nowait(payload)
         except asyncio.QueueFull:
             dead.append(q)
         except Exception:
@@ -53,7 +55,7 @@ def create(host_name: str, host_color: str, seed_items: list[dict] | None = None
         "host": host_name,
         "members": [{"name": host_name, "color": host_color, "relation": "You", "host": True}],
         "items": [],
-        "played": False,
+        "played_members": [],
     }
     _GROUPS[gid] = g
     for it in seed_items or []:
@@ -145,9 +147,12 @@ def play_member(gid: str, member: dict) -> dict | None:
     g = _GROUPS.get(gid)
     if not g:
         return None
+    if member["name"] in g.get("played_members", []):
+        return enrich(gid)
     _member(g, member["name"], member.get("color", "#7C3AED"), member.get("relation", "Family"))
     for it in member.get("items", []):
         _add_item(g, it["product_id"], it.get("qty", 1), member["name"])
+    g["played_members"].append(member["name"])
     _bump(gid)
     return enrich(gid)
 

@@ -93,7 +93,7 @@ export default function GroupCartPage() {
       }
     });
     es.addEventListener("done", () => es.close());
-    es.onerror = () => es.close();
+    es.onerror = () => {};
   };
 
   const addToGroup = async (p: Product) => {

@@ -17,7 +17,7 @@
         "dairy"
       ],
       "rating": 4.5,
-      "rating_count": 1135,
+      "rating_count": 1462,
       "description": "Homogenised toned milk, 3% fat."
     },
     {
@@ -37,7 +37,7 @@
         "dairy"
       ],
       "rating": 4.6,
-      "rating_count": 2993,
+      "rating_count": 2806,
       "description": "Rich full-cream milk, 6% fat."
     },
     {
@@ -50,14 +50,13 @@
       "image": "/products/farm-eggs-6.png",
       "match_key": "eggs",
       "dietary_tags": [
-        "gluten-free",
-        "eggetarian"
+        "gluten-free"
       ],
       "allergen_tags": [
         "eggs"
       ],
       "rating": 4.4,
-      "rating_count": 1160,
+      "rating_count": 3982,
       "description": "Cage-free brown eggs, protein-rich."
     },
     {
@@ -70,14 +69,13 @@
       "image": "/products/farm-eggs-12.png",
       "match_key": "eggs",
       "dietary_tags": [
-        "gluten-free",
-        "eggetarian"
+        "gluten-free"
       ],
       "allergen_tags": [
         "eggs"
       ],
       "rating": 4.4,
-      "rating_count": 3009,
+      "rating_count": 1531,
       "description": "A dozen farm-fresh white eggs."
     },
     {
@@ -97,7 +95,7 @@
         "dairy"
       ],
       "rating": 4.7,
-      "rating_count": 4072,
+      "rating_count": 1122,
       "description": "Utterly butterly delicious salted butter."
     },
     {
@@ -117,7 +115,7 @@
         "dairy"
       ],
       "rating": 4.5,
-      "rating_count": 1783,
+      "rating_count": 2683,
       "description": "Soft fresh cottage cheese."
     },
     {
@@ -137,7 +135,7 @@
         "dairy"
       ],
       "rating": 4.3,
-      "rating_count": 1683,
+      "rating_count": 1762,
       "description": "Thick set fresh curd."
     },
     {
@@ -157,7 +155,7 @@
         "dairy"
       ],
       "rating": 4.4,
-      "rating_count": 1087,
+      "rating_count": 2642,
       "description": "High-protein creamy Greek yogurt."
     },
     {
@@ -176,7 +174,7 @@
         "dairy"
       ],
       "rating": 4.4,
-      "rating_count": 4191,
+      "rating_count": 4662,
       "description": "Processed cheese slices, 10 pcs."
     },
     {
@@ -195,7 +193,7 @@
         "dairy"
       ],
       "rating": 4.5,
-      "rating_count": 4090,
+      "rating_count": 4145,
       "description": "Stretchy pizza-style mozzarella."
     },
     {
@@ -214,7 +212,7 @@
         "dairy"
       ],
       "rating": 4.6,
-      "rating_count": 4614,
+      "rating_count": 3237,
       "description": "Aged hard cheese, grated."
     },
     {
@@ -233,7 +231,7 @@
         "dairy"
       ],
       "rating": 4.5,
-      "rating_count": 4686,
+      "rating_count": 584,
       "description": "Italian soft cheese for desserts."
     },
     {
@@ -253,7 +251,7 @@
         "dairy"
       ],
       "rating": 4.4,
-      "rating_count": 1728,
+      "rating_count": 1512,
       "description": "25% fat fresh dairy cream."
     },
     {
@@ -273,7 +271,7 @@
         "dairy"
       ],
       "rating": 4.7,
-      "rating_count": 3762,
+      "rating_count": 4859,
       "description": "Clarified butter, rich aroma."
     },
     {
@@ -292,7 +290,7 @@
         "gluten"
       ],
       "rating": 4.3,
-      "rating_count": 4368,
+      "rating_count": 2969,
       "description": "Soft whole-wheat sandwich bread."
     },
     {
@@ -311,7 +309,7 @@
         "gluten"
       ],
       "rating": 4.2,
-      "rating_count": 3861,
+      "rating_count": 3292,
       "description": "Classic soft white bread."
     },
     {
@@ -330,7 +328,7 @@
         "gluten"
       ],
       "rating": 4.3,
-      "rating_count": 3082,
+      "rating_count": 1376,
       "description": "Soft pav buns for misal & vada pav."
     },
     {
@@ -350,7 +348,7 @@
         "eggs"
       ],
       "rating": 4.2,
-      "rating_count": 4850,
+      "rating_count": 2746,
       "description": "Sesame-topped burger buns."
     },
     {
@@ -371,7 +369,7 @@
         "eggs"
       ],
       "rating": 4.5,
-      "rating_count": 1455,
+      "rating_count": 3279,
       "description": "Flaky all-butter croissants."
     },
     {
@@ -389,7 +387,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.1,
-      "rating_count": 4746,
+      "rating_count": 2639,
       "description": "Fresh red onions."
     },
     {
@@ -407,7 +405,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.0,
-      "rating_count": 461,
+      "rating_count": 4233,
       "description": "Ripe red tomatoes."
     },
     {
@@ -425,7 +423,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.1,
-      "rating_count": 4344,
+      "rating_count": 906,
       "description": "Everyday cooking potatoes."
     },
     {
@@ -443,7 +441,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.2,
-      "rating_count": 4443,
+      "rating_count": 1468,
       "description": "Fresh garlic bulbs."
     },
     {
@@ -461,7 +459,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.2,
-      "rating_count": 3062,
+      "rating_count": 2436,
       "description": "Fresh ginger root."
     },
     {
@@ -479,7 +477,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.1,
-      "rating_count": 1387,
+      "rating_count": 1583,
       "description": "Tender green spinach."
     },
     {
@@ -497,7 +495,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.0,
-      "rating_count": 2074,
+      "rating_count": 2840,
       "description": "Crunchy green bell peppers."
     },
     {
@@ -515,7 +513,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 4759,
+      "rating_count": 4448,
       "description": "Fresh white button mushrooms."
     },
     {
@@ -533,7 +531,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.1,
-      "rating_count": 3621,
+      "rating_count": 783,
       "description": "Juicy lemons."
     },
     {
@@ -551,7 +549,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.2,
-      "rating_count": 4465,
+      "rating_count": 4543,
       "description": "Ripe sweet bananas."
     },
     {
@@ -569,7 +567,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 1680,
+      "rating_count": 2807,
       "description": "Crisp imported apples."
     },
     {
@@ -587,7 +585,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.2,
-      "rating_count": 887,
+      "rating_count": 2114,
       "description": "Sweet orange carrots."
     },
     {
@@ -605,7 +603,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.0,
-      "rating_count": 2908,
+      "rating_count": 3751,
       "description": "Fresh dhania for garnish."
     },
     {
@@ -623,7 +621,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.0,
-      "rating_count": 3312,
+      "rating_count": 4092,
       "description": "Spicy green chillies."
     },
     {
@@ -641,7 +639,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.2,
-      "rating_count": 902,
+      "rating_count": 3211,
       "description": "Aromatic basil leaves."
     },
     {
@@ -659,7 +657,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.6,
-      "rating_count": 4575,
+      "rating_count": 145,
       "description": "Long-grain aged basmati."
     },
     {
@@ -678,7 +676,7 @@
         "gluten"
       ],
       "rating": 4.6,
-      "rating_count": 1035,
+      "rating_count": 4815,
       "description": "Whole-wheat chakki atta."
     },
     {
@@ -697,7 +695,7 @@
         "gluten"
       ],
       "rating": 4.4,
-      "rating_count": 3233,
+      "rating_count": 3806,
       "description": "Italian-style spaghetti."
     },
     {
@@ -716,7 +714,7 @@
         "gluten"
       ],
       "rating": 4.4,
-      "rating_count": 2162,
+      "rating_count": 2067,
       "description": "Ridged penne pasta."
     },
     {
@@ -734,7 +732,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 2707,
+      "rating_count": 3232,
       "description": "Unpolished split pigeon peas."
     },
     {
@@ -752,7 +750,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 3165,
+      "rating_count": 474,
       "description": "Split Bengal gram."
     },
     {
@@ -770,7 +768,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 4078,
+      "rating_count": 2596,
       "description": "Fine white sugar."
     },
     {
@@ -788,7 +786,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.7,
-      "rating_count": 531,
+      "rating_count": 4138,
       "description": "Vacuum-evaporated iodised salt."
     },
     {
@@ -806,7 +804,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 1342,
+      "rating_count": 3325,
       "description": "Cold-pressed olive oil."
     },
     {
@@ -824,7 +822,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 587,
+      "rating_count": 2671,
       "description": "Refined sunflower cooking oil."
     },
     {
@@ -843,7 +841,7 @@
         "gluten"
       ],
       "rating": 4.2,
-      "rating_count": 4468,
+      "rating_count": 229,
       "description": "Refined wheat flour."
     },
     {
@@ -861,7 +859,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 931,
+      "rating_count": 3932,
       "description": "Stone-ground gram flour."
     },
     {
@@ -879,7 +877,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 2646,
+      "rating_count": 248,
       "description": "Whole black peppercorns."
     },
     {
@@ -897,7 +895,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 2003,
+      "rating_count": 214,
       "description": "Pure haldi powder."
     },
     {
@@ -915,7 +913,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 1443,
+      "rating_count": 312,
       "description": "Aromatic spice blend."
     },
     {
@@ -933,7 +931,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 4401,
+      "rating_count": 3501,
       "description": "Whole cumin seeds."
     },
     {
@@ -950,7 +948,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 2736,
+      "rating_count": 2577,
       "description": "Antibiotic-free boneless breast."
     },
     {
@@ -967,7 +965,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 1199,
+      "rating_count": 159,
       "description": "Skinless curry-cut with bone."
     },
     {
@@ -984,7 +982,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 1623,
+      "rating_count": 1487,
       "description": "Tender goat curry cut."
     },
     {
@@ -1003,7 +1001,7 @@
         "shellfish"
       ],
       "rating": 4.3,
-      "rating_count": 758,
+      "rating_count": 1037,
       "description": "Deveined medium prawns."
     },
     {
@@ -1022,7 +1020,7 @@
         "fish"
       ],
       "rating": 4.5,
-      "rating_count": 4831,
+      "rating_count": 4680,
       "description": "Boneless salmon fillet."
     },
     {
@@ -1039,7 +1037,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 4806,
+      "rating_count": 4793,
       "description": "Smoked streaky bacon."
     },
     {
@@ -1057,7 +1055,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.7,
-      "rating_count": 1619,
+      "rating_count": 3379,
       "description": "Single-origin medium roast beans."
     },
     {
@@ -1075,7 +1073,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 1757,
+      "rating_count": 2325,
       "description": "Rich instant coffee granules."
     },
     {
@@ -1093,7 +1091,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 4773,
+      "rating_count": 2844,
       "description": "Assam blend leaf tea."
     },
     {
@@ -1111,7 +1109,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 1244,
+      "rating_count": 4093,
       "description": "Antioxidant-rich green tea."
     },
     {
@@ -1129,7 +1127,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 4015,
+      "rating_count": 2205,
       "description": "100% not-from-concentrate juice."
     },
     {
@@ -1147,7 +1145,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 4308,
+      "rating_count": 4109,
       "description": "Chilled cola."
     },
     {
@@ -1165,7 +1163,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 3978,
+      "rating_count": 3441,
       "description": "Mineral water."
     },
     {
@@ -1183,7 +1181,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 2935,
+      "rating_count": 2313,
       "description": "Crisp dry white wine."
     },
     {
@@ -1201,7 +1199,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 3737,
+      "rating_count": 4787,
       "description": "Bold full-bodied red wine."
     },
     {
@@ -1221,7 +1219,7 @@
         "gluten"
       ],
       "rating": 4.4,
-      "rating_count": 3707,
+      "rating_count": 1670,
       "description": "Crisp white lager."
     },
     {
@@ -1235,12 +1233,11 @@
       "match_key": "potatoes",
       "dietary_tags": [
         "vegetarian",
-        "gluten-free",
-        "vegan"
+        "gluten-free"
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 4024,
+      "rating_count": 2847,
       "description": "Classic salted crisps."
     },
     {
@@ -1259,7 +1256,7 @@
         "gluten"
       ],
       "rating": 4.4,
-      "rating_count": 4921,
+      "rating_count": 3283,
       "description": "Wholewheat digestive biscuits."
     },
     {
@@ -1272,12 +1269,11 @@
       "image": "/products/namkeen.png",
       "match_key": "flour",
       "dietary_tags": [
-        "vegetarian",
-        "vegan"
+        "vegetarian"
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 3534,
+      "rating_count": 101,
       "description": "Spicy potato sev namkeen."
     },
     {
@@ -1291,14 +1287,13 @@
       "match_key": "dark chocolate",
       "dietary_tags": [
         "vegetarian",
-        "gluten-free",
-        "vegan"
+        "gluten-free"
       ],
       "allergen_tags": [
         "dairy"
       ],
       "rating": 4.5,
-      "rating_count": 2637,
+      "rating_count": 3773,
       "description": "Intense 70% cocoa chocolate."
     },
     {
@@ -1317,7 +1312,7 @@
         "dairy"
       ],
       "rating": 4.6,
-      "rating_count": 3825,
+      "rating_count": 3937,
       "description": "Creamy milk chocolate."
     },
     {
@@ -1331,12 +1326,11 @@
       "match_key": "sweetcorn",
       "dietary_tags": [
         "vegetarian",
-        "gluten-free",
-        "vegan"
+        "gluten-free"
       ],
       "allergen_tags": [],
       "rating": 4.2,
-      "rating_count": 3917,
+      "rating_count": 581,
       "description": "Butter-flavour popcorn."
     },
     {
@@ -1356,7 +1350,7 @@
         "nuts"
       ],
       "rating": 4.5,
-      "rating_count": 2546,
+      "rating_count": 2754,
       "description": "Premium roasted & salted cashews."
     },
     {
@@ -1376,7 +1370,7 @@
         "nuts"
       ],
       "rating": 4.6,
-      "rating_count": 2020,
+      "rating_count": 2411,
       "description": "Whole raw almonds."
     },
     {
@@ -1394,7 +1388,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 3726,
+      "rating_count": 2349,
       "description": "Farm-fresh frozen peas."
     },
     {
@@ -1411,7 +1405,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 1597,
+      "rating_count": 3062,
       "description": "Crispy classic fries."
     },
     {
@@ -1431,7 +1425,7 @@
         "dairy"
       ],
       "rating": 4.5,
-      "rating_count": 3254,
+      "rating_count": 726,
       "description": "Rich vanilla ice cream."
     },
     {
@@ -1450,7 +1444,7 @@
         "gluten"
       ],
       "rating": 4.3,
-      "rating_count": 1031,
+      "rating_count": 3955,
       "description": "Ready-to-cook flaky parathas."
     },
     {
@@ -1467,7 +1461,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 4599,
+      "rating_count": 1510,
       "description": "Nourishing daily shampoo."
     },
     {
@@ -1484,7 +1478,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 574,
+      "rating_count": 3037,
       "description": "Cream beauty bar."
     },
     {
@@ -1501,7 +1495,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 2845,
+      "rating_count": 4141,
       "description": "Fluoride toothpaste."
     },
     {
@@ -1518,7 +1512,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 4975,
+      "rating_count": 4220,
       "description": "Gentle daily face wash."
     },
     {
@@ -1535,7 +1529,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 2407,
+      "rating_count": 2585,
       "description": "Overnight protection pads."
     },
     {
@@ -1552,7 +1546,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 2591,
+      "rating_count": 3280,
       "description": "Long-lasting freshness."
     },
     {
@@ -1569,7 +1563,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 2372,
+      "rating_count": 3934,
       "description": "All-in-1 dishwasher tablets."
     },
     {
@@ -1586,7 +1580,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 3892,
+      "rating_count": 4168,
       "description": "Lemon dishwash gel."
     },
     {
@@ -1603,7 +1597,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 2702,
+      "rating_count": 2891,
       "description": "Front-load liquid detergent."
     },
     {
@@ -1620,7 +1614,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 1646,
+      "rating_count": 2971,
       "description": "Kills 99.9% germs."
     },
     {
@@ -1637,7 +1631,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 2265,
+      "rating_count": 515,
       "description": "Power-plus toilet cleaner."
     },
     {
@@ -1654,7 +1648,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 3722,
+      "rating_count": 2640,
       "description": "Oxo-biodegradable bin bags."
     },
     {
@@ -1671,7 +1665,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 825,
+      "rating_count": 3777,
       "description": "2-ply soft facial tissues."
     },
     {
@@ -1689,7 +1683,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.7,
-      "rating_count": 2683,
+      "rating_count": 1201,
       "description": "Fever & pain relief tablets."
     },
     {
@@ -1707,7 +1701,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.6,
-      "rating_count": 335,
+      "rating_count": 1477,
       "description": "Rehydration salts sachet."
     },
     {
@@ -1725,7 +1719,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 3034,
+      "rating_count": 974,
       "description": "Fast-read digital thermometer."
     },
     {
@@ -1743,7 +1737,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 518,
+      "rating_count": 516,
       "description": "Relief for dry cough."
     },
     {
@@ -1761,7 +1755,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 3354,
+      "rating_count": 3738,
       "description": "Fast acidity & gas relief."
     },
     {
@@ -1779,7 +1773,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 203,
+      "rating_count": 3218,
       "description": "Assorted washproof bandages."
     },
     {
@@ -1797,7 +1791,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 2279,
+      "rating_count": 4273,
       "description": "70% alcohol germ protection."
     },
     {
@@ -1815,7 +1809,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 282,
+      "rating_count": 4544,
       "description": "Immunity-boosting vitamin C."
     },
     {
@@ -1832,7 +1826,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.6,
-      "rating_count": 2247,
+      "rating_count": 558,
       "description": "12-hr dry pant-style diapers."
     },
     {
@@ -1849,7 +1843,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 4459,
+      "rating_count": 2885,
       "description": "Fragrance-free gentle wipes."
     },
     {
@@ -1868,7 +1862,7 @@
         "dairy"
       ],
       "rating": 4.5,
-      "rating_count": 1307,
+      "rating_count": 4765,
       "description": "Spray-dried infant milk formula."
     },
     {
@@ -1885,7 +1879,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 3282,
+      "rating_count": 3388,
       "description": "Mild moisturising baby lotion."
     },
     {
@@ -1903,7 +1897,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 2482,
+      "rating_count": 1622,
       "description": "Premium fine-ground chana dal flour for frying."
     },
     {
@@ -1921,7 +1915,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.8,
-      "rating_count": 1249,
+      "rating_count": 1084,
       "description": "Fast-acting relief from acidity and stomach gas."
     },
     {
@@ -1939,7 +1933,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.6,
-      "rating_count": 4532,
+      "rating_count": 1006,
       "description": "100% pure naturally hydrating electrolyte beverage."
     },
     {
@@ -1959,7 +1953,7 @@
         "nuts"
       ],
       "rating": 4.7,
-      "rating_count": 3235,
+      "rating_count": 1141,
       "description": "Pure roasted peanut paste with no added oil or sugars."
     },
     {
@@ -1979,7 +1973,7 @@
         "nuts"
       ],
       "rating": 4.3,
-      "rating_count": 492,
+      "rating_count": 4389,
       "description": "Creamy plant-based dairy milk alternative."
     },
     {
@@ -2000,7 +1994,7 @@
         "gluten"
       ],
       "rating": 4.8,
-      "rating_count": 153,
+      "rating_count": 1206,
       "description": "Crispy hazelnut chocolate truffles."
     },
     {
@@ -2018,7 +2012,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.6,
-      "rating_count": 1030,
+      "rating_count": 1148,
       "description": "A bunch of 6 elegant, freshly-cut red roses."
     },
     {
@@ -2036,7 +2030,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 419,
+      "rating_count": 344,
       "description": "Soothing hand-poured wax jar candle for ambience."
     },
     {
@@ -2054,7 +2048,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.2,
-      "rating_count": 393,
+      "rating_count": 4880,
       "description": "Disposable premium red cups for cold beverages."
     },
     {
@@ -2075,7 +2069,7 @@
         "dairy"
       ],
       "rating": 4.5,
-      "rating_count": 2118,
+      "rating_count": 2256,
       "description": "Flaky traditional sweet made with ghee and dry fruits."
     },
     {
@@ -2093,7 +2087,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 4594,
+      "rating_count": 4399,
       "description": "Thick glossy gift wrapping bag with ribbon handles."
     },
     {
@@ -2110,7 +2104,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 3674,
+      "rating_count": 2657,
       "description": "Shine and disinfection booster spray for glass tables."
     },
     {
@@ -2127,7 +2121,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.6,
-      "rating_count": 4198,
+      "rating_count": 1991,
       "description": "Skin-safe disinfecting travel wet tissues."
     },
     {
@@ -2145,7 +2139,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 291,
+      "rating_count": 4334,
       "description": "Aromatically fragrant whole dried bay leaves."
     },
     {
@@ -2163,7 +2157,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.6,
-      "rating_count": 4949,
+      "rating_count": 1458,
       "description": "Premium sweet-aroma cinnamon whole sticks."
     },
     {
@@ -2181,7 +2175,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.4,
-      "rating_count": 1978,
+      "rating_count": 3494,
       "description": "Handpicked premium pungent whole cloves."
     },
     {
@@ -2199,7 +2193,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.7,
-      "rating_count": 3545,
+      "rating_count": 169,
       "description": "Whole aromatic green cardamom pods."
     },
     {
@@ -2219,7 +2213,7 @@
         "dairy"
       ],
       "rating": 4.6,
-      "rating_count": 2525,
+      "rating_count": 1211,
       "description": "Moist layered chocolate cake with chocolate ganache."
     },
     {
@@ -2237,7 +2231,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 2434,
+      "rating_count": 3070,
       "description": "Assorted bright-coloured 12-inch latex balloons."
     },
     {
@@ -2255,7 +2249,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.2,
-      "rating_count": 4959,
+      "rating_count": 4792,
       "description": "Instant cup-of-soup mix, just add hot water."
     },
     {
@@ -2272,7 +2266,7 @@
       ],
       "allergen_tags": [],
       "rating": 4.7,
-      "rating_count": 3590,
+      "rating_count": 3475,
       "description": "Ayurvedic balm for cold, cough and headache relief."
     },
     {
@@ -2289,309 +2283,307 @@
       ],
       "allergen_tags": [],
       "rating": 4.6,
-      "rating_count": 4239,
+      "rating_count": 558,
       "description": "100% pure natural honey for tea and home remedies."
     },
     {
       "id": "khus-khus",
       "name": "Khus Khus",
       "brand": "Fresho",
-      "price": 165,
+      "price": 195,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/khus-khus.png",
       "match_key": "khus khus",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 631,
+      "rating": 4.8,
+      "rating_count": 1089,
       "description": "Fresh khus khus."
     },
     {
       "id": "mint",
       "name": "Mint",
       "brand": "Fresho",
-      "price": 115,
+      "price": 100,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/mint.png",
       "match_key": "mint",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 1005,
+      "rating": 4.7,
+      "rating_count": 510,
       "description": "Fresh mint."
     },
     {
       "id": "cilantro",
       "name": "Cilantro",
       "brand": "Fresho",
-      "price": 80,
+      "price": 145,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/cilantro.png",
       "match_key": "cilantro",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 1442,
+      "rating": 4.7,
+      "rating_count": 615,
       "description": "Fresh cilantro."
     },
     {
       "id": "saffron",
       "name": "Saffron",
       "brand": "Fresho",
-      "price": 150,
+      "price": 190,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/saffron.png",
       "match_key": "saffron",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 1368,
+      "rating": 4.7,
+      "rating_count": 1476,
       "description": "Fresh saffron."
     },
     {
       "id": "biryani-masala",
       "name": "Biryani Masala",
       "brand": "Fresho",
-      "price": 70,
+      "price": 35,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/biryani-masala.png",
       "match_key": "biryani masala",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 1176,
+      "rating": 4.3,
+      "rating_count": 1321,
       "description": "Fresh biryani masala."
     },
     {
       "id": "sunflower-oil",
       "name": "Sunflower Oil",
       "brand": "Fresho",
-      "price": 90,
+      "price": 60,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/sunflower-oil.png",
       "match_key": "sunflower oil",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 1268,
+      "rating": 4.8,
+      "rating_count": 1906,
       "description": "Fresh sunflower oil."
     },
     {
       "id": "madras-paste",
       "name": "Madras Paste",
       "brand": "Fresho",
-      "price": 20,
+      "price": 25,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/madras-paste.png",
       "match_key": "madras paste",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 1690,
+      "rating": 4.1,
+      "rating_count": 1847,
       "description": "Fresh madras paste."
     },
     {
       "id": "paprika",
       "name": "Paprika",
       "brand": "Fresho",
-      "price": 110,
+      "price": 30,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/paprika.png",
       "match_key": "paprika",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 836,
+      "rating": 4.2,
+      "rating_count": 1584,
       "description": "Fresh paprika."
     },
     {
       "id": "tomato-pur-e",
       "name": "Tomato Purée",
       "brand": "Fresho",
-      "price": 155,
+      "price": 135,
       "size": "1 unit",
       "category": "fresh_produce",
       "image": "/products/tomato-pur-e.png",
       "match_key": "tomato purée",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 1057,
+      "rating": 4.5,
+      "rating_count": 221,
       "description": "Fresh tomato purée."
     },
     {
       "id": "mustard-seeds",
       "name": "Mustard Seeds",
       "brand": "Fresho",
-      "price": 50,
+      "price": 85,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/mustard-seeds.png",
       "match_key": "mustard seeds",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 804,
+      "rating": 4.4,
+      "rating_count": 1243,
       "description": "Fresh mustard seeds."
     },
     {
       "id": "rice-noodles",
       "name": "Rice Noodles",
       "brand": "Fresho",
-      "price": 165,
+      "price": 160,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/rice-noodles.png",
       "match_key": "rice noodles",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 1087,
+      "rating": 4.1,
+      "rating_count": 746,
       "description": "Fresh rice noodles."
     },
     {
       "id": "lime",
       "name": "Lime",
       "brand": "Fresho",
-      "price": 140,
+      "price": 25,
       "size": "1 unit",
       "category": "fresh_produce",
       "image": "/products/lime.png",
       "match_key": "lime",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 118,
+      "rating": 4.1,
+      "rating_count": 1495,
       "description": "Fresh lime."
     },
     {
       "id": "cayenne-pepper",
       "name": "Cayenne Pepper",
       "brand": "Fresho",
-      "price": 100,
+      "price": 50,
       "size": "1 unit",
       "category": "fresh_produce",
       "image": "/products/cayenne-pepper.png",
       "match_key": "cayenne pepper",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 1178,
+      "rating": 4.6,
+      "rating_count": 1932,
       "description": "Fresh cayenne pepper."
     },
     {
       "id": "fish-sauce",
       "name": "Fish Sauce",
       "brand": "Fresho",
-      "price": 115,
+      "price": 175,
       "size": "1 unit",
       "category": "meat_seafood",
       "image": "/products/fish-sauce.png",
       "match_key": "fish sauce",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 337,
+      "rating": 4.4,
+      "rating_count": 1493,
       "description": "Fresh fish sauce."
     },
     {
       "id": "bean-sprouts",
       "name": "Bean Sprouts",
       "brand": "Fresho",
-      "price": 50,
+      "price": 180,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/bean-sprouts.png",
       "match_key": "bean sprouts",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 624,
+      "rating": 4.5,
+      "rating_count": 1230,
       "description": "Fresh bean sprouts."
     },
     {
       "id": "peanuts",
       "name": "Peanuts",
       "brand": "Fresho",
-      "price": 85,
+      "price": 165,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/peanuts.png",
       "match_key": "peanuts",
       "dietary_tags": [],
-      "allergen_tags": [
-        "nuts"
-      ],
-      "rating": 4.4,
-      "rating_count": 1551,
+      "allergen_tags": [],
+      "rating": 4.2,
+      "rating_count": 1531,
       "description": "Fresh peanuts."
     },
     {
       "id": "pork-chops",
       "name": "Pork Chops",
       "brand": "Fresho",
-      "price": 105,
+      "price": 35,
       "size": "1 unit",
       "category": "meat_seafood",
       "image": "/products/pork-chops.png",
       "match_key": "pork chops",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 1263,
+      "rating": 4.3,
+      "rating_count": 1269,
       "description": "Fresh pork chops."
     },
     {
       "id": "tomato-ketchup",
       "name": "Tomato Ketchup",
       "brand": "Fresho",
-      "price": 30,
+      "price": 155,
       "size": "1 unit",
       "category": "fresh_produce",
       "image": "/products/tomato-ketchup.png",
       "match_key": "tomato ketchup",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 1220,
+      "rating": 4.0,
+      "rating_count": 1585,
       "description": "Fresh tomato ketchup."
     },
     {
       "id": "worcestershire-sauce",
       "name": "Worcestershire Sauce",
       "brand": "Fresho",
-      "price": 110,
+      "price": 70,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/worcestershire-sauce.png",
       "match_key": "worcestershire sauce",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 360,
+      "rating": 4.1,
+      "rating_count": 624,
       "description": "Fresh worcestershire sauce."
     },
     {
       "id": "oyster-sauce",
       "name": "Oyster Sauce",
       "brand": "Fresho",
-      "price": 60,
+      "price": 110,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/oyster-sauce.png",
       "match_key": "oyster sauce",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 1654,
+      "rating": 4.0,
+      "rating_count": 1220,
       "description": "Fresh oyster sauce."
     },
     {
@@ -2606,44 +2598,44 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 1096,
+      "rating_count": 1132,
       "description": "Fresh coconut cream."
     },
     {
       "id": "massaman-curry-paste",
       "name": "Massaman Curry Paste",
       "brand": "Fresho",
-      "price": 170,
+      "price": 95,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/massaman-curry-paste.png",
       "match_key": "massaman curry paste",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 804,
+      "rating": 4.6,
+      "rating_count": 921,
       "description": "Fresh massaman curry paste."
     },
     {
       "id": "beef",
       "name": "Beef",
       "brand": "Fresho",
-      "price": 45,
+      "price": 170,
       "size": "1 unit",
       "category": "meat_seafood",
       "image": "/products/beef.png",
       "match_key": "beef",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 1503,
+      "rating": 4.3,
+      "rating_count": 2000,
       "description": "Fresh beef."
     },
     {
       "id": "tamarind-paste",
       "name": "Tamarind Paste",
       "brand": "Fresho",
-      "price": 170,
+      "price": 125,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/tamarind-paste.png",
@@ -2651,436 +2643,434 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 1592,
+      "rating_count": 827,
       "description": "Fresh tamarind paste."
     },
     {
       "id": "jasmine-rice",
       "name": "Jasmine Rice",
       "brand": "Fresho",
-      "price": 45,
+      "price": 95,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/jasmine-rice.png",
       "match_key": "jasmine rice",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 1315,
+      "rating": 4.6,
+      "rating_count": 1753,
       "description": "Fresh jasmine rice."
     },
     {
       "id": "egg-yolks",
       "name": "Egg Yolks",
       "brand": "Fresho",
-      "price": 85,
+      "price": 150,
       "size": "1 unit",
       "category": "dairy_eggs",
       "image": "/products/egg-yolks.png",
       "match_key": "egg yolks",
-      "dietary_tags": [
-        "eggetarian"
-      ],
+      "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 1447,
+      "rating": 4.8,
+      "rating_count": 220,
       "description": "Fresh egg yolks."
     },
     {
       "id": "pecorino",
       "name": "Pecorino",
       "brand": "Fresho",
-      "price": 145,
+      "price": 165,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/pecorino.png",
       "match_key": "pecorino",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 1987,
+      "rating": 4.2,
+      "rating_count": 1795,
       "description": "Fresh pecorino."
     },
     {
       "id": "celery",
       "name": "Celery",
       "brand": "Fresho",
-      "price": 125,
+      "price": 25,
       "size": "1 unit",
       "category": "fresh_produce",
       "image": "/products/celery.png",
       "match_key": "celery",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 983,
+      "rating": 4.1,
+      "rating_count": 791,
       "description": "Fresh celery."
     },
     {
       "id": "tomato-puree",
       "name": "Tomato Puree",
       "brand": "Fresho",
-      "price": 100,
+      "price": 195,
       "size": "1 unit",
       "category": "fresh_produce",
       "image": "/products/tomato-puree.png",
       "match_key": "tomato puree",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 710,
+      "rating": 4.8,
+      "rating_count": 921,
       "description": "Fresh tomato puree."
     },
     {
       "id": "lasagne-sheets",
       "name": "Lasagne Sheets",
       "brand": "Fresho",
-      "price": 25,
+      "price": 135,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/lasagne-sheets.png",
       "match_key": "lasagne sheets",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 115,
+      "rating": 4.5,
+      "rating_count": 1789,
       "description": "Fresh lasagne sheets."
     },
     {
       "id": "creme-fraiche",
       "name": "Creme Fraiche",
       "brand": "Fresho",
-      "price": 100,
+      "price": 65,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/creme-fraiche.png",
       "match_key": "creme fraiche",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 1834,
+      "rating": 4.0,
+      "rating_count": 1967,
       "description": "Fresh creme fraiche."
     },
     {
       "id": "vegetable-stock",
       "name": "Vegetable Stock",
       "brand": "Fresho",
-      "price": 185,
+      "price": 190,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/vegetable-stock.png",
       "match_key": "vegetable stock",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 779,
+      "rating": 4.7,
+      "rating_count": 1576,
       "description": "Fresh vegetable stock."
     },
     {
       "id": "asparagus",
       "name": "Asparagus",
       "brand": "Fresho",
-      "price": 140,
+      "price": 35,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/asparagus.png",
       "match_key": "asparagus",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 1086,
+      "rating": 4.3,
+      "rating_count": 1177,
       "description": "Fresh asparagus."
     },
     {
       "id": "yeast",
       "name": "Yeast",
       "brand": "Fresho",
-      "price": 95,
+      "price": 20,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/yeast.png",
       "match_key": "yeast",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 877,
+      "rating": 4.0,
+      "rating_count": 1538,
       "description": "Fresh yeast."
     },
     {
       "id": "passata",
       "name": "Passata",
       "brand": "Fresho",
-      "price": 185,
+      "price": 110,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/passata.png",
       "match_key": "passata",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 687,
+      "rating": 4.0,
+      "rating_count": 928,
       "description": "Fresh passata."
     },
     {
       "id": "oregano",
       "name": "Oregano",
       "brand": "Fresho",
-      "price": 155,
+      "price": 145,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/oregano.png",
       "match_key": "oregano",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 397,
+      "rating": 4.7,
+      "rating_count": 803,
       "description": "Fresh oregano."
     },
     {
       "id": "aubergine",
       "name": "Aubergine",
       "brand": "Fresho",
-      "price": 20,
+      "price": 150,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/aubergine.png",
       "match_key": "aubergine",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 1478,
+      "rating": 4.8,
+      "rating_count": 472,
       "description": "Fresh aubergine."
     },
     {
       "id": "courgettes",
       "name": "Courgettes",
       "brand": "Fresho",
-      "price": 115,
+      "price": 150,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/courgettes.png",
       "match_key": "courgettes",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 1749,
+      "rating": 4.8,
+      "rating_count": 1328,
       "description": "Fresh courgettes."
     },
     {
       "id": "yellow-pepper",
       "name": "Yellow Pepper",
       "brand": "Fresho",
-      "price": 185,
+      "price": 75,
       "size": "1 unit",
       "category": "fresh_produce",
       "image": "/products/yellow-pepper.png",
       "match_key": "yellow pepper",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 1871,
+      "rating": 4.2,
+      "rating_count": 1029,
       "description": "Fresh yellow pepper."
     },
     {
       "id": "red-wine-vinegar",
       "name": "Red Wine Vinegar",
       "brand": "Fresho",
-      "price": 170,
+      "price": 70,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/red-wine-vinegar.png",
       "match_key": "red wine vinegar",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 104,
+      "rating": 4.1,
+      "rating_count": 1252,
       "description": "Fresh red wine vinegar."
     },
     {
       "id": "macaroni",
       "name": "Macaroni",
       "brand": "Fresho",
-      "price": 120,
+      "price": 70,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/macaroni.png",
       "match_key": "macaroni",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 466,
+      "rating": 4.1,
+      "rating_count": 1420,
       "description": "Fresh macaroni."
     },
     {
       "id": "white-fish-fillets",
       "name": "White Fish Fillets",
       "brand": "Fresho",
-      "price": 195,
+      "price": 160,
       "size": "1 unit",
       "category": "meat_seafood",
       "image": "/products/white-fish-fillets.png",
       "match_key": "white fish fillets",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 681,
+      "rating": 4.1,
+      "rating_count": 606,
       "description": "Fresh white fish fillets."
     },
     {
       "id": "nutmeg",
       "name": "Nutmeg",
       "brand": "Fresho",
-      "price": 40,
+      "price": 55,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/nutmeg.png",
       "match_key": "nutmeg",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 442,
+      "rating": 4.7,
+      "rating_count": 881,
       "description": "Fresh nutmeg."
     },
     {
       "id": "jerusalem-artichokes",
       "name": "Jerusalem Artichokes",
       "brand": "Fresho",
-      "price": 185,
+      "price": 105,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/jerusalem-artichokes.png",
       "match_key": "jerusalem artichokes",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 915,
+      "rating": 4.8,
+      "rating_count": 155,
       "description": "Fresh jerusalem artichokes."
     },
     {
       "id": "leek",
       "name": "Leek",
       "brand": "Fresho",
-      "price": 70,
+      "price": 165,
       "size": "1 unit",
       "category": "fresh_produce",
       "image": "/products/leek.png",
       "match_key": "leek",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 188,
+      "rating": 4.2,
+      "rating_count": 551,
       "description": "Fresh leek."
     },
     {
       "id": "parsley",
       "name": "Parsley",
       "brand": "Fresho",
-      "price": 190,
+      "price": 85,
       "size": "1 unit",
       "category": "fresh_produce",
       "image": "/products/parsley.png",
       "match_key": "parsley",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 608,
+      "rating": 4.4,
+      "rating_count": 1183,
       "description": "Fresh parsley."
     },
     {
       "id": "dill",
       "name": "Dill",
       "brand": "Fresho",
-      "price": 30,
+      "price": 170,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/dill.png",
       "match_key": "dill",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 1668,
+      "rating": 4.3,
+      "rating_count": 320,
       "description": "Fresh dill."
     },
     {
       "id": "gruy-re",
       "name": "Gruyère",
       "brand": "Fresho",
-      "price": 65,
+      "price": 105,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/gruy-re.png",
       "match_key": "gruyère",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 2043,
+      "rating": 4.8,
+      "rating_count": 1623,
       "description": "Fresh gruyère."
     },
     {
       "id": "feta",
       "name": "Feta",
       "brand": "Fresho",
-      "price": 135,
+      "price": 120,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/feta.png",
       "match_key": "feta",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 237,
+      "rating": 4.2,
+      "rating_count": 1802,
       "description": "Fresh feta."
     },
     {
       "id": "raspberries",
       "name": "Raspberries",
       "brand": "Fresho",
-      "price": 135,
+      "price": 190,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/raspberries.png",
       "match_key": "raspberries",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 1845,
+      "rating": 4.7,
+      "rating_count": 1836,
       "description": "Fresh raspberries."
     },
     {
       "id": "blueberries",
       "name": "Blueberries",
       "brand": "Fresho",
-      "price": 50,
+      "price": 160,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/blueberries.png",
       "match_key": "blueberries",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 660,
+      "rating": 4.1,
+      "rating_count": 1378,
       "description": "Fresh blueberries."
     },
     {
       "id": "casabe",
       "name": "Casabe",
       "brand": "Fresho",
-      "price": 145,
+      "price": 155,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/casabe.png",
       "match_key": "casabe",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 1167,
+      "rating": 4.0,
+      "rating_count": 149,
       "description": "Fresh casabe."
     },
     {
       "id": "tomato-sauce",
       "name": "Tomato Sauce",
       "brand": "Fresho",
-      "price": 75,
+      "price": 165,
       "size": "1 unit",
       "category": "fresh_produce",
       "image": "/products/tomato-sauce.png",
@@ -3088,179 +3078,179 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.2,
-      "rating_count": 673,
+      "rating_count": 983,
       "description": "Fresh tomato sauce."
     },
     {
       "id": "chorizo",
       "name": "Chorizo",
       "brand": "Fresho",
-      "price": 30,
+      "price": 100,
       "size": "1 unit",
       "category": "meat_seafood",
       "image": "/products/chorizo.png",
       "match_key": "chorizo",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 1672,
+      "rating": 4.7,
+      "rating_count": 458,
       "description": "Fresh chorizo."
     },
     {
       "id": "turkey-ham",
       "name": "Turkey Ham",
       "brand": "Fresho",
-      "price": 95,
+      "price": 155,
       "size": "1 unit",
       "category": "meat_seafood",
       "image": "/products/turkey-ham.png",
       "match_key": "turkey ham",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 1737,
+      "rating": 4.0,
+      "rating_count": 1025,
       "description": "Fresh turkey ham."
     },
     {
       "id": "green-olives",
       "name": "Green Olives",
       "brand": "Fresho",
-      "price": 170,
+      "price": 85,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/green-olives.png",
       "match_key": "green olives",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 428,
+      "rating": 4.4,
+      "rating_count": 1871,
       "description": "Fresh green olives."
     },
     {
       "id": "sushi-rice",
       "name": "Sushi Rice",
       "brand": "Fresho",
-      "price": 100,
+      "price": 60,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/sushi-rice.png",
       "match_key": "sushi rice",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 1786,
+      "rating": 4.8,
+      "rating_count": 906,
       "description": "Fresh sushi rice."
     },
     {
       "id": "rice-wine",
       "name": "Rice Wine",
       "brand": "Fresho",
-      "price": 90,
+      "price": 125,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/rice-wine.png",
       "match_key": "rice wine",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 1004,
+      "rating": 4.3,
+      "rating_count": 663,
       "description": "Fresh rice wine."
     },
     {
       "id": "mayonnaise",
       "name": "Mayonnaise",
       "brand": "Fresho",
-      "price": 150,
+      "price": 165,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/mayonnaise.png",
       "match_key": "mayonnaise",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 1428,
+      "rating": 4.2,
+      "rating_count": 1263,
       "description": "Fresh mayonnaise."
     },
     {
       "id": "soy-sauce",
       "name": "Soy Sauce",
       "brand": "Fresho",
-      "price": 175,
+      "price": 65,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/soy-sauce.png",
       "match_key": "soy sauce",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 1633,
+      "rating": 4.0,
+      "rating_count": 487,
       "description": "Fresh soy sauce."
     },
     {
       "id": "cucumber",
       "name": "Cucumber",
       "brand": "Fresho",
-      "price": 180,
+      "price": 175,
       "size": "1 unit",
       "category": "fresh_produce",
       "image": "/products/cucumber.png",
       "match_key": "cucumber",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 678,
+      "rating": 4.4,
+      "rating_count": 901,
       "description": "Fresh cucumber."
     },
     {
       "id": "dry-sherry",
       "name": "Dry Sherry",
       "brand": "Fresho",
-      "price": 85,
+      "price": 155,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/dry-sherry.png",
       "match_key": "dry sherry",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 707,
+      "rating": 4.0,
+      "rating_count": 1117,
       "description": "Fresh dry sherry."
     },
     {
       "id": "mussels",
       "name": "Mussels",
       "brand": "Fresho",
-      "price": 180,
+      "price": 195,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/mussels.png",
       "match_key": "mussels",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 774,
+      "rating": 4.8,
+      "rating_count": 1937,
       "description": "Fresh mussels."
     },
     {
       "id": "squid",
       "name": "Squid",
       "brand": "Fresho",
-      "price": 40,
+      "price": 25,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/squid.png",
       "match_key": "squid",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 1266,
+      "rating": 4.1,
+      "rating_count": 627,
       "description": "Fresh squid."
     },
     {
       "id": "paella-rice",
       "name": "Paella Rice",
       "brand": "Fresho",
-      "price": 180,
+      "price": 45,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/paella-rice.png",
@@ -3268,44 +3258,44 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 750,
+      "rating_count": 1667,
       "description": "Fresh paella rice."
     },
     {
       "id": "broad-beans",
       "name": "Broad Beans",
       "brand": "Fresho",
-      "price": 120,
+      "price": 55,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/broad-beans.png",
       "match_key": "broad beans",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 1750,
+      "rating": 4.7,
+      "rating_count": 1781,
       "description": "Fresh broad beans."
     },
     {
       "id": "sesame-seed-oil",
       "name": "Sesame Seed Oil",
       "brand": "Fresho",
-      "price": 40,
+      "price": 190,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/sesame-seed-oil.png",
       "match_key": "sesame seed oil",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 1770,
+      "rating": 4.7,
+      "rating_count": 1284,
       "description": "Fresh sesame seed oil."
     },
     {
       "id": "wonton-skin",
       "name": "Wonton Skin",
       "brand": "Fresho",
-      "price": 105,
+      "price": 150,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/wonton-skin.png",
@@ -3313,59 +3303,59 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.8,
-      "rating_count": 815,
+      "rating_count": 1984,
       "description": "Fresh wonton skin."
     },
     {
       "id": "avocado",
       "name": "Avocado",
       "brand": "Fresho",
-      "price": 125,
+      "price": 130,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/avocado.png",
       "match_key": "avocado",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 327,
+      "rating": 4.4,
+      "rating_count": 1652,
       "description": "Fresh avocado."
     },
     {
       "id": "baking-powder",
       "name": "Baking Powder",
       "brand": "Fresho",
-      "price": 85,
+      "price": 165,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/baking-powder.png",
       "match_key": "baking powder",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 1007,
+      "rating": 4.2,
+      "rating_count": 1167,
       "description": "Fresh baking powder."
     },
     {
       "id": "balsamic-vinegar",
       "name": "Balsamic Vinegar",
       "brand": "Fresho",
-      "price": 185,
+      "price": 135,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/balsamic-vinegar.png",
       "match_key": "balsamic vinegar",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 1363,
+      "rating": 4.5,
+      "rating_count": 1749,
       "description": "Fresh balsamic vinegar."
     },
     {
       "id": "bay-leaves",
       "name": "Bay Leaves",
       "brand": "Fresho",
-      "price": 120,
+      "price": 75,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/bay-leaves.png",
@@ -3373,157 +3363,157 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.2,
-      "rating_count": 1098,
+      "rating_count": 549,
       "description": "Fresh bay leaves."
     },
     {
       "id": "bicarbonate-of-soda",
       "name": "Bicarbonate Of Soda",
       "brand": "Fresho",
-      "price": 170,
+      "price": 70,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/bicarbonate-of-soda.png",
       "match_key": "bicarbonate of soda",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 1928,
+      "rating": 4.1,
+      "rating_count": 1400,
       "description": "Fresh bicarbonate of soda."
     },
     {
       "id": "black-treacle",
       "name": "Black Treacle",
       "brand": "Fresho",
-      "price": 90,
+      "price": 140,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/black-treacle.png",
       "match_key": "black treacle",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 412,
+      "rating": 4.6,
+      "rating_count": 1574,
       "description": "Fresh black treacle."
     },
     {
       "id": "borlotti-beans",
       "name": "Borlotti Beans",
       "brand": "Fresho",
-      "price": 180,
+      "price": 75,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/borlotti-beans.png",
       "match_key": "borlotti beans",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 806,
+      "rating": 4.2,
+      "rating_count": 2037,
       "description": "Fresh borlotti beans."
     },
     {
       "id": "bowtie-pasta",
       "name": "Bowtie Pasta",
       "brand": "Fresho",
-      "price": 120,
+      "price": 25,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/bowtie-pasta.png",
       "match_key": "bowtie pasta",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 1342,
+      "rating": 4.1,
+      "rating_count": 587,
       "description": "Fresh bowtie pasta."
     },
     {
       "id": "brandy",
       "name": "Brandy",
       "brand": "Fresho",
-      "price": 185,
+      "price": 105,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/brandy.png",
       "match_key": "brandy",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 443,
+      "rating": 4.8,
+      "rating_count": 91,
       "description": "Fresh brandy."
     },
     {
       "id": "broccoli",
       "name": "Broccoli",
       "brand": "Fresho",
-      "price": 195,
+      "price": 185,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/broccoli.png",
       "match_key": "broccoli",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 661,
+      "rating": 4.6,
+      "rating_count": 2023,
       "description": "Fresh broccoli."
     },
     {
       "id": "brown-lentils",
       "name": "Brown Lentils",
       "brand": "Fresho",
-      "price": 115,
+      "price": 60,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/brown-lentils.png",
       "match_key": "brown lentils",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 285,
+      "rating": 4.8,
+      "rating_count": 1478,
       "description": "Fresh brown lentils."
     },
     {
       "id": "brown-rice",
       "name": "Brown Rice",
       "brand": "Fresho",
-      "price": 130,
+      "price": 105,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/brown-rice.png",
       "match_key": "brown rice",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 952,
+      "rating": 4.8,
+      "rating_count": 1419,
       "description": "Fresh brown rice."
     },
     {
       "id": "cacao",
       "name": "Cacao",
       "brand": "Fresho",
-      "price": 105,
+      "price": 70,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/cacao.png",
       "match_key": "cacao",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 1407,
+      "rating": 4.1,
+      "rating_count": 1940,
       "description": "Fresh cacao."
     },
     {
       "id": "cajun",
       "name": "Cajun",
       "brand": "Fresho",
-      "price": 65,
+      "price": 180,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/cajun.png",
       "match_key": "cajun",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 1655,
+      "rating": 4.5,
+      "rating_count": 826,
       "description": "Fresh cajun."
     },
     {
@@ -3538,54 +3528,52 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.7,
-      "rating_count": 605,
+      "rating_count": 1633,
       "description": "Fresh cannellini beans."
     },
     {
       "id": "cashews",
       "name": "Cashews",
       "brand": "Fresho",
-      "price": 170,
+      "price": 45,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/cashews.png",
       "match_key": "cashews",
       "dietary_tags": [],
-      "allergen_tags": [
-        "nuts"
-      ],
-      "rating": 4.3,
-      "rating_count": 1080,
+      "allergen_tags": [],
+      "rating": 4.5,
+      "rating_count": 379,
       "description": "Fresh cashews."
     },
     {
       "id": "celeriac",
       "name": "Celeriac",
       "brand": "Fresho",
-      "price": 45,
+      "price": 65,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/celeriac.png",
       "match_key": "celeriac",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 1083,
+      "rating": 4.0,
+      "rating_count": 527,
       "description": "Fresh celeriac."
     },
     {
       "id": "challots",
       "name": "Challots",
       "brand": "Fresho",
-      "price": 100,
+      "price": 135,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/challots.png",
       "match_key": "challots",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 770,
+      "rating": 4.5,
+      "rating_count": 449,
       "description": "Fresh challots."
     },
     {
@@ -3600,59 +3588,59 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 1613,
+      "rating_count": 1461,
       "description": "Fresh chestnut mushroom."
     },
     {
       "id": "chili-powder",
       "name": "Chili Powder",
       "brand": "Fresho",
-      "price": 190,
+      "price": 140,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/chili-powder.png",
       "match_key": "chili powder",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 1268,
+      "rating": 4.6,
+      "rating_count": 1810,
       "description": "Fresh chili powder."
     },
     {
       "id": "christmas-pudding",
       "name": "Christmas Pudding",
       "brand": "Fresho",
-      "price": 70,
+      "price": 190,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/christmas-pudding.png",
       "match_key": "christmas pudding",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 212,
+      "rating": 4.7,
+      "rating_count": 1092,
       "description": "Fresh christmas pudding."
     },
     {
       "id": "cocoa",
       "name": "Cocoa",
       "brand": "Fresho",
-      "price": 50,
+      "price": 115,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/cocoa.png",
       "match_key": "cocoa",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 800,
+      "rating": 4.1,
+      "rating_count": 577,
       "description": "Fresh cocoa."
     },
     {
       "id": "corn-tortillas",
       "name": "Corn Tortillas",
       "brand": "Fresho",
-      "price": 145,
+      "price": 100,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/corn-tortillas.png",
@@ -3660,74 +3648,74 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.7,
-      "rating_count": 999,
+      "rating_count": 1126,
       "description": "Fresh corn tortillas."
     },
     {
       "id": "cornstarch",
       "name": "Cornstarch",
       "brand": "Fresho",
-      "price": 75,
+      "price": 80,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/cornstarch.png",
       "match_key": "cornstarch",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 437,
+      "rating": 4.3,
+      "rating_count": 334,
       "description": "Fresh cornstarch."
     },
     {
       "id": "curry-powder",
       "name": "Curry Powder",
       "brand": "Fresho",
-      "price": 35,
+      "price": 85,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/curry-powder.png",
       "match_key": "curry powder",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 781,
+      "rating": 4.4,
+      "rating_count": 1635,
       "description": "Fresh curry powder."
     },
     {
       "id": "doner-meat",
       "name": "Doner Meat",
       "brand": "Fresho",
-      "price": 150,
+      "price": 95,
       "size": "1 unit",
       "category": "meat_seafood",
       "image": "/products/doner-meat.png",
       "match_key": "doner meat",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 1284,
+      "rating": 4.6,
+      "rating_count": 1513,
       "description": "Fresh doner meat."
     },
     {
       "id": "dry-white-wine",
       "name": "Dry White Wine",
       "brand": "Fresho",
-      "price": 130,
+      "price": 145,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/dry-white-wine.png",
       "match_key": "dry white wine",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 2032,
+      "rating": 4.7,
+      "rating_count": 1019,
       "description": "Fresh dry white wine."
     },
     {
       "id": "egg-plants",
       "name": "Egg Plants",
       "brand": "Fresho",
-      "price": 115,
+      "price": 160,
       "size": "1 unit",
       "category": "dairy_eggs",
       "image": "/products/egg-plants.png",
@@ -3735,93 +3723,89 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.1,
-      "rating_count": 1013,
+      "rating_count": 754,
       "description": "Fresh egg plants."
     },
     {
       "id": "egg-rolls",
       "name": "Egg Rolls",
       "brand": "Fresho",
-      "price": 160,
+      "price": 165,
       "size": "1 unit",
       "category": "dairy_eggs",
       "image": "/products/egg-rolls.png",
       "match_key": "egg rolls",
-      "dietary_tags": [
-        "eggetarian"
-      ],
+      "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 786,
+      "rating": 4.2,
+      "rating_count": 1119,
       "description": "Fresh egg rolls."
     },
     {
       "id": "egg-white",
       "name": "Egg White",
       "brand": "Fresho",
-      "price": 170,
+      "price": 105,
       "size": "1 unit",
       "category": "dairy_eggs",
       "image": "/products/egg-white.png",
       "match_key": "egg white",
-      "dietary_tags": [
-        "eggetarian"
-      ],
+      "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 228,
+      "rating": 4.8,
+      "rating_count": 267,
       "description": "Fresh egg white."
     },
     {
       "id": "enchilada-sauce",
       "name": "Enchilada Sauce",
       "brand": "Fresho",
-      "price": 65,
+      "price": 100,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/enchilada-sauce.png",
       "match_key": "enchilada sauce",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 1507,
+      "rating": 4.7,
+      "rating_count": 1754,
       "description": "Fresh enchilada sauce."
     },
     {
       "id": "english-mustard",
       "name": "English Mustard",
       "brand": "Fresho",
-      "price": 40,
+      "price": 80,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/english-mustard.png",
       "match_key": "english mustard",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 998,
+      "rating": 4.3,
+      "rating_count": 1702,
       "description": "Fresh english mustard."
     },
     {
       "id": "fajita-seasoning",
       "name": "Fajita Seasoning",
       "brand": "Fresho",
-      "price": 75,
+      "price": 25,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/fajita-seasoning.png",
       "match_key": "fajita seasoning",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 1981,
+      "rating": 4.1,
+      "rating_count": 1667,
       "description": "Fresh fajita seasoning."
     },
     {
       "id": "farfalle",
       "name": "Farfalle",
       "brand": "Fresho",
-      "price": 30,
+      "price": 165,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/farfalle.png",
@@ -3829,84 +3813,82 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.2,
-      "rating_count": 1064,
+      "rating_count": 1059,
       "description": "Fresh farfalle."
     },
     {
       "id": "fennel-bulb",
       "name": "Fennel Bulb",
       "brand": "Fresho",
-      "price": 40,
+      "price": 55,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/fennel-bulb.png",
       "match_key": "fennel bulb",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 302,
+      "rating": 4.7,
+      "rating_count": 589,
       "description": "Fresh fennel bulb."
     },
     {
       "id": "fennel-seeds",
       "name": "Fennel Seeds",
       "brand": "Fresho",
-      "price": 105,
+      "price": 190,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/fennel-seeds.png",
       "match_key": "fennel seeds",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 1555,
+      "rating": 4.7,
+      "rating_count": 360,
       "description": "Fresh fennel seeds."
     },
     {
       "id": "fenugreek",
       "name": "Fenugreek",
       "brand": "Fresho",
-      "price": 175,
+      "price": 50,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/fenugreek.png",
       "match_key": "fenugreek",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 2037,
+      "rating": 4.6,
+      "rating_count": 2012,
       "description": "Fresh fenugreek."
     },
     {
       "id": "free-range-egg-beaten",
       "name": "Free-Range Egg, Beaten",
       "brand": "Fresho",
-      "price": 90,
+      "price": 95,
       "size": "1 unit",
       "category": "dairy_eggs",
       "image": "/products/free-range-egg-beaten.png",
       "match_key": "free-range egg, beaten",
-      "dietary_tags": [
-        "eggetarian"
-      ],
+      "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 112,
+      "rating": 4.6,
+      "rating_count": 429,
       "description": "Fresh free-range egg, beaten."
     },
     {
       "id": "french-lentils",
       "name": "French Lentils",
       "brand": "Fresho",
-      "price": 65,
+      "price": 30,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/french-lentils.png",
       "match_key": "french lentils",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 1635,
+      "rating": 4.2,
+      "rating_count": 224,
       "description": "Fresh french lentils."
     },
     {
@@ -3921,22 +3903,22 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.0,
-      "rating_count": 944,
+      "rating_count": 856,
       "description": "Fresh fresh thyme."
     },
     {
       "id": "fries",
       "name": "Fries",
       "brand": "Fresho",
-      "price": 70,
+      "price": 165,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/fries.png",
       "match_key": "fries",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 1892,
+      "rating": 4.2,
+      "rating_count": 103,
       "description": "Fresh fries."
     },
     {
@@ -3951,74 +3933,74 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.7,
-      "rating_count": 1741,
+      "rating_count": 573,
       "description": "Fresh golden syrup."
     },
     {
       "id": "green-beans",
       "name": "Green Beans",
       "brand": "Fresho",
-      "price": 195,
+      "price": 115,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/green-beans.png",
       "match_key": "green beans",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 1677,
+      "rating": 4.1,
+      "rating_count": 2041,
       "description": "Fresh green beans."
     },
     {
       "id": "green-salsa",
       "name": "Green Salsa",
       "brand": "Fresho",
-      "price": 130,
+      "price": 185,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/green-salsa.png",
       "match_key": "green salsa",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 1700,
+      "rating": 4.6,
+      "rating_count": 863,
       "description": "Fresh green salsa."
     },
     {
       "id": "hard-taco-shells",
       "name": "Hard Taco Shells",
       "brand": "Fresho",
-      "price": 40,
+      "price": 145,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/hard-taco-shells.png",
       "match_key": "hard taco shells",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 1506,
+      "rating": 4.7,
+      "rating_count": 479,
       "description": "Fresh hard taco shells."
     },
     {
       "id": "harissa-spice",
       "name": "Harissa Spice",
       "brand": "Fresho",
-      "price": 195,
+      "price": 50,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/harissa-spice.png",
       "match_key": "harissa spice",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 1085,
+      "rating": 4.6,
+      "rating_count": 152,
       "description": "Fresh harissa spice."
     },
     {
       "id": "heavy-cream",
       "name": "Heavy Cream",
       "brand": "Fresho",
-      "price": 155,
+      "price": 20,
       "size": "1 unit",
       "category": "dairy_eggs",
       "image": "/products/heavy-cream.png",
@@ -4026,44 +4008,44 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.0,
-      "rating_count": 289,
+      "rating_count": 1886,
       "description": "Fresh heavy cream."
     },
     {
       "id": "horseradish",
       "name": "Horseradish",
       "brand": "Fresho",
-      "price": 150,
+      "price": 120,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/horseradish.png",
       "match_key": "horseradish",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 708,
+      "rating": 4.2,
+      "rating_count": 398,
       "description": "Fresh horseradish."
     },
     {
       "id": "hotsauce",
       "name": "Hotsauce",
       "brand": "Fresho",
-      "price": 165,
+      "price": 145,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/hotsauce.png",
       "match_key": "hotsauce",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 1255,
+      "rating": 4.7,
+      "rating_count": 127,
       "description": "Fresh hotsauce."
     },
     {
       "id": "italian-fennel-sausages",
       "name": "Italian Fennel Sausages",
       "brand": "Fresho",
-      "price": 50,
+      "price": 185,
       "size": "1 unit",
       "category": "meat_seafood",
       "image": "/products/italian-fennel-sausages.png",
@@ -4071,238 +4053,232 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.6,
-      "rating_count": 1808,
+      "rating_count": 2043,
       "description": "Fresh italian fennel sausages."
     },
     {
       "id": "italian-seasoning",
       "name": "Italian Seasoning",
       "brand": "Fresho",
-      "price": 20,
+      "price": 150,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/italian-seasoning.png",
       "match_key": "italian seasoning",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 1066,
+      "rating": 4.8,
+      "rating_count": 460,
       "description": "Fresh italian seasoning."
     },
     {
       "id": "jalapeno",
       "name": "Jalapeno",
       "brand": "Fresho",
-      "price": 100,
+      "price": 110,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/jalapeno.png",
       "match_key": "jalapeno",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 742,
+      "rating": 4.0,
+      "rating_count": 220,
       "description": "Fresh jalapeno."
     },
     {
       "id": "kale",
       "name": "Kale",
       "brand": "Fresho",
-      "price": 40,
+      "price": 185,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/kale.png",
       "match_key": "kale",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 1514,
+      "rating": 4.6,
+      "rating_count": 379,
       "description": "Fresh kale."
     },
     {
       "id": "lettuce",
       "name": "Lettuce",
       "brand": "Fresho",
-      "price": 160,
+      "price": 80,
       "size": "1 unit",
       "category": "fresh_produce",
       "image": "/products/lettuce.png",
       "match_key": "lettuce",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 278,
+      "rating": 4.3,
+      "rating_count": 1306,
       "description": "Fresh lettuce."
     },
     {
       "id": "mackerel",
       "name": "Mackerel",
       "brand": "Fresho",
-      "price": 100,
+      "price": 105,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/mackerel.png",
       "match_key": "mackerel",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 542,
+      "rating": 4.8,
+      "rating_count": 647,
       "description": "Fresh mackerel."
     },
     {
       "id": "marjoram",
       "name": "Marjoram",
       "brand": "Fresho",
-      "price": 105,
+      "price": 130,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/marjoram.png",
       "match_key": "marjoram",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 1107,
+      "rating": 4.4,
+      "rating_count": 1964,
       "description": "Fresh marjoram."
     },
     {
       "id": "medjool-dates",
       "name": "Medjool Dates",
       "brand": "Fresho",
-      "price": 180,
+      "price": 35,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/medjool-dates.png",
       "match_key": "medjool dates",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 78,
+      "rating": 4.3,
+      "rating_count": 93,
       "description": "Fresh medjool dates."
     },
     {
       "id": "meringue-nests",
       "name": "Meringue Nests",
       "brand": "Fresho",
-      "price": 60,
+      "price": 75,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/meringue-nests.png",
       "match_key": "meringue nests",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 370,
+      "rating": 4.2,
+      "rating_count": 2049,
       "description": "Fresh meringue nests."
     },
     {
       "id": "miniature-marshmallows",
       "name": "Miniature Marshmallows",
       "brand": "Fresho",
-      "price": 125,
+      "price": 85,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/miniature-marshmallows.png",
       "match_key": "miniature marshmallows",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 1547,
+      "rating": 4.4,
+      "rating_count": 1387,
       "description": "Fresh miniature marshmallows."
     },
     {
       "id": "mustard-powder",
       "name": "Mustard Powder",
       "brand": "Fresho",
-      "price": 125,
+      "price": 180,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/mustard-powder.png",
       "match_key": "mustard powder",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 1179,
+      "rating": 4.5,
+      "rating_count": 318,
       "description": "Fresh mustard powder."
     },
     {
       "id": "parma-ham",
       "name": "Parma Ham",
       "brand": "Fresho",
-      "price": 185,
+      "price": 110,
       "size": "1 unit",
       "category": "meat_seafood",
       "image": "/products/parma-ham.png",
       "match_key": "parma ham",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 1095,
+      "rating": 4.0,
+      "rating_count": 436,
       "description": "Fresh parma ham."
     },
     {
       "id": "parmigiano-reggiano",
       "name": "Parmigiano-Reggiano",
       "brand": "Fresho",
-      "price": 20,
+      "price": 80,
       "size": "1 unit",
       "category": "dairy_eggs",
       "image": "/products/parmigiano-reggiano.png",
       "match_key": "parmigiano-reggiano",
-      "dietary_tags": [
-        "vegetarian"
-      ],
+      "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 662,
+      "rating": 4.3,
+      "rating_count": 798,
       "description": "Fresh parmigiano-reggiano."
     },
     {
       "id": "peanut-oil",
       "name": "Peanut Oil",
       "brand": "Fresho",
-      "price": 175,
+      "price": 25,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/peanut-oil.png",
       "match_key": "peanut oil",
       "dietary_tags": [],
-      "allergen_tags": [
-        "nuts"
-      ],
-      "rating": 4.4,
-      "rating_count": 201,
+      "allergen_tags": [],
+      "rating": 4.1,
+      "rating_count": 755,
       "description": "Fresh peanut oil."
     },
     {
       "id": "pine-nuts",
       "name": "Pine Nuts",
       "brand": "Fresho",
-      "price": 115,
+      "price": 175,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/pine-nuts.png",
       "match_key": "pine nuts",
       "dietary_tags": [],
-      "allergen_tags": [
-        "nuts"
-      ],
-      "rating": 4.1,
-      "rating_count": 357,
+      "allergen_tags": [],
+      "rating": 4.4,
+      "rating_count": 1145,
       "description": "Fresh pine nuts."
     },
     {
       "id": "pitted-black-olives",
       "name": "Pitted Black Olives",
       "brand": "Fresho",
-      "price": 170,
+      "price": 55,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/pitted-black-olives.png",
       "match_key": "pitted black olives",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 668,
+      "rating": 4.7,
+      "rating_count": 381,
       "description": "Fresh pitted black olives."
     },
     {
@@ -4317,97 +4293,97 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 1422,
+      "rating_count": 1534,
       "description": "Fresh potato starch."
     },
     {
       "id": "puff-pastry",
       "name": "Puff Pastry",
       "brand": "Fresho",
-      "price": 30,
+      "price": 195,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/puff-pastry.png",
       "match_key": "puff pastry",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 200,
+      "rating": 4.8,
+      "rating_count": 1473,
       "description": "Fresh puff pastry."
     },
     {
       "id": "raspberry-jam",
       "name": "Raspberry Jam",
       "brand": "Fresho",
-      "price": 165,
+      "price": 95,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/raspberry-jam.png",
       "match_key": "raspberry jam",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 2003,
+      "rating": 4.6,
+      "rating_count": 105,
       "description": "Fresh raspberry jam."
     },
     {
       "id": "refried-beans",
       "name": "Refried Beans",
       "brand": "Fresho",
-      "price": 130,
+      "price": 50,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/refried-beans.png",
       "match_key": "refried beans",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 332,
+      "rating": 4.6,
+      "rating_count": 1820,
       "description": "Fresh refried beans."
     },
     {
       "id": "rice-stick-noodles",
       "name": "Rice Stick Noodles",
       "brand": "Fresho",
-      "price": 195,
+      "price": 25,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/rice-stick-noodles.png",
       "match_key": "rice stick noodles",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 173,
+      "rating": 4.1,
+      "rating_count": 1403,
       "description": "Fresh rice stick noodles."
     },
     {
       "id": "rice-vermicelli",
       "name": "Rice Vermicelli",
       "brand": "Fresho",
-      "price": 170,
+      "price": 115,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/rice-vermicelli.png",
       "match_key": "rice vermicelli",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 376,
+      "rating": 4.1,
+      "rating_count": 209,
       "description": "Fresh rice vermicelli."
     },
     {
       "id": "rigatoni",
       "name": "Rigatoni",
       "brand": "Fresho",
-      "price": 155,
+      "price": 175,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/rigatoni.png",
       "match_key": "rigatoni",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 1585,
+      "rating": 4.4,
+      "rating_count": 885,
       "description": "Fresh rigatoni."
     },
     {
@@ -4422,149 +4398,149 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 335,
+      "rating_count": 311,
       "description": "Fresh rocket."
     },
     {
       "id": "rolled-oats",
       "name": "Rolled Oats",
       "brand": "Fresho",
-      "price": 180,
+      "price": 75,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/rolled-oats.png",
       "match_key": "rolled oats",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 246,
+      "rating": 4.2,
+      "rating_count": 233,
       "description": "Fresh rolled oats."
     },
     {
       "id": "sake",
       "name": "Sake",
       "brand": "Fresho",
-      "price": 140,
+      "price": 65,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/sake.png",
       "match_key": "sake",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 1318,
+      "rating": 4.0,
+      "rating_count": 1959,
       "description": "Fresh sake."
     },
     {
       "id": "shallots",
       "name": "Shallots",
       "brand": "Fresho",
-      "price": 145,
+      "price": 120,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/shallots.png",
       "match_key": "shallots",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 1827,
+      "rating": 4.2,
+      "rating_count": 62,
       "description": "Fresh shallots."
     },
     {
       "id": "sour-cream",
       "name": "Sour Cream",
       "brand": "Fresho",
-      "price": 175,
+      "price": 135,
       "size": "1 unit",
       "category": "dairy_eggs",
       "image": "/products/sour-cream.png",
       "match_key": "sour cream",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 1833,
+      "rating": 4.5,
+      "rating_count": 909,
       "description": "Fresh sour cream."
     },
     {
       "id": "squash",
       "name": "Squash",
       "brand": "Fresho",
-      "price": 145,
+      "price": 45,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/squash.png",
       "match_key": "squash",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 1303,
+      "rating": 4.5,
+      "rating_count": 207,
       "description": "Fresh squash."
     },
     {
       "id": "stir-fry-vegetables",
       "name": "Stir-Fry Vegetables",
       "brand": "Fresho",
-      "price": 105,
+      "price": 55,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/stir-fry-vegetables.png",
       "match_key": "stir-fry vegetables",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 1823,
+      "rating": 4.7,
+      "rating_count": 301,
       "description": "Fresh stir-fry vegetables."
     },
     {
       "id": "strawberries",
       "name": "Strawberries",
       "brand": "Fresho",
-      "price": 30,
+      "price": 190,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/strawberries.png",
       "match_key": "strawberries",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 1432,
+      "rating": 4.7,
+      "rating_count": 1056,
       "description": "Fresh strawberries."
     },
     {
       "id": "sultanas",
       "name": "Sultanas",
       "brand": "Fresho",
-      "price": 180,
+      "price": 160,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/sultanas.png",
       "match_key": "sultanas",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 1130,
+      "rating": 4.1,
+      "rating_count": 1242,
       "description": "Fresh sultanas."
     },
     {
       "id": "tamarind-ball",
       "name": "Tamarind Ball",
       "brand": "Fresho",
-      "price": 185,
+      "price": 60,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/tamarind-ball.png",
       "match_key": "tamarind ball",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 535,
+      "rating": 4.8,
+      "rating_count": 1074,
       "description": "Fresh tamarind ball."
     },
     {
       "id": "thai-green-curry-paste",
       "name": "Thai Green Curry Paste",
       "brand": "Fresho",
-      "price": 90,
+      "price": 135,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/thai-green-curry-paste.png",
@@ -4572,127 +4548,127 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.5,
-      "rating_count": 644,
+      "rating_count": 1621,
       "description": "Fresh thai green curry paste."
     },
     {
       "id": "thai-red-curry-paste",
       "name": "Thai Red Curry Paste",
       "brand": "Fresho",
-      "price": 75,
+      "price": 150,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/thai-red-curry-paste.png",
       "match_key": "thai red curry paste",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 117,
+      "rating": 4.8,
+      "rating_count": 1288,
       "description": "Fresh thai red curry paste."
     },
     {
       "id": "tuna",
       "name": "Tuna",
       "brand": "Fresho",
-      "price": 25,
+      "price": 85,
       "size": "1 unit",
       "category": "meat_seafood",
       "image": "/products/tuna.png",
       "match_key": "tuna",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 119,
+      "rating": 4.4,
+      "rating_count": 223,
       "description": "Fresh tuna."
     },
     {
       "id": "turnips",
       "name": "Turnips",
       "brand": "Fresho",
-      "price": 55,
+      "price": 170,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/turnips.png",
       "match_key": "turnips",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 201,
+      "rating": 4.3,
+      "rating_count": 536,
       "description": "Fresh turnips."
     },
     {
       "id": "vanilla",
       "name": "Vanilla",
       "brand": "Fresho",
-      "price": 50,
+      "price": 75,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/vanilla.png",
       "match_key": "vanilla",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 1752,
+      "rating": 4.2,
+      "rating_count": 1597,
       "description": "Fresh vanilla."
     },
     {
       "id": "veal",
       "name": "Veal",
       "brand": "Fresho",
-      "price": 190,
+      "price": 135,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/veal.png",
       "match_key": "veal",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 1672,
+      "rating": 4.5,
+      "rating_count": 1753,
       "description": "Fresh veal."
     },
     {
       "id": "vinaigrette-dressing",
       "name": "Vinaigrette Dressing",
       "brand": "Fresho",
-      "price": 125,
+      "price": 85,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/vinaigrette-dressing.png",
       "match_key": "vinaigrette dressing",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 951,
+      "rating": 4.4,
+      "rating_count": 1659,
       "description": "Fresh vinaigrette dressing."
     },
     {
       "id": "vine-leaves",
       "name": "Vine Leaves",
       "brand": "Fresho",
-      "price": 170,
+      "price": 165,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/vine-leaves.png",
       "match_key": "vine leaves",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 776,
+      "rating": 4.2,
+      "rating_count": 1583,
       "description": "Fresh vine leaves."
     },
     {
       "id": "white-vinegar",
       "name": "White Vinegar",
       "brand": "Fresho",
-      "price": 55,
+      "price": 20,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/white-vinegar.png",
       "match_key": "white vinegar",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 557,
+      "rating": 4.0,
+      "rating_count": 938,
       "description": "Fresh white vinegar."
     },
     {
@@ -4707,59 +4683,59 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.1,
-      "rating_count": 711,
+      "rating_count": 903,
       "description": "Fresh whole wheat."
     },
     {
       "id": "zucchini",
       "name": "Zucchini",
       "brand": "Fresho",
-      "price": 190,
+      "price": 105,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/zucchini.png",
       "match_key": "zucchini",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 1076,
+      "rating": 4.8,
+      "rating_count": 1471,
       "description": "Fresh zucchini."
     },
     {
       "id": "pretzels",
       "name": "Pretzels",
       "brand": "Fresho",
-      "price": 130,
+      "price": 125,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/pretzels.png",
       "match_key": "pretzels",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 1376,
+      "rating": 4.3,
+      "rating_count": 1271,
       "description": "Fresh pretzels."
     },
     {
       "id": "toffee-popcorn",
       "name": "Toffee Popcorn",
       "brand": "Fresho",
-      "price": 140,
+      "price": 135,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/toffee-popcorn.png",
       "match_key": "toffee popcorn",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 534,
+      "rating": 4.5,
+      "rating_count": 1449,
       "description": "Fresh toffee popcorn."
     },
     {
       "id": "caramel",
       "name": "Caramel",
       "brand": "Fresho",
-      "price": 125,
+      "price": 80,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/caramel.png",
@@ -4767,1034 +4743,173 @@
       "dietary_tags": [],
       "allergen_tags": [],
       "rating": 4.3,
-      "rating_count": 79,
+      "rating_count": 1702,
       "description": "Fresh caramel."
     },
     {
       "id": "tagliatelle",
       "name": "Tagliatelle",
       "brand": "Fresho",
-      "price": 35,
+      "price": 45,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/tagliatelle.png",
       "match_key": "tagliatelle",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 1677,
+      "rating": 4.5,
+      "rating_count": 1735,
       "description": "Fresh tagliatelle."
     },
     {
       "id": "fettuccine",
       "name": "Fettuccine",
       "brand": "Fresho",
-      "price": 170,
+      "price": 100,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/fettuccine.png",
       "match_key": "fettuccine",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 392,
+      "rating": 4.7,
+      "rating_count": 1482,
       "description": "Fresh fettuccine."
     },
     {
       "id": "clotted-cream",
       "name": "Clotted Cream",
       "brand": "Fresho",
-      "price": 110,
+      "price": 170,
       "size": "1 unit",
       "category": "dairy_eggs",
       "image": "/products/clotted-cream.png",
       "match_key": "clotted cream",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 2044,
+      "rating": 4.3,
+      "rating_count": 248,
       "description": "Fresh clotted cream."
     },
     {
       "id": "fideo",
       "name": "Fideo",
       "brand": "Fresho",
-      "price": 60,
+      "price": 30,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/fideo.png",
       "match_key": "fideo",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.8,
-      "rating_count": 1398,
+      "rating": 4.2,
+      "rating_count": 1704,
       "description": "Fresh fideo."
     },
     {
       "id": "monkfish",
       "name": "Monkfish",
       "brand": "Fresho",
-      "price": 130,
+      "price": 160,
       "size": "1 unit",
       "category": "meat_seafood",
       "image": "/products/monkfish.png",
       "match_key": "monkfish",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 1280,
+      "rating": 4.1,
+      "rating_count": 418,
       "description": "Fresh monkfish."
     },
     {
       "id": "vermicelli-pasta",
       "name": "Vermicelli Pasta",
       "brand": "Fresho",
-      "price": 25,
+      "price": 150,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/vermicelli-pasta.png",
       "match_key": "vermicelli pasta",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 1167,
+      "rating": 4.8,
+      "rating_count": 1336,
       "description": "Fresh vermicelli pasta."
     },
     {
       "id": "fish-stock",
       "name": "Fish Stock",
       "brand": "Fresho",
-      "price": 65,
+      "price": 180,
       "size": "1 unit",
       "category": "meat_seafood",
       "image": "/products/fish-stock.png",
       "match_key": "fish stock",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.0,
-      "rating_count": 1795,
+      "rating": 4.5,
+      "rating_count": 1918,
       "description": "Fresh fish stock."
     },
     {
       "id": "pilchards",
       "name": "Pilchards",
       "brand": "Fresho",
-      "price": 145,
+      "price": 80,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/pilchards.png",
       "match_key": "pilchards",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 1167,
+      "rating": 4.3,
+      "rating_count": 934,
       "description": "Fresh pilchards."
     },
     {
       "id": "duck",
       "name": "Duck",
       "brand": "Fresho",
-      "price": 180,
+      "price": 55,
       "size": "1 unit",
       "category": "meat_seafood",
       "image": "/products/duck.png",
       "match_key": "duck",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 1158,
+      "rating": 4.7,
+      "rating_count": 501,
       "description": "Fresh duck."
     },
     {
       "id": "pappardelle-pasta",
       "name": "Pappardelle Pasta",
       "brand": "Fresho",
-      "price": 165,
+      "price": 105,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/pappardelle-pasta.png",
       "match_key": "pappardelle pasta",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 1847,
+      "rating": 4.8,
+      "rating_count": 111,
       "description": "Fresh pappardelle pasta."
     },
     {
       "id": "paccheri-pasta",
       "name": "Paccheri Pasta",
       "brand": "Fresho",
-      "price": 130,
+      "price": 180,
       "size": "1 unit",
       "category": "staples_grocery",
       "image": "/products/paccheri-pasta.png",
       "match_key": "paccheri pasta",
       "dietary_tags": [],
       "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 116,
+      "rating": 4.5,
+      "rating_count": 502,
       "description": "Fresh paccheri pasta."
-    },
-    {
-      "id": "oat-milk-1l",
-      "name": "Oat Milk Barista Edition",
-      "brand": "Alpro",
-      "price": 149,
-      "size": "1 L",
-      "category": "dairy_eggs",
-      "match_key": "oat milk",
-      "image": "/products/oat-milk-1l.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 120,
-      "description": "Creamy oat milk perfect for coffee, cereals and smoothies. Dairy-free, lactose-free."
-    },
-    {
-      "id": "soy-milk-1l",
-      "name": "Soya Milk Unsweetened",
-      "brand": "Silk",
-      "price": 129,
-      "size": "1 L",
-      "category": "dairy_eggs",
-      "match_key": "soy milk",
-      "image": "/products/soy-milk-1l.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [
-        "soy"
-      ],
-      "rating": 4.2,
-      "rating_count": 120,
-      "description": "Smooth plant-based soy milk. Rich in protein, zero cholesterol."
-    },
-    {
-      "id": "coconut-milk-400ml",
-      "name": "Coconut Milk Full Fat",
-      "brand": "Dabur",
-      "price": 89,
-      "size": "400 ml",
-      "category": "dairy_eggs",
-      "match_key": "coconut milk",
-      "image": "/products/coconut-milk-400ml.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 120,
-      "description": "Thick creamy coconut milk for curries, smoothies and vegan desserts."
-    },
-    {
-      "id": "vegan-butter-100g",
-      "name": "Plant-Based Vegan Butter",
-      "brand": "Nutralite",
-      "price": 95,
-      "size": "100 g",
-      "category": "dairy_eggs",
-      "match_key": "vegan butter",
-      "image": "/products/vegan-butter-100g.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [
-        "soy"
-      ],
-      "rating": 4.1,
-      "rating_count": 120,
-      "description": "Dairy-free spread made from sunflower oil. Perfect for cooking and toast."
-    },
-    {
-      "id": "vegan-curd-400g",
-      "name": "Coconut Yogurt (Dairy-Free)",
-      "brand": "Epigamia",
-      "price": 120,
-      "size": "400 g",
-      "category": "dairy_eggs",
-      "match_key": "vegan curd",
-      "image": "/products/vegan-curd-400g.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 120,
-      "description": "Creamy coconut-based yogurt. Probiotic-rich, completely dairy-free."
-    },
-    {
-      "id": "cashew-cream-200ml",
-      "name": "Cashew Cream (Cooking)",
-      "brand": "Nutty Yogi",
-      "price": 145,
-      "size": "200 ml",
-      "category": "dairy_eggs",
-      "match_key": "cashew cream",
-      "image": "/products/cashew-cream-200ml.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [
-        "nuts"
-      ],
-      "rating": 4.2,
-      "rating_count": 120,
-      "description": "Thick cashew cream for pasta, curries and soups. Replaces heavy cream."
-    },
-    {
-      "id": "vegan-cheese-150g",
-      "name": "Vegan Cheddar Cheese Slices",
-      "brand": "Violife",
-      "price": 199,
-      "size": "150 g",
-      "category": "dairy_eggs",
-      "match_key": "vegan cheese",
-      "image": "/products/vegan-cheese-150g.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [
-        "coconut"
-      ],
-      "rating": 4.0,
-      "rating_count": 120,
-      "description": "Dairy-free cheese slices that melt beautifully. Made from coconut oil."
-    },
-    {
-      "id": "tofu-300g",
-      "name": "Firm Tofu (Plain)",
-      "brand": "Soya Tribe",
-      "price": 79,
-      "size": "300 g",
-      "category": "dairy_eggs",
-      "match_key": "tofu",
-      "image": "/products/tofu-300g.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [
-        "soy"
-      ],
-      "rating": 4.2,
-      "rating_count": 120,
-      "description": "High-protein firm tofu. Great for stir-fry, curries and scrambles."
-    },
-    {
-      "id": "almond-milk-1l",
-      "name": "Almond Milk Sweetened",
-      "brand": "So Good",
-      "price": 139,
-      "size": "1 L",
-      "category": "dairy_eggs",
-      "match_key": "almond milk",
-      "image": "/products/almond-milk-1l.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [
-        "nuts"
-      ],
-      "rating": 4.3,
-      "rating_count": 120,
-      "description": "Light and nutty almond milk. Perfect with cereal, coffee or on its own."
-    },
-    {
-      "id": "vegan-sourdough",
-      "name": "Vegan Sourdough Loaf",
-      "brand": "Theobroma",
-      "price": 149,
-      "size": "400 g",
-      "category": "bakery",
-      "match_key": "vegan bread",
-      "image": "/products/vegan-sourdough.png",
-      "dietary_tags": [
-        "vegan"
-      ],
-      "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 120,
-      "description": "Artisan sourdough made without eggs or dairy. Crispy crust, airy inside."
-    },
-    {
-      "id": "multigrain-vegan-bread",
-      "name": "Multigrain Vegan Bread",
-      "brand": "Harvest Gold",
-      "price": 55,
-      "size": "400 g",
-      "category": "bakery",
-      "match_key": "multigrain bread",
-      "image": "/products/multigrain-vegan-bread.png",
-      "dietary_tags": [
-        "vegan"
-      ],
-      "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 120,
-      "description": "Seed-enriched multigrain bread. No eggs, no dairy, no preservatives."
-    },
-    {
-      "id": "vegan-bun-pack",
-      "name": "Vegan Burger Buns (4-pack)",
-      "brand": "Wibs",
-      "price": 65,
-      "size": "4 pcs",
-      "category": "bakery",
-      "match_key": "vegan buns",
-      "image": "/products/vegan-bun-pack.png",
-      "dietary_tags": [
-        "vegan"
-      ],
-      "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 120,
-      "description": "Soft sesame-topped burger buns made without eggs or butter."
-    },
-    {
-      "id": "vegan-chips",
-      "name": "Baked Veggie Chips (Mixed)",
-      "brand": "Cornitos",
-      "price": 60,
-      "size": "100 g",
-      "category": "snacks",
-      "match_key": "vegan chips",
-      "image": "/products/vegan-chips.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 120,
-      "description": "Crunchy baked chips made from real vegetables. Oil-free, dairy-free."
-    },
-    {
-      "id": "dark-chocolate-vegan",
-      "name": "Vegan Dark Chocolate 85%",
-      "brand": "Amul",
-      "price": 95,
-      "size": "150 g",
-      "category": "snacks",
-      "match_key": "vegan chocolate",
-      "image": "/products/dark-chocolate-vegan.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 120,
-      "description": "Intense 85% dark chocolate with no milk solids. Vegan certified."
-    },
-    {
-      "id": "roasted-makhana",
-      "name": "Roasted Fox Nuts (Makhana)",
-      "brand": "Farmley",
-      "price": 89,
-      "size": "100 g",
-      "category": "snacks",
-      "match_key": "makhana",
-      "image": "/products/roasted-makhana.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 120,
-      "description": "Light and crispy roasted fox nuts. High protein, oil-free vegan snack."
-    },
-    {
-      "id": "trail-mix-vegan",
-      "name": "Vegan Trail Mix (Nuts & Berries)",
-      "brand": "Happilo",
-      "price": 129,
-      "size": "200 g",
-      "category": "snacks",
-      "match_key": "trail mix",
-      "image": "/products/trail-mix-vegan.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [
-        "nuts"
-      ],
-      "rating": 4.3,
-      "rating_count": 120,
-      "description": "Premium mix of almonds, walnuts, cranberries and raisins. No added sugar."
-    },
-    {
-      "id": "rice-cakes-vegan",
-      "name": "Brown Rice Cakes (Unsalted)",
-      "brand": "Kallo",
-      "price": 75,
-      "size": "130 g",
-      "category": "snacks",
-      "match_key": "rice cakes",
-      "image": "/products/rice-cakes-vegan.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 120,
-      "description": "Light and airy rice cakes made from whole grain brown rice. Zero dairy."
-    },
-    {
-      "id": "vegan-popcorn",
-      "name": "Sea Salt Vegan Popcorn",
-      "brand": "Act II",
-      "price": 45,
-      "size": "100 g",
-      "category": "snacks",
-      "match_key": "popcorn",
-      "image": "/products/vegan-popcorn.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 120,
-      "description": "Air-popped popcorn seasoned with sea salt. No butter, no dairy."
-    },
-    {
-      "id": "energy-bar-vegan",
-      "name": "Vegan Protein Energy Bar",
-      "brand": "RiteBite",
-      "price": 55,
-      "size": "1 pc",
-      "category": "snacks",
-      "match_key": "energy bar",
-      "image": "/products/energy-bar-vegan.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [
-        "nuts"
-      ],
-      "rating": 4.3,
-      "rating_count": 120,
-      "description": "Oats, nuts and seeds bar with 10g protein. No whey, no dairy."
-    },
-    {
-      "id": "vegan-shampoo",
-      "name": "Vegan & Cruelty-Free Shampoo",
-      "brand": "WOW",
-      "price": 299,
-      "size": "300 ml",
-      "category": "personal_care",
-      "match_key": "vegan shampoo",
-      "image": "/products/vegan-shampoo.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 120,
-      "description": "Sulfate-free, paraben-free shampoo. 100% vegan, not tested on animals."
-    },
-    {
-      "id": "vegan-soap",
-      "name": "Vegan Neem & Tulsi Soap",
-      "brand": "Khadi",
-      "price": 60,
-      "size": "100 g",
-      "category": "personal_care",
-      "match_key": "vegan soap",
-      "image": "/products/vegan-soap.png",
-      "dietary_tags": [
-        "vegan"
-      ],
-      "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 120,
-      "description": "Plant-based soap with neem and tulsi. No animal fats, cruelty-free."
-    },
-    {
-      "id": "vegan-facewash",
-      "name": "Vegan Green Tea Face Wash",
-      "brand": "Plum",
-      "price": 195,
-      "size": "100 ml",
-      "category": "personal_care",
-      "match_key": "vegan facewash",
-      "image": "/products/vegan-facewash.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 120,
-      "description": "Gentle plant-based face wash. 100% vegan, no parabens, no SLS."
-    },
-    {
-      "id": "vegan-deodorant",
-      "name": "Vegan Charcoal Deodorant",
-      "brand": "Mamaearth",
-      "price": 199,
-      "size": "150 ml",
-      "category": "personal_care",
-      "match_key": "vegan deodorant",
-      "image": "/products/vegan-deodorant.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 120,
-      "description": "Aluminium-free deodorant. 100% vegan, no animal-derived ingredients."
-    },
-    {
-      "id": "vegan-ice-cream",
-      "name": "Vegan Mango Coconut Ice Cream",
-      "brand": "NiceCream",
-      "price": 199,
-      "size": "500 ml",
-      "category": "frozen",
-      "match_key": "vegan ice cream",
-      "image": "/products/vegan-ice-cream.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [
-        "coconut"
-      ],
-      "rating": 4.4,
-      "rating_count": 120,
-      "description": "Creamy dairy-free ice cream made from coconut milk and real mango."
-    },
-    {
-      "id": "frozen-edamame",
-      "name": "Frozen Edamame (Salted)",
-      "brand": "Go Earth",
-      "price": 99,
-      "size": "400 g",
-      "category": "frozen",
-      "match_key": "edamame",
-      "image": "/products/frozen-edamame.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [
-        "soy"
-      ],
-      "rating": 4.3,
-      "rating_count": 120,
-      "description": "Ready-to-eat steamed edamame beans. High in plant protein."
-    },
-    {
-      "id": "vegan-nuggets",
-      "name": "Plant-Based Vegan Nuggets",
-      "brand": "Imagine Meats",
-      "price": 249,
-      "size": "250 g",
-      "category": "frozen",
-      "match_key": "vegan nuggets",
-      "image": "/products/vegan-nuggets.png",
-      "dietary_tags": [
-        "vegan"
-      ],
-      "allergen_tags": [
-        "soy"
-      ],
-      "rating": 4.1,
-      "rating_count": 120,
-      "description": "Crispy plant-based nuggets. 18g protein per serving, zero cholesterol."
-    },
-    {
-      "id": "matcha-latte-powder",
-      "name": "Organic Matcha Latte Powder",
-      "brand": "Vahdam",
-      "price": 349,
-      "size": "100 g",
-      "category": "beverages",
-      "match_key": "matcha",
-      "image": "/products/matcha-latte-powder.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 120,
-      "description": "Premium ceremonial grade matcha. Rich in antioxidants, naturally vegan."
-    },
-    {
-      "id": "oat-latte-pack",
-      "name": "Oat Milk Latte Sachets (10-pack)",
-      "brand": "Sleepy Owl",
-      "price": 299,
-      "size": "10 pcs",
-      "category": "beverages",
-      "match_key": "oat latte",
-      "image": "/products/oat-latte-pack.png",
-      "dietary_tags": [
-        "vegan"
-      ],
-      "allergen_tags": [
-        "gluten"
-      ],
-      "rating": 4.3,
-      "rating_count": 120,
-      "description": "Instant oat milk latte. No dairy, no refined sugar."
-    },
-    {
-      "id": "nutritional-yeast",
-      "name": "Nutritional Yeast Flakes",
-      "brand": "Urban Platter",
-      "price": 249,
-      "size": "100 g",
-      "category": "staples_grocery",
-      "match_key": "nutritional yeast",
-      "image": "/products/nutritional-yeast.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 120,
-      "description": "Cheesy-flavoured nutritional yeast. Vegan B12 source, great on pasta."
-    },
-    {
-      "id": "coconut-oil-500ml",
-      "name": "Cold Pressed Coconut Oil",
-      "brand": "Coco Soul",
-      "price": 299,
-      "size": "500 ml",
-      "category": "staples_grocery",
-      "match_key": "coconut oil",
-      "image": "/products/coconut-oil-500ml.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 120,
-      "description": "Virgin cold-pressed coconut oil. 100% plant-based, no cholesterol."
-    },
-    {
-      "id": "flaxseed-500g",
-      "name": "Roasted Flaxseeds",
-      "brand": "Organic India",
-      "price": 99,
-      "size": "500 g",
-      "category": "staples_grocery",
-      "match_key": "flaxseed",
-      "image": "/products/flaxseed-500g.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 120,
-      "description": "Omega-3 rich roasted flaxseeds. Perfect vegan egg substitute in baking."
-    },
-    {
-      "id": "chia-seeds-250g",
-      "name": "Organic Chia Seeds",
-      "brand": "True Elements",
-      "price": 199,
-      "size": "250 g",
-      "category": "staples_grocery",
-      "match_key": "chia seeds",
-      "image": "/products/chia-seeds-250g.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 120,
-      "description": "Packed with omega-3, fibre and protein. Ideal for puddings and smoothies."
-    },
-    {
-      "id": "tempeh-200g",
-      "name": "Fermented Soy Tempeh",
-      "brand": "Soya Tribe",
-      "price": 149,
-      "size": "200 g",
-      "category": "staples_grocery",
-      "match_key": "tempeh",
-      "image": "/products/tempeh-200g.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [
-        "soy"
-      ],
-      "rating": 4.1,
-      "rating_count": 120,
-      "description": "High-protein fermented soybean block. Nutty flavour, great for stir-fry."
-    },
-    {
-      "id": "hemp-seeds-200g",
-      "name": "Hulled Hemp Seeds",
-      "brand": "Conscious Food",
-      "price": 249,
-      "size": "200 g",
-      "category": "staples_grocery",
-      "match_key": "hemp seeds",
-      "image": "/products/hemp-seeds-200g.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 120,
-      "description": "Complete protein hemp seeds with all 9 essential amino acids. 100% vegan."
-    },
-    {
-      "id": "vegan-cake-slice",
-      "name": "Vegan Chocolate Fudge Cake",
-      "brand": "Theobroma",
-      "price": 180,
-      "size": "1 slice",
-      "category": "party_festive",
-      "match_key": "vegan cake",
-      "image": "/products/vegan-cake-slice.png",
-      "dietary_tags": [
-        "vegan"
-      ],
-      "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 120,
-      "description": "Decadent chocolate fudge cake made without eggs or dairy. Completely vegan."
-    },
-    {
-      "id": "vegan-cookies",
-      "name": "Vegan Chocolate Chip Cookies",
-      "brand": "Nourish",
-      "price": 95,
-      "size": "150 g",
-      "category": "party_festive",
-      "match_key": "vegan cookies",
-      "image": "/products/vegan-cookies.png",
-      "dietary_tags": [
-        "vegan"
-      ],
-      "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 120,
-      "description": "Crispy chocolate chip cookies. No eggs, no butter, no compromise on taste."
-    },
-    {
-      "id": "balloons-pack",
-      "name": "Colourful Party Balloons (30-pack)",
-      "brand": "Funcart",
-      "price": 99,
-      "size": "30 pcs",
-      "category": "party_festive",
-      "match_key": "balloons",
-      "image": "/products/latex-balloons.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 95,
-      "description": "Bright multicoloured latex balloons. Perfect for birthdays and celebrations."
-    },
-    {
-      "id": "party-cups",
-      "name": "Disposable Party Cups (50-pack)",
-      "brand": "Paricart",
-      "price": 89,
-      "size": "50 pcs",
-      "category": "party_festive",
-      "match_key": "party cups",
-      "image": "/products/red-plastic-cups.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 95,
-      "description": "Sturdy disposable cups for cold drinks. Eco-friendly, BPA-free."
-    },
-    {
-      "id": "party-plates",
-      "name": "Disposable Paper Plates (25-pack)",
-      "brand": "Paricart",
-      "price": 79,
-      "size": "25 pcs",
-      "category": "party_festive",
-      "match_key": "party plates",
-      "image": "/products/party-plates.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.1,
-      "rating_count": 95,
-      "description": "Round paper plates, microwave-safe, grease-resistant. Ideal for parties."
-    },
-    {
-      "id": "party-streamers",
-      "name": "Metallic Party Streamers (6-pack)",
-      "brand": "Funcart",
-      "price": 59,
-      "size": "6 rolls",
-      "category": "party_festive",
-      "match_key": "streamers",
-      "image": "/products/party-streamers.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 95,
-      "description": "Shimmery metallic streamers in assorted colours. Perfect party decoration."
-    },
-    {
-      "id": "birthday-candles",
-      "name": "Birthday Candles (12-pack)",
-      "brand": "Funcart",
-      "price": 49,
-      "size": "12 pcs",
-      "category": "party_festive",
-      "match_key": "birthday candles",
-      "image": "/products/birthday-candles.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 95,
-      "description": "Colourful wax birthday candles with holders. Burns for 5-8 minutes."
-    },
-    {
-      "id": "birthday-banner",
-      "name": "Happy Birthday Banner",
-      "brand": "Funcart",
-      "price": 79,
-      "size": "1 pc",
-      "category": "party_festive",
-      "match_key": "birthday banner",
-      "image": "/products/birthday-banner.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.4,
-      "rating_count": 95,
-      "description": "Gold and multicolour Happy Birthday banner. Reusable, easy to hang."
-    },
-    {
-      "id": "party-poppers",
-      "name": "Party Poppers Confetti (12-pack)",
-      "brand": "Funcart",
-      "price": 99,
-      "size": "12 pcs",
-      "category": "party_festive",
-      "match_key": "party poppers",
-      "image": "/products/party-poppers.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.3,
-      "rating_count": 95,
-      "description": "Confetti-filled party poppers. Perfect for celebrations and surprises."
-    },
-    {
-      "id": "cupcakes-6",
-      "name": "Assorted Cupcakes (6-pack)",
-      "brand": "Theobroma",
-      "price": 299,
-      "size": "6 pcs",
-      "category": "party_festive",
-      "match_key": "cupcakes",
-      "image": "/products/cupcakes-6.png",
-      "dietary_tags": [
-        "vegetarian"
-      ],
-      "allergen_tags": [],
-      "rating": 4.7,
-      "rating_count": 95,
-      "description": "Freshly baked assorted cupcakes with buttercream frosting."
-    },
-    {
-      "id": "return-gifts-bag",
-      "name": "Return Gift Bags (12-pack)",
-      "brand": "Funcart",
-      "price": 149,
-      "size": "12 pcs",
-      "category": "party_festive",
-      "match_key": "return gifts",
-      "image": "/products/return-gifts-bag.png",
-      "dietary_tags": [
-        "vegan",
-        "gluten-free"
-      ],
-      "allergen_tags": [],
-      "rating": 4.2,
-      "rating_count": 95,
-      "description": "Colourful gift bags with handles. Great for return gifts at birthdays."
-    },
-    {
-      "id": "vegan-cupcakes-6",
-      "name": "Vegan Assorted Cupcakes (6-pack)",
-      "brand": "Theobroma",
-      "price": 320,
-      "size": "6 pcs",
-      "category": "party_festive",
-      "match_key": "vegan cupcakes",
-      "image": "/products/cupcakes-6.png",
-      "dietary_tags": [
-        "vegan"
-      ],
-      "allergen_tags": [],
-      "rating": 4.5,
-      "rating_count": 88,
-      "description": "Egg-free, dairy-free assorted cupcakes. Same great taste, 100% vegan."
-    },
-    {
-      "id": "vegan-chocolate-cake",
-      "name": "Vegan Chocolate Fudge Cake",
-      "brand": "Theobroma",
-      "price": 350,
-      "size": "500 g",
-      "category": "party_festive",
-      "match_key": "vegan cake",
-      "image": "/products/chocolate-cake.png",
-      "dietary_tags": [
-        "vegan"
-      ],
-      "allergen_tags": [],
-      "rating": 4.6,
-      "rating_count": 102,
-      "description": "Rich chocolate fudge cake made without eggs or dairy. 100% vegan certified."
     }
   ]
 }
