@@ -18,9 +18,20 @@ AWS_REGION = os.environ.get("AWS_REGION")
 USERS_TABLE_NAME = os.environ.get("USERS_TABLE_NAME")
 PRODUCTS_TABLE_NAME = os.environ.get("PRODUCTS_TABLE_NAME")
 
-dynamodb = boto3.resource("dynamodb", region_name=AWS_REGION)
-users_table = dynamodb.Table(USERS_TABLE_NAME)
-products_table = dynamodb.Table(PRODUCTS_TABLE_NAME)
+def _get_dynamodb():
+    if not AWS_REGION:
+        return None
+    return boto3.resource("dynamodb", region_name=AWS_REGION)
+
+def _get_table(table_name: str | None):
+    if not AWS_REGION or not table_name:
+        return None
+    db = _get_dynamodb()
+    return db.Table(table_name) if db else None
+
+dynamodb = _get_dynamodb()
+users_table = _get_table(USERS_TABLE_NAME)
+products_table = _get_table(PRODUCTS_TABLE_NAME)
 
 def _load(name: str) -> dict:
     with open(CONFIG_DIR / name, encoding="utf-8") as f:
