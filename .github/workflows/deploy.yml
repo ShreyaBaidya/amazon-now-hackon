@@ -1,24 +1,32 @@
-script: |
-  set -e
+name: Deploy to EC2
 
-  cd /opt/amazonNow
+on:
+  push:
+    branches:
+      - main
 
-  git fetch origin
-  git reset --hard origin/main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-  # backend safety
-  cd backend
-  /root/.local/bin/uv sync || true
+    steps:
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -e
 
-  # frontend
-  cd ../frontend
-  pnpm install
-  pnpm build
+            cd /opt/amazonNow
 
-  # restart services
-  sudo systemctl restart amznow-api
-  sudo systemctl restart amznow-web
+            git fetch origin main
+            git reset --hard origin/main
 
-  # health check
-  sleep 5
-  curl -f http://localhost:8010/api/bootstrap
+            cd frontend
+            pnpm install
+            pnpm build
+
+            sudo systemctl restart amznow-api
+            sudo systemctl restart amznow-web
