@@ -18,13 +18,13 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /opt/amazonNow
-
-            sudo git pull origin main
-
+          
+            git fetch origin
+            git reset --hard origin/main
+          
             cd frontend
-            sudo npm install
-            sudo npm run build
+            pnpm install
+            pnpm build
+          
             sudo systemctl restart amznow-web
-
-            cd ../backend
             sudo systemctl restart amznow-api
