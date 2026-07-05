@@ -4910,6 +4910,741 @@
       "rating": 4.5,
       "rating_count": 502,
       "description": "Fresh paccheri pasta."
+    },
+    {
+      "id": "party-plates",
+      "name": "Paper Party Plates",
+      "brand": "Origami",
+      "price": 99,
+      "size": "50 pcs",
+      "category": "party_festive",
+      "image": "/products/party-plates.png",
+      "match_key": "paper plates",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.3,
+      "rating_count": 2100,
+      "description": "Disposable paper plates for parties and events."
+    },
+    {
+      "id": "party-cups",
+      "name": "Paper Party Cups",
+      "brand": "Origami",
+      "price": 75,
+      "size": "50 pcs",
+      "category": "party_festive",
+      "image": "/products/party-cups.png",
+      "match_key": "paper cups",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.2,
+      "rating_count": 1800,
+      "description": "Disposable paper cups for hot and cold beverages."
+    },
+    {
+      "id": "paper-napkins",
+      "name": "Paper Napkins",
+      "brand": "Origami",
+      "price": 65,
+      "size": "100 pcs",
+      "category": "household_cleaning",
+      "image": "/products/paper-napkins.png",
+      "match_key": "napkins",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.4,
+      "rating_count": 3200,
+      "description": "Multipurpose paper napkins for dining and cleaning."
+    },
+    {
+      "id": "pocket-tissues",
+      "name": "Pocket Tissues",
+      "brand": "Origami",
+      "price": 45,
+      "size": "10 pcs",
+      "category": "household_cleaning",
+      "image": "/products/pocket-tissues.png",
+      "match_key": "tissue napkins",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.5,
+      "rating_count": 4500,
+      "description": "Soft pocket tissues for on-the-go use."
+    },
+    {
+      "id": "apricot",
+      "name": "Apricot",
+      "brand": "Fresho",
+      "price": 120,
+      "size": "500 g",
+      "category": "fresh_produce",
+      "image": "/products/apricot.png",
+      "match_key": "apricot",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.3,
+      "rating_count": 890,
+      "description": "Fresh juicy apricots."
+    },
+    {
+      "id": "balloons-pack",
+      "name": "Colourful Latex Balloons (Value Pack)",
+      "brand": "Party Supplies",
+      "price": 120,
+      "size": "25 pcs",
+      "category": "party_festive",
+      "image": "/products/balloons-pack.png",
+      "match_key": "balloons",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.2,
+      "rating_count": 1500,
+      "description": "Assorted colour latex balloons for decoration."
+    },
+    {
+      "id": "barbeque-sauce",
+      "name": "Barbeque Sauce",
+      "brand": "Kissan",
+      "price": 95,
+      "size": "500 g",
+      "category": "staples_grocery",
+      "image": "/products/barbeque-sauce.png",
+      "match_key": "bbq sauce",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.3,
+      "rating_count": 2100,
+      "description": "Smoky barbeque sauce for grilling and dipping."
+    },
+    {
+      "id": "bay-leaf",
+      "name": "Bay Leaf",
+      "brand": "Fresho",
+      "price": 25,
+      "size": "50 g",
+      "category": "staples_grocery",
+      "image": "/products/bay-leaf.png",
+      "match_key": "bay leaf",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.5,
+      "rating_count": 3200,
+      "description": "Aromatic dried bay leaves for cooking."
+    },
+    {
+      "id": "birthday-banner",
+      "name": "Happy Birthday Banner",
+      "brand": "Party Supplies",
+      "price": 80,
+      "size": "1 unit",
+      "category": "party_festive",
+      "image": "/products/birthday-banner.png",
+      "match_key": "birthday banner",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.4,
+      "rating_count": 2800,
+      "description": "Colourful happy birthday party banner."
+    },
+    {
+      "id": "birthday-candles",
+      "name": "Birthday Candles",
+      "brand": "Party Supplies",
+      "price": 45,
+      "size": "12 pcs",
+      "category": "party_festive",
+      "image": "/products/birthday-candles.png",
+      "match_key": "birthday candles",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.3,
+      "rating_count": 3500,
+      "description": "Assorted colourful birthday candles."
+    },
+    {
+      "id": "birthday-card",
+      "name": "Birthday Greeting Card",
+      "brand": "Paperkraft",
+      "price": 40,
+      "size": "1 unit",
+      "category": "party_festive",
+      "image": "/products/birthday-card.png",
+      "match_key": "birthday card",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.5,
+      "rating_count": 4200,
+      "description": "Elegant birthday greeting card with envelope."
+    },
+    {
+      "id": "brownie-box",
+      "name": "Premium Chocolate Brownie Box",
+      "brand": "Bombay Baking",
+      "price": 250,
+      "size": "6 pcs",
+      "category": "party_festive",
+      "image": "/products/brownie-box.png",
+      "match_key": "brownie",
+      "dietary_tags": [
+        "vegetarian"
+      ],
+      "allergen_tags": [
+        "gluten",
+        "dairy"
+      ],
+      "rating": 4.6,
+      "rating_count": 1800,
+      "description": "Rich fudgy chocolate brownie gift box."
+    },
+    {
+      "id": "capers",
+      "name": "Capers (Pickled)",
+      "brand": "Fresho",
+      "price": 85,
+      "size": "100 g",
+      "category": "staples_grocery",
+      "image": "/products/capers.png",
+      "match_key": "capers",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.2,
+      "rating_count": 1200,
+      "description": "Pickled caper buds for Mediterranean dishes."
+    },
+    {
+      "id": "cardamom",
+      "name": "Green Cardamom",
+      "brand": "Fresho",
+      "price": 60,
+      "size": "50 g",
+      "category": "staples_grocery",
+      "image": "/products/cardamom.png",
+      "match_key": "cardamom",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.6,
+      "rating_count": 4100,
+      "description": "Aromatic green cardamom pods."
+    },
+    {
+      "id": "cinnamon",
+      "name": "Cinnamon Sticks",
+      "brand": "Fresho",
+      "price": 45,
+      "size": "50 g",
+      "category": "staples_grocery",
+      "image": "/products/cinnamon.png",
+      "match_key": "cinnamon",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.5,
+      "rating_count": 3800,
+      "description": "Whole cinnamon sticks for cooking and tea."
+    },
+    {
+      "id": "clams",
+      "name": "Fresh Clams",
+      "brand": "Fresho",
+      "price": 180,
+      "size": "500 g",
+      "category": "meat_seafood",
+      "image": "/products/clams.png",
+      "match_key": "clams",
+      "dietary_tags": [],
+      "allergen_tags": [
+        "shellfish"
+      ],
+      "rating": 4.1,
+      "rating_count": 650,
+      "description": "Fresh cleaned clams for seafood dishes."
+    },
+    {
+      "id": "cloves",
+      "name": "Whole Cloves",
+      "brand": "Fresho",
+      "price": 35,
+      "size": "50 g",
+      "category": "staples_grocery",
+      "image": "/products/cloves.png",
+      "match_key": "cloves",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.5,
+      "rating_count": 3600,
+      "description": "Aromatic whole cloves for cooking."
+    },
+    {
+      "id": "couscous",
+      "name": "Couscous",
+      "brand": "Fresho",
+      "price": 95,
+      "size": "500 g",
+      "category": "staples_grocery",
+      "image": "/products/couscous.png",
+      "match_key": "couscous",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.3,
+      "rating_count": 1400,
+      "description": "Quick-cook Moroccan couscous."
+    },
+    {
+      "id": "cupcakes-6",
+      "name": "Vanilla Cupcakes (6 pcs)",
+      "brand": "Bombay Baking",
+      "price": 180,
+      "size": "6 pcs",
+      "category": "bakery",
+      "image": "/products/cupcakes-6.png",
+      "match_key": "cupcakes",
+      "dietary_tags": [
+        "vegetarian"
+      ],
+      "allergen_tags": [
+        "gluten",
+        "dairy"
+      ],
+      "rating": 4.5,
+      "rating_count": 2100,
+      "description": "Soft vanilla buttercream cupcakes."
+    },
+    {
+      "id": "fromage-frais",
+      "name": "Fromage Frais",
+      "brand": "Presidents",
+      "price": 120,
+      "size": "200 g",
+      "category": "dairy_eggs",
+      "image": "/products/fromage-frais.png",
+      "match_key": "fromage frais",
+      "dietary_tags": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "allergen_tags": [
+        "dairy"
+      ],
+      "rating": 4.3,
+      "rating_count": 950,
+      "description": "Smooth and creamy French fromage frais."
+    },
+    {
+      "id": "frozen-samosa",
+      "name": "Frozen Samosa",
+      "brand": "Safal",
+      "price": 120,
+      "size": "600 g",
+      "category": "frozen",
+      "image": "/products/frozen-samosa.png",
+      "match_key": "frozen samosa",
+      "dietary_tags": [
+        "vegetarian"
+      ],
+      "allergen_tags": [
+        "gluten"
+      ],
+      "rating": 4.4,
+      "rating_count": 2900,
+      "description": "Crispy frozen potato-filled samosas."
+    },
+    {
+      "id": "goose-fat",
+      "name": "Goose Fat",
+      "brand": "Fresho",
+      "price": 320,
+      "size": "500 g",
+      "category": "staples_grocery",
+      "image": "/products/goose-fat.png",
+      "match_key": "goose fat",
+      "dietary_tags": [],
+      "allergen_tags": [],
+      "rating": 4.2,
+      "rating_count": 750,
+      "description": "Premium rendered goose fat for roasting."
+    },
+    {
+      "id": "haricot-beans",
+      "name": "Haricot Beans (Dried)",
+      "brand": "Fresho",
+      "price": 85,
+      "size": "500 g",
+      "category": "staples_grocery",
+      "image": "/products/haricot-beans.png",
+      "match_key": "haricot beans",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.3,
+      "rating_count": 1100,
+      "description": "Dried haricot beans for stews and soups."
+    },
+    {
+      "id": "ice-cubes-pack",
+      "name": "Ice Cubes (Party Pack)",
+      "brand": "Fresho",
+      "price": 60,
+      "size": "1 kg",
+      "category": "beverages",
+      "image": "/products/ice-cubes-pack.png",
+      "match_key": "ice cubes",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.2,
+      "rating_count": 1800,
+      "description": "Ready-to-use ice cubes in resealable pack."
+    },
+    {
+      "id": "linguine-pasta",
+      "name": "Linguine Pasta",
+      "brand": "Del Monte",
+      "price": 110,
+      "size": "500 g",
+      "category": "staples_grocery",
+      "image": "/products/linguine-pasta.png",
+      "match_key": "linguine",
+      "dietary_tags": [
+        "vegan"
+      ],
+      "allergen_tags": [
+        "gluten"
+      ],
+      "rating": 4.4,
+      "rating_count": 2200,
+      "description": "Premium durum wheat linguine pasta."
+    },
+    {
+      "id": "liquid-handwash",
+      "name": "Liquid Handwash",
+      "brand": "Dettol",
+      "price": 120,
+      "size": "250 ml",
+      "category": "personal_care",
+      "image": "/products/liquid-handwash.png",
+      "match_key": "handwash",
+      "dietary_tags": [],
+      "allergen_tags": [],
+      "rating": 4.5,
+      "rating_count": 5200,
+      "description": "Antibacterial liquid handwash for daily use."
+    },
+    {
+      "id": "maple-syrup",
+      "name": "Pure Maple Syrup",
+      "brand": "Maple Gold",
+      "price": 350,
+      "size": "250 ml",
+      "category": "staples_grocery",
+      "image": "/products/maple-syrup.png",
+      "match_key": "maple syrup",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.5,
+      "rating_count": 1600,
+      "description": "Pure Canadian maple syrup for pancakes."
+    },
+    {
+      "id": "party-poppers",
+      "name": "Party Poppers",
+      "brand": "Party Supplies",
+      "price": 60,
+      "size": "8 pcs",
+      "category": "party_festive",
+      "image": "/products/party-poppers.png",
+      "match_key": "party poppers",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.1,
+      "rating_count": 2300,
+      "description": "Confetti party poppers for celebrations."
+    },
+    {
+      "id": "party-streamers",
+      "name": "Party Streamers",
+      "brand": "Party Supplies",
+      "price": 40,
+      "size": "6 pcs",
+      "category": "party_festive",
+      "image": "/products/party-streamers.png",
+      "match_key": "party streamers",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.0,
+      "rating_count": 1900,
+      "description": "Colourful curled party streamers."
+    },
+    {
+      "id": "pecan-nuts",
+      "name": "Pecan Nuts",
+      "brand": "Fresho",
+      "price": 280,
+      "size": "200 g",
+      "category": "snacks",
+      "image": "/products/pecan-nuts.png",
+      "match_key": "pecan nuts",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [
+        "nuts"
+      ],
+      "rating": 4.5,
+      "rating_count": 1400,
+      "description": "Premium pecan nut halves."
+    },
+    {
+      "id": "perfume-git-set",
+      "name": "Perfume Gift Set",
+      "brand": "Fogg",
+      "price": 450,
+      "size": "1 unit",
+      "category": "personal_care",
+      "image": "/products/perfume-git-set.png",
+      "match_key": "perfume gift",
+      "dietary_tags": [],
+      "allergen_tags": [],
+      "rating": 4.3,
+      "rating_count": 1200,
+      "description": "Premium perfume gift set for gifting."
+    },
+    {
+      "id": "pinto-beans",
+      "name": "Pinto Beans (Dried)",
+      "brand": "Fresho",
+      "price": 90,
+      "size": "500 g",
+      "category": "staples_grocery",
+      "image": "/products/pinto-beans.png",
+      "match_key": "pinto beans",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.3,
+      "rating_count": 980,
+      "description": "Dried pinto beans for Mexican dishes."
+    },
+    {
+      "id": "rapeseed-oil",
+      "name": "Rapeseed Oil",
+      "brand": "Fresho",
+      "price": 150,
+      "size": "1 L",
+      "category": "staples_grocery",
+      "image": "/products/rapeseed-oil.png",
+      "match_key": "rapeseed oil",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.4,
+      "rating_count": 2100,
+      "description": "Light rapeseed oil for cooking and frying."
+    },
+    {
+      "id": "return-gifts-bag",
+      "name": "Return Gifts Goodie Bag",
+      "brand": "Paperkraft",
+      "price": 30,
+      "size": "1 unit",
+      "category": "party_festive",
+      "image": "/products/return-gifts-bag.png",
+      "match_key": "return gifts",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.2,
+      "rating_count": 1600,
+      "description": "Cute goodie bag for party return gifts."
+    },
+    {
+      "id": "ricotta",
+      "name": "Ricotta Cheese",
+      "brand": "Presidents",
+      "price": 140,
+      "size": "250 g",
+      "category": "dairy_eggs",
+      "image": "/products/ricotta.png",
+      "match_key": "ricotta",
+      "dietary_tags": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "allergen_tags": [
+        "dairy"
+      ],
+      "rating": 4.4,
+      "rating_count": 1800,
+      "description": "Smooth Italian ricotta cheese."
+    },
+    {
+      "id": "rosemary",
+      "name": "Dried Rosemary",
+      "brand": "Fresho",
+      "price": 35,
+      "size": "30 g",
+      "category": "staples_grocery",
+      "image": "/products/rosemary.png",
+      "match_key": "rosemary",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [],
+      "rating": 4.4,
+      "rating_count": 2900,
+      "description": "Aromatic dried rosemary for cooking."
+    },
+    {
+      "id": "sunscreen-spf50",
+      "name": "Sunscreen SPF 50",
+      "brand": "Lotus",
+      "price": 250,
+      "size": "100 ml",
+      "category": "personal_care",
+      "image": "/products/sunscreen-spf50.png",
+      "match_key": "sunscreen spf50",
+      "dietary_tags": [],
+      "allergen_tags": [],
+      "rating": 4.5,
+      "rating_count": 3800,
+      "description": "Broad-spectrum sunscreen with SPF 50."
+    },
+    {
+      "id": "turkey-mince",
+      "name": "Turkey Mince",
+      "brand": "Licious",
+      "price": 260,
+      "size": "500 g",
+      "category": "meat_seafood",
+      "image": "/products/turkey-mince.png",
+      "match_key": "turkey mince",
+      "dietary_tags": [],
+      "allergen_tags": [],
+      "rating": 4.3,
+      "rating_count": 850,
+      "description": "Lean turkey mince for healthy cooking."
+    },
+    {
+      "id": "vanilla-cake",
+      "name": "Vanilla Cake Slice",
+      "brand": "Bombay Baking",
+      "price": 100,
+      "size": "1 slice",
+      "category": "bakery",
+      "image": "/products/vanilla-cake.png",
+      "match_key": "vanilla cake",
+      "dietary_tags": [
+        "vegetarian"
+      ],
+      "allergen_tags": [
+        "gluten",
+        "dairy"
+      ],
+      "rating": 4.4,
+      "rating_count": 1600,
+      "description": "Light and fluffy vanilla sponge cake."
+    },
+    {
+      "id": "walnuts",
+      "name": "Walnuts",
+      "brand": "Fresho",
+      "price": 320,
+      "size": "200 g",
+      "category": "snacks",
+      "image": "/products/walnuts.png",
+      "match_key": "walnuts",
+      "dietary_tags": [
+        "vegan",
+        "gluten-free"
+      ],
+      "allergen_tags": [
+        "nuts"
+      ],
+      "rating": 4.6,
+      "rating_count": 2800,
+      "description": "Premium walnut halves."
+    },
+    {
+      "id": "wet-wipes",
+      "name": "Wet Wipes (Travel Pack)",
+      "brand": "Dettol",
+      "price": 85,
+      "size": "50 pcs",
+      "category": "baby_care",
+      "image": "/products/wet-wipes.png",
+      "match_key": "wet wipes",
+      "dietary_tags": [],
+      "allergen_tags": [],
+      "rating": 4.4,
+      "rating_count": 3400,
+      "description": "Antibacterial wet wipes for on-the-go freshness."
     }
   ]
 }

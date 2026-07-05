@@ -403,6 +403,15 @@ _SYNONYMS = {
 
     "cold drink": ["coke", "pepsi", "soft drink", "soda"],
 
+    "bottled water": ["water", "mineral water"],
+    "mineral water": ["water", "bottled water"],
+    "napkins": ["tissue", "napkin", "facial tissue"],
+    "napkin": ["tissue", "napkins", "facial tissue"],
+    "paper plates": ["plates", "party plates", "disposable plates"],
+    "paper cups": ["cups", "party cups", "disposable cups"],
+    "mango juice": ["juice", "mango drink"],
+    "roasted peanuts": ["peanuts", "peanut"],
+
     "samosa": ["snack", "frozen snack"],
 
     "flowers": ["roses", "bouquet"],
@@ -429,6 +438,46 @@ _SYNONYMS = {
     
     # More party supply gaps
     "forks": ["disposable forks", "plastic forks"],
+
+    "apricot": ["fresh apricot"],
+    "sunblock": ["sunscreen", "suncream"],
+    "handwash liquid": ["handwash", "liquid handwash"],
+    "barbeque": ["bbq", "barbecue", "grill sauce"],
+    "bbq": ["barbeque", "barbecue"],
+    "couscous": ["moroccan couscous"],
+    "walnuts": ["walnut", "akhrot"],
+    "pecan": ["pecan nuts", "pecans"],
+    "walnut": ["walnuts", "akhrot"],
+    "ricotta": ["ricotta cheese", "italian cheese"],
+    "clams": ["shellfish", "seafood"],
+    "turkey": ["turkey mince", "turkey meat"],
+    "linguine": ["linguine pasta"],
+    "rapeseed": ["rapeseed oil", "vegetable oil"],
+    "goose fat": ["duck fat", "roasting fat"],
+    "frozen samosa": ["samosa frozen", "frozen snack"],
+    "ice": ["ice cubes", "ice pack", "party ice"],
+    "cupcakes": ["cupcake", "vanilla cupcake", "fairy cake"],
+    "brownie": ["chocolate brownie", "brownie box"],
+    "vanilla cake": ["vanilla sponge", "cake slice"],
+    "cardamom": ["elaichi", "green cardamom"],
+    "cinnamon": ["dalchini", "cinnamon stick"],
+    "cloves": ["laung", "whole clove"],
+    "rosemary": ["dried rosemary", "herbs"],
+    "capers": ["pickled capers"],
+    "bay leaf": ["tejpatta", "bay leaves"],
+    "pinto beans": ["dried beans", "mexican beans"],
+    "haricot beans": ["white beans", "navy beans"],
+    "maple syrup": ["maple", "pancake syrup"],
+    "party banner": ["birthday banner", "decoration banner"],
+    "party candles": ["birthday candles", "cake candles"],
+    "birthday card": ["greeting card", "birthday greeting"],
+    "party poppers": ["confetti poppers", "party snaps"],
+    "streamers": ["party streamers", "decorative streamers"],
+    "return gifts": ["goodie bag", "party favor bag"],
+    "perfume": ["perfume gift set", "fragrance gift"],
+    "wet wipes": ["baby wipes", "travel wipes", "antibacterial wipes"],
+    "pinto": ["pinto beans", "dried pinto"],
+    "haricot": ["haricot beans", "white beans"],
     "plates": ["paper plates", "disposable plates"],
     "candles": ["birthday candles", "candle"],
 }
@@ -436,7 +485,19 @@ _SYNONYMS = {
 
 def _expand(term: str) -> list[str]:
     t = term.strip().lower()
-    return [t, *_SYNONYMS.get(t, [])]
+    terms = [t]
+    syns = _SYNONYMS.get(t, [])
+    terms.extend(s for s in syns if s not in terms)
+    words = t.split()
+    if len(words) > 1:
+        for w in words:
+            if w not in terms:
+                terms.append(w)
+            w_syns = _SYNONYMS.get(w, [])
+            for ws in w_syns:
+                if ws not in terms:
+                    terms.append(ws)
+    return terms
 
 
     # Allergen keyword backstop — catalog allergen_tags are incomplete (many nut
