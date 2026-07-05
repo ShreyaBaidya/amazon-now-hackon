@@ -2919,7 +2919,7 @@
       "price": 120,
       "size": "1 L",
       "category": "frozen",
-      "image": "/products/ice-cream.png",
+      "image": "/products/eco-vanilla-icecream.png",
       "match_key": "ice cream",
       "dietary_tags": [
         "vegetarian",
@@ -4197,12 +4197,12 @@
     },
     {
       "id": "eco-red-plastic-cups",
-      "name": "Red Party Plastic Cups (Value Pack)",
+      "name": "Party Plastic Cups (Value Pack)",
       "brand": "Origami",
       "price": 60,
       "size": "25 pcs",
       "category": "party_festive",
-      "image": "/products/red-plastic-cups.png",
+      "image": "/products/eco-party-cups.png",
       "match_key": "",
       "dietary_tags": [
         "vegan",
@@ -4211,7 +4211,7 @@
       "allergen_tags": [],
       "rating": 3.7,
       "rating_count": 1220,
-      "description": "Economy variant. Disposable premium red cups for cold beverages.",
+      "description": "Economy variant. Disposable premium cups for cold beverages.",
       "economy_variant": true
     },
     {
@@ -4539,7 +4539,7 @@
       "price": 80,
       "size": "1 slice",
       "category": "party_festive",
-      "image": "/products/chocolate-cake.png",
+      "image": "/products/eco-chocolate-cake.png",
       "match_key": "",
       "dietary_tags": [
         "vegetarian"
@@ -4578,7 +4578,7 @@
       "price": 40,
       "size": "12 pcs",
       "category": "party_festive",
-      "image": "/products/latex-balloons.png",
+      "image": "/products/eco-part-balloons.png",
       "match_key": "",
       "dietary_tags": [
         "vegan",

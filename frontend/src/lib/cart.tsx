@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { Product } from "./types";
+import { api } from "./api";
 
 export type CartItem = { product: Product; qty: number };
 
@@ -31,8 +32,6 @@ const KEY = "amzn-now-cart";
 const ECO_KEY = "amzn-now-economy";
 
 // ── Economy helper ────────────────────────────────────────────────────────
-// Build an economy variant of a product entirely on the frontend.
-// No backend call needed — just reduce the price and swap the brand.
 const HOUSE_BRANDS: Record<string, string> = {
   dairy_eggs:          "Freshday",
   fresh_produce:       "FarmBasket",
@@ -50,9 +49,40 @@ const HOUSE_BRANDS: Record<string, string> = {
   party_festive:       "FestBasic",
 };
 
-function makeEconomyVariant(p: Product): Product {
+// Cache of eco products fetched from the catalog: id -> Product
+const ecoProductCache = new Map<string, Product>();
+
+async function fetchEcoProduct(ecoId: string): Promise<Product | null> {
+  if (ecoProductCache.has(ecoId)) return ecoProductCache.get(ecoId)!;
+  try {
+    const url = `${api.base}/api/product/${encodeURIComponent(ecoId)}`;
+    const r = await fetch(url);
+    if (!r.ok) return null;
+    const p = await r.json();
+    if (!p || p.error) return null;
+    ecoProductCache.set(ecoId, p as Product);
+    return p as Product;
+  } catch {
+    return null;
+  }
+}
+
+function makeEconomyVariant(p: Product, realEco?: Product | null): Product {
   const ecoPrice = Math.max(5, Math.ceil((p.price * 0.65) / 5) * 5);
   const brand = HOUSE_BRANDS[p.category] ?? "Amazon Basics";
+  if (realEco) {
+    return {
+      ...p,
+      id:    realEco.id,
+      name:  realEco.name,
+      brand: realEco.brand,
+      price: realEco.price,
+      size:  realEco.size,
+      image: realEco.image,
+      dietary_tags: realEco.dietary_tags,
+      allergen_tags: realEco.allergen_tags,
+    };
+  }
   return {
     ...p,
     id:    `eco-${p.id}`,
@@ -93,38 +123,43 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } catch {}
   }, [economyMode, economyBudget]);
 
-  // When economy mode turns on, swap EACH cart item with a frontend-generated
-  // economy variant (same product, cheaper price, house brand).
-  // Deduplicate by eco product ID (merge quantities) and sort by price.
+  // When economy mode turns on, swap EACH cart item with the real catalog eco
+  // product (to get the correct image/price/size), falling back to a synthetic
+  // variant if no catalog eco entry exists for that product.
   useEffect(() => {
     if (!economyMode || items.length === 0) {
       setEcoItems([]);
       return;
     }
 
-    // Build eco variants synchronously — no backend call needed
-    const mapped: CartItem[] = items.map((item) => ({
-      product: makeEconomyVariant(item.product),
-      qty: item.qty,
-    }));
+    const snapshotItems = [...items];
 
-    // Deduplicate: merge quantities for identical eco product IDs
-    const merged = new Map<string, CartItem>();
-    for (const item of mapped) {
-      const existing = merged.get(item.product.id);
-      if (existing) {
-        merged.set(item.product.id, { ...existing, qty: existing.qty + item.qty });
-      } else {
-        merged.set(item.product.id, { ...item });
+    Promise.all(
+      snapshotItems.map((item) => fetchEcoProduct(`eco-${item.product.id}`))
+    ).then((realEcoProducts) => {
+      const mapped: CartItem[] = snapshotItems.map((item, i) => ({
+        product: makeEconomyVariant(item.product, realEcoProducts[i]),
+        qty: item.qty,
+      }));
+
+      // Deduplicate: merge quantities for identical eco product IDs
+      const merged = new Map<string, CartItem>();
+      for (const item of mapped) {
+        const existing = merged.get(item.product.id);
+        if (existing) {
+          merged.set(item.product.id, { ...existing, qty: existing.qty + item.qty });
+        } else {
+          merged.set(item.product.id, { ...item });
+        }
       }
-    }
 
-    // Sort by price ascending (cheapest first)
-    const sorted = Array.from(merged.values()).sort(
-      (a, b) => a.product.price - b.product.price,
-    );
+      // Sort by price ascending (cheapest first)
+      const sorted = Array.from(merged.values()).sort(
+        (a, b) => a.product.price - b.product.price,
+      );
 
-    setEcoItems(sorted);
+      setEcoItems(sorted);
+    });
   }, [economyMode, items]);
 
   const setEconomyMode = (on: boolean) => setEconomyModeRaw(on);

@@ -75,6 +75,13 @@ def family() -> dict:
 
 
 @lru_cache(maxsize=1)
+def _local_catalog_index() -> dict[str, dict]:
+    """Always loads from local catalog.json — used as a fallback for products
+    (e.g. eco variants) that exist in local config but not in DynamoDB."""
+    return {p["id"]: p for p in _load("catalog.json")["products"]}
+
+
+@lru_cache(maxsize=1)
 def coupons() -> list[dict]:
     return _load("coupons.json")["coupons"]
 
@@ -111,7 +118,12 @@ def product(pid: str) -> dict | None:
             return item
     except Exception as e:
         print(f"[DynamoDB] Failed to load product {pid}, falling back to memory. Error: {e}")
-    return _catalog_index().get(pid)
+    # Check in-memory catalog index (DynamoDB products)
+    result = _catalog_index().get(pid)
+    if result:
+        return result
+    # Final fallback: check local catalog.json (eco variants and other local-only products)
+    return _local_catalog_index().get(pid)
 
 
 _dietary_override: dict | None = None
