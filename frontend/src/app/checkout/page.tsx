@@ -13,6 +13,7 @@ import {
   Users,
   Wallet,
 } from "lucide-react";
+import { Leaf } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { api } from "@/lib/api";
@@ -31,7 +32,7 @@ export default function CheckoutPage() {
 }
 
 function CheckoutContent() {
-  const { items, subtotal, setQty, clear } = useCart();
+  const { items, originalItems, subtotal, setQty, clear, economyMode, setEconomyMode } = useCart();
   const boot = useBoot();
   const router = useRouter();
   const [paying, setPaying] = useState(false);
@@ -42,19 +43,33 @@ function CheckoutContent() {
   const fee = subtotal >= (boot?.settings.free_delivery_above ?? 199) ? 0 : boot?.settings.delivery_fee ?? 25;
   const eta = boot?.settings.eta_default_min ?? 14;
 
-  // re-evaluate coupons whenever the cart changes; always auto-select the best
+  // Reset coupons when economy mode toggles so stale discount is cleared
   useEffect(() => {
-    if (items.length === 0) return;
-    api.coupons(items.map((i) => ({ product_id: i.product.id, qty: i.qty })))
+    setEvalc(null);
+    setSelected(null);
+  }, [economyMode]);
+
+  // Re-evaluate coupons using original item IDs (backend knows their prices).
+  // subtotal from context already reflects eco prices correctly.
+  useEffect(() => {
+    const couponItems = originalItems.length > 0 ? originalItems : items;
+    if (couponItems.length === 0) return;
+    api.coupons(couponItems.map((i) => ({ product_id: i.product.id, qty: i.qty })))
       .then((ev) => {
         setEvalc(ev);
         setSelected(ev.best_code);
       })
       .catch(() => {});
-  }, [items]);
+  }, [items, originalItems]);
 
   const selectedCoupon = evalc?.coupons.find((c) => c.code === selected && c.eligible) || null;
-  const discount = selectedCoupon?.discount ?? 0;
+  // In economy mode, recompute discount as a proportion of the new subtotal
+  // so it scales correctly with the cheaper prices.
+  const rawDiscount = selectedCoupon?.discount ?? 0;
+  const originalSubtotal = evalc?.subtotal ?? subtotal;
+  const discount = originalSubtotal > 0 && economyMode
+    ? Math.round((rawDiscount / originalSubtotal) * subtotal)
+    : rawDiscount;
   const total = Math.max(0, subtotal + fee - discount);
   const eligibleCount = evalc?.coupons.filter((c) => c.eligible).length ?? 0;
 
@@ -107,6 +122,36 @@ function CheckoutContent() {
           <span className="text-[13px] font-semibold text-amzn-green">Arriving in {eta} minutes</span>
         </div>
 
+        {/* Economy mode banner */}
+        <button
+          onClick={() => setEconomyMode(!economyMode)}
+          className={`mx-3 mt-3 w-[calc(100%-1.5rem)] rounded-2xl border px-4 py-3 flex items-center gap-3 text-left transition-colors ${
+            economyMode
+              ? "border-emerald-400 bg-emerald-50"
+              : "border-line bg-white"
+          }`}
+        >
+          <span className={`h-9 w-9 rounded-xl grid place-items-center shrink-0 ${economyMode ? "bg-emerald-600 text-white" : "bg-paper text-emerald-600"}`}>
+            <Leaf size={18} />
+          </span>
+          <div className="flex-1 min-w-0">
+            {economyMode ? (
+              <>
+                <p className="text-[13px] font-bold text-emerald-700">Saver mode is ON</p>
+                <p className="text-[11px] text-ink2">Showing economic options · tap to turn off</p>
+              </>
+            ) : (
+              <>
+                <p className="text-[13px] font-semibold text-emerald-700">Try Saver mode</p>
+                <p className="text-[11px] text-ink2">Switch to cheapest items in each category</p>
+              </>
+            )}
+          </div>
+          <span className={`text-[11px] font-bold px-2 py-1 rounded-lg ${economyMode ? "bg-emerald-600 text-white" : "bg-emerald-100 text-emerald-700"}`}>
+            {economyMode ? "ON" : "OFF"}
+          </span>
+        </button>
+
         {/* auto-applied coupon */}
         <button
           onClick={() => setSheet(true)}
@@ -157,9 +202,14 @@ function CheckoutContent() {
                 <img src={i.product.image} alt="" className="h-[85%] w-[85%] object-contain" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 flex-wrap">
                   <VegMark product={i.product} size={12} />
                   <p className="text-[13px] font-semibold leading-tight truncate">{i.product.name}</p>
+                  {economyMode && (
+                    <span className="text-[9px] bg-emerald-100 text-emerald-700 font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5 w-fit">
+                      <Leaf size={10} />Smart Saver
+                    </span>
+                  )}
                 </div>
                 <p className="text-[11px] text-ink2">{i.product.size}</p>
                 <DietaryTags product={i.product} />
