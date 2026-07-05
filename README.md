@@ -85,8 +85,8 @@ uv run uvicorn app.main:app --host 127.0.0.1 --port 8010
 
 # 2. Storefront (new terminal)
 cd frontend
-pnpm install
-pnpm exec next dev -p 3100
+npm install
+npm run dev
 ```
 
 Open **http://localhost:3100** — best viewed in a narrow window; it renders as a phone.
