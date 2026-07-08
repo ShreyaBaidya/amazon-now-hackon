@@ -87,7 +87,7 @@ def nextbuy():
 
 
 @app.get("/api/catalog")
-def catalog(q: str = "", category: str = "", limit: int = 40):
+def catalog(q: str = "", category: str = "", limit: int = 20):
     return {"products": data.search(q, category, limit)}
 
 

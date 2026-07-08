@@ -23,7 +23,7 @@ function SearchInner() {
   useEffect(() => {
     const t = setTimeout(() => {
       // showExcluded is always true to get all products
-      api.catalog(q, cat, 40, true)
+      api.catalog(q, cat, 1000, true)
         .then((d) => setProducts(d.products))
         .catch(() => {});
     }, 180);
